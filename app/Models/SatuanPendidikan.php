@@ -39,4 +39,12 @@ class SatuanPendidikan extends Model
     {
         return $this->hasMany(Rombel::class, 'id_satuan_pendidikan', 'id_satuan_pendidikan');
     }
+
+    /**
+     * @return HasMany<TenagaPendidik, $this>
+     */
+    public function tenagaPendidik(): HasMany
+    {
+        return $this->hasMany(TenagaPendidik::class, 'id_satuan_pendidikan', 'id_satuan_pendidikan');
+    }
 }

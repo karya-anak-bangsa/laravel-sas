@@ -10,6 +10,7 @@
         ['teks' => 'Satuan Pendidikan', 'route' => 'admin.master-data.satuan-pendidikan.index', 'aktif' => 'admin.master-data.satuan-pendidikan.*', 'model' => App\Models\SatuanPendidikan::class],
         ['teks' => 'Tahun Ajaran', 'route' => 'admin.master-data.tahun-ajaran.index', 'aktif' => 'admin.master-data.tahun-ajaran.*', 'model' => App\Models\TahunAjaran::class],
         ['teks' => 'Rombel', 'route' => 'admin.master-data.rombel.index', 'aktif' => 'admin.master-data.rombel.*', 'model' => App\Models\Rombel::class],
+        ['teks' => 'Tenaga Pendidik', 'route' => 'admin.master-data.tenaga-pendidik.index', 'aktif' => 'admin.master-data.tenaga-pendidik.*', 'model' => App\Models\TenagaPendidik::class],
         ['teks' => 'Bidang Keahlian', 'route' => 'admin.master-data.bidang-keahlian.index', 'aktif' => 'admin.master-data.bidang-keahlian.*', 'model' => App\Models\BidangKeahlian::class],
         ['teks' => 'Program Keahlian', 'route' => 'admin.master-data.program-keahlian.index', 'aktif' => 'admin.master-data.program-keahlian.*', 'model' => App\Models\ProgramKeahlian::class],
         ['teks' => 'Konsentrasi Keahlian', 'route' => 'admin.master-data.konsentrasi-keahlian.index', 'aktif' => 'admin.master-data.konsentrasi-keahlian.*', 'model' => App\Models\KonsentrasiKeahlian::class],

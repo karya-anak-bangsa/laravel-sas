@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MasterData\RombelController;
 use App\Http\Controllers\Admin\MasterData\SatuanPendidikanController;
 use App\Http\Controllers\Admin\MasterData\SemesterAktifController;
 use App\Http\Controllers\Admin\MasterData\TahunAjaranController;
+use App\Http\Controllers\Admin\MasterData\TenagaPendidikController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('master-data')->name('master-data.')->group(function () {
@@ -34,4 +35,8 @@ Route::prefix('master-data')->name('master-data.')->group(function () {
         ->name('semester-aktif.update');
 
     Route::resource('rombel', RombelController::class)->except('show');
+
+    Route::resource('tenaga-pendidik', TenagaPendidikController::class)
+        ->except('show')
+        ->parameters(['tenaga-pendidik' => 'tenagaPendidik']);
 });

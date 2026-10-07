@@ -16,6 +16,10 @@ class HapusSatuanPendidikan
             throw new DataMasihDipakai("Satuan pendidikan {$satuanPendidikan->nama} masih memiliki rombel.");
         }
 
+        if ($satuanPendidikan->tenagaPendidik()->exists()) {
+            throw new DataMasihDipakai("Satuan pendidikan {$satuanPendidikan->nama} masih memiliki tenaga pendidik.");
+        }
+
         $satuanPendidikan->delete();
     }
 }

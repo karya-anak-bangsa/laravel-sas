@@ -92,6 +92,8 @@ Peran:
 - Status: **GTT** (Guru Tidak Tetap) atau **GTY** (Guru Tetap Yayasan). Tidak ada status honorer.
 - **Masa kerja diisi manual**, tidak dihitung dari TMT (`masa_kerja_tahun`, `masa_kerja_bulan`).
 - Terhubung opsional ke akun pengguna (`id_pengguna` nullable).
+- **NUPTK opsional**; jika diisi 16 digit dan unik. Wajib: nama lengkap, satuan pendidikan, status, pendidikan terakhir, masa kerja.
+- **Pendidikan terakhir** = enum `JenjangPendidikan`: SMA/Sederajat, D1, D2, D3, D4, S1, S2, S3.
 
 ### Tenaga Kependidikan — TBD
 - Status dan cara pencatatan **belum diketahui**. Sementara kolom mengikuti data KTP: NIK, nama lengkap, tempat lahir, tanggal lahir, jenis kelamin, alamat (RT/RW, kelurahan/desa, kecamatan), agama.

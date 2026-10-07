@@ -10,6 +10,7 @@ use App\Models\ProgramKeahlian;
 use App\Models\Rombel;
 use App\Models\SatuanPendidikan;
 use App\Models\TahunAjaran;
+use App\Models\TenagaPendidik;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -33,6 +34,7 @@ class KebijakanMasterDataTest extends TestCase
             'konsentrasi keahlian' => [KonsentrasiKeahlian::class],
             'tahun ajaran' => [TahunAjaran::class],
             'rombel' => [Rombel::class],
+            'tenaga pendidik' => [TenagaPendidik::class],
         ];
     }
 
