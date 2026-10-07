@@ -42,7 +42,8 @@ class Pengguna extends Authenticatable
     public function peran(): BelongsToMany
     {
         return $this->belongsToMany(Peran::class, 'tb_pengguna_peran', 'id_pengguna', 'id_peran', 'id_pengguna', 'id_peran')
-            ->withTimestamps();
+            ->withTimestamps()
+            ->orderBy('tb_peran.id_peran');
     }
 
     /**

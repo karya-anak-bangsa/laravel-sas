@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Dasbor;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class DasborController extends Controller
+{
+    public function __invoke(Request $request): View
+    {
+        return view('admin.dasbor.index', [
+            'pengguna' => $request->user()->loadMissing('peran'),
+        ]);
+    }
+}

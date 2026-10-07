@@ -1,0 +1,52 @@
+@extends('layouts.admin-tamu')
+
+@section('judul', 'Masuk')
+
+@section('konten')
+    <div class="auth-title">Masuk</div>
+    <div class="auth-subtitle">Gunakan akun yang diberikan oleh Administrator sekolah.</div>
+
+    @if (session('status'))
+        <div class="alert alert-success" role="status">
+            <div class="alert-body">{{ session('status') }}</div>
+        </div>
+    @endif
+
+    <form method="POST" action="{{ route('admin.masuk') }}" novalidate>
+        @csrf
+
+        <div class="form-group">
+            <label class="form-label" for="login">Nama pengguna atau email</label>
+            <input type="text" id="login" name="login" value="{{ old('login') }}"
+                @class(['form-control', 'is-invalid' => $errors->has('login')])
+                autocomplete="username" autocapitalize="none" autofocus required>
+            @error('login')
+                <div class="form-error">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="password">Kata sandi</label>
+            <input type="password" id="password" name="password"
+                @class(['form-control', 'is-invalid' => $errors->has('password')])
+                autocomplete="current-password" required>
+            @error('password')
+                <div class="form-error">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="auth-actions">
+            <label class="form-check">
+                <input type="checkbox" name="ingat" value="1" @checked(old('ingat'))> Ingat saya
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;height:38px">
+            Masuk
+        </button>
+    </form>
+
+    <div class="auth-footer">
+        Lupa kata sandi? Hubungi Administrator sekolah.
+    </div>
+@endsection

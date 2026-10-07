@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Route Web
@@ -11,3 +13,11 @@
 */
 
 require __DIR__.'/publik/beranda.php';
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    require __DIR__.'/admin/autentikasi.php';
+
+    Route::middleware(['auth', 'can:akses-admin'])->group(function () {
+        require __DIR__.'/admin/dasbor.php';
+    });
+});

@@ -132,9 +132,13 @@ Data pribadi (NIK, No. KK, NUPTK, data orang tua):
 
 ## Frontend: backend dan publik dipisah
 
-- **Area admin (`/admin`)**: template **Gentelella v4** (Bootstrap). Entry Vite `resources/css/admin.css` + `resources/js/admin.js`, layout `resources/views/layouts/admin.blade.php`.
+- **Area admin (`/admin`)**: template **Gentelella v4** (paket npm `gentelella`). Catatan: v4 **tidak memakai Bootstrap maupun jQuery** (vanilla JS + SCSS, grid `.row/.col-*` sendiri); jangan memasang Bootstrap. Entry Vite `resources/css/admin.css` (penyesuaian proyek) + `resources/js/admin.js` (mengimpor SCSS Gentelella dan `mountShell`), layout `resources/views/layouts/admin.blade.php` (halaman berlogin) dan `layouts/admin-tamu.blade.php` (halaman masuk).
+  - Sidebar/topbar/footer dirender di Blade (`layouts/partials/admin-sidebar.blade.php`), bukan oleh JS Gentelella. Menu modul baru ditambahkan di partial itu dan dibungkus `@can`.
+  - Entry demo Gentelella (`gentelella` / `main-v4.js`: command palette, data contoh, form palsu) **tidak** dimuat. Modul JS lain diimpor per kebutuhan dari `gentelella/v4/*`.
+  - Referensi markup komponen: halaman `node_modules/gentelella/production/*.html`.
 - **Area publik (company profile, PPDB)**: **Tailwind CSS v4**. Entry Vite `resources/css/app.css` + `resources/js/app.js`, layout `resources/views/layouts/publik.blade.php`.
-- Kedua bundel **tidak boleh dimuat bersama** dalam satu layout. Jangan memakai class Tailwind di view admin, dan jangan memakai class Bootstrap di view publik.
+- Kedua bundel **tidak boleh dimuat bersama** dalam satu layout. Jangan memakai class Tailwind di view admin, dan jangan memakai class Gentelella di view publik.
+- Font di-host sendiri lewat opsi `fonts` laravel-vite-plugin dan direktif `@fonts`: Inter (admin), Instrument Sans (publik).
 - Library komponen Tailwind (daisyUI / shadcn / Flowbite / Preline / HyperUI): **TBD**. Jangan memasang salah satunya sebelum diputuskan.
 
 ## Kualitas — ISO/IEC 25010
@@ -161,7 +165,16 @@ Setiap fitur memperhatikan karakteristik berikut:
   - `php artisan test`: jalankan test
   - `vendor/bin/pint --dirty`: format kode
   - `npm run build`: build aset
+  - `php artisan pengguna:buat-administrator`: buat akun Administrator (instalasi awal/production)
+  - `php artisan migrate:fresh --seed`: database lokal dengan akun contoh `admin` / `password` (seeder tidak berjalan di production)
 - Cara deploy ke production: **TBD**.
+
+## Autentikasi
+
+- Halaman masuk `/admin/masuk` (nama pengguna **atau** email + kata sandi), keluar lewat POST `/admin/keluar`. Tidak ada pendaftaran mandiri; akun dibuat oleh Administrator.
+- Hanya akun `aktif` yang dapat masuk; percobaan gagal dibatasi 5 kali per login + IP (`App\Actions\Autentikasi\AutentikasiPengguna`).
+- Seluruh route admin selain masuk/keluar memakai middleware `auth` + `can:akses-admin` (lihat `routes/web.php`).
+- Lupa kata sandi: sementara diatur ulang oleh Administrator (belum ada reset via email).
 
 ## Tahapan pengembangan (usulan urutan)
 
