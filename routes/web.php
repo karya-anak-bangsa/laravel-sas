@@ -1,7 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+/*
+|--------------------------------------------------------------------------
+| Route Web
+|--------------------------------------------------------------------------
+|
+| Route setiap modul ditulis di routes/publik/<modul>.php (tanpa login) dan
+| routes/admin/<modul>.php (area /admin), lalu didaftarkan di sini.
+|
+*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+require __DIR__.'/publik/beranda.php';
