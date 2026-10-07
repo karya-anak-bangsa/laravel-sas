@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\KodePeran;
 use App\Models\Pengguna;
+use App\Models\Peran;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -31,6 +33,18 @@ class PenggunaFactory extends Factory
             'aktif' => true,
             'remember_token' => Str::random(10),
         ];
+    }
+
+    /**
+     * Berikan peran kepada pengguna setelah dibuat.
+     */
+    public function denganPeran(KodePeran ...$kode): static
+    {
+        return $this->afterCreating(function (Pengguna $pengguna) use ($kode) {
+            $pengguna->peran()->attach(
+                Peran::query()->whereIn('kode', $kode)->pluck('id_peran')
+            );
+        });
     }
 
     /**

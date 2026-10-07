@@ -65,6 +65,8 @@ Peran:
   - Ketua Jurusan → konsentrasi keahlian + tahun ajaran
   - Kepala/Wakil Kepala Sekolah → satuan pendidikan + tahun ajaran
 - Otorisasi memakai Gate/Policy Laravel. Tabel peran mengikuti konvensi penamaan proyek (`tb_peran`, `tb_pengguna_peran`). Jangan memasang paket RBAC yang memaksakan nama tabel/PK sendiri tanpa persetujuan.
+- Implementasi: kode peran adalah enum `App\Enums\KodePeran` (disimpan di `tb_peran.kode`; baris `tb_peran` diisi oleh migration-nya, jadi menambah peran = enum + migration baru). `Pengguna::memilikiPeran(KodePeran ...)` untuk pengecekan. Gate di `AppServiceProvider`: `Gate::before` meloloskan Administrator aktif; `akses-admin` = akun aktif dengan ≥1 peran.
+- Tabel penugasan per tahun ajaran dibuat setelah master data yang dirujuknya (tahun ajaran, rombel, konsentrasi keahlian, satuan pendidikan, tenaga pendidik) tersedia di tahap 1.
 
 ## Master data
 
