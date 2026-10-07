@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\MasterData\BidangKeahlianController;
 use App\Http\Controllers\Admin\MasterData\KonsentrasiKeahlianController;
 use App\Http\Controllers\Admin\MasterData\MuridController;
+use App\Http\Controllers\Admin\MasterData\MuridOrangTuaController;
+use App\Http\Controllers\Admin\MasterData\OrangTuaWaliController;
 use App\Http\Controllers\Admin\MasterData\PenugasanController;
 use App\Http\Controllers\Admin\MasterData\ProgramKeahlianController;
 use App\Http\Controllers\Admin\MasterData\RombelController;
@@ -50,4 +52,13 @@ Route::prefix('master-data')->name('master-data.')->group(function () {
         ->parameters(['tenaga-kependidikan' => 'tenagaKependidikan']);
 
     Route::resource('murid', MuridController::class)->except('show');
+
+    Route::resource('orang-tua-wali', OrangTuaWaliController::class)
+        ->except('show')
+        ->parameters(['orang-tua-wali' => 'orangTuaWali']);
+
+    Route::post('murid/{murid}/orang-tua-wali', [MuridOrangTuaController::class, 'store'])
+        ->name('murid.orang-tua-wali.store');
+    Route::delete('murid/{murid}/orang-tua-wali/{orangTuaWali}', [MuridOrangTuaController::class, 'destroy'])
+        ->name('murid.orang-tua-wali.destroy');
 });

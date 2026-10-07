@@ -112,6 +112,8 @@ Peran:
 ### Orang Tua/Wali
 - **Tabel terpisah dari murid**, dihubungkan lewat tabel relasi dengan kolom `hubungan` (ayah kandung / ibu kandung / wali). Murid bersaudara dapat memakai data orang tua yang sama.
 - Kolom: nama, pendidikan, pekerjaan, penghasilan, nomor HP (WA).
+- Implementasi: `tb_orang_tua_wali` + `tb_murid_orang_tua` (pivot `MuridOrangTua`, kolom `hubungan` enum `HubunganOrangTua`). Satu murid paling banyak satu baris per hubungan. Dikelola dari halaman ubah murid (tautkan data yang ada / tambah baru langsung tertaut) dan menu Orang Tua/Wali. Orang tua/wali yang masih tertaut ke murid tidak dapat dihapus.
+- Nomor HP murid dan orang tua/wali divalidasi dengan Rule `App\Rules\NomorPonselIndonesia` (normalkan dulu dengan `NomorPonselIndonesia::normalkan()`).
 
 ### PPDB
 - Formulir terdiri dari dua lembar: (1) lembar peserta didik (identitas murid + ayah, ibu, wali), (2) lembar pernyataan kesanggupan murid dan orang tua/wali.
@@ -125,7 +127,7 @@ Peran:
 - **Moda transportasi**: jalan kaki, kendaraan pribadi, kendaraan umum, jemputan sekolah
 - **Tempat tinggal**: bersama orang tua, bersama wali, kos, asrama, panti asuhan, lainnya
 - **Status tenaga pendidik**: GTT, GTY
-- **Pendidikan, pekerjaan, penghasilan orang tua/wali**: TBD (usulan: ikuti referensi Dapodik)
+- **Pendidikan, pekerjaan, penghasilan orang tua/wali**: mengikuti referensi Dapodik — enum `PendidikanOrangTua`, `PekerjaanOrangTua`, `PenghasilanOrangTua`
 
 ## Konvensi kode
 
@@ -225,7 +227,6 @@ Setiap fitur memperhatikan karakteristik berikut:
 ## Belum diputuskan (TBD)
 
 - Status dan kolom data Tenaga Kependidikan.
-- Referensi pendidikan, pekerjaan, dan penghasilan orang tua/wali.
 - Library komponen Tailwind untuk area publik.
 - Jenis dan format dokumen administrasi tenaga pendidik.
 - Format dan aturan penilaian rapor.

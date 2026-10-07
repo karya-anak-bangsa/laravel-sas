@@ -6,6 +6,7 @@ use App\Enums\KodePeran;
 use App\Models\BidangKeahlian;
 use App\Models\KonsentrasiKeahlian;
 use App\Models\Murid;
+use App\Models\OrangTuaWali;
 use App\Models\Pengguna;
 use App\Models\Penugasan;
 use App\Models\ProgramKeahlian;
@@ -42,6 +43,7 @@ class KebijakanMasterDataTest extends TestCase
             'pengguna' => [Pengguna::class],
             'tenaga kependidikan' => [TenagaKependidikan::class],
             'murid' => [Murid::class],
+            'orang tua/wali' => [OrangTuaWali::class],
         ];
     }
 

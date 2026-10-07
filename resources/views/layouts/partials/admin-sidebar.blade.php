@@ -11,6 +11,7 @@
         ['teks' => 'Tahun Ajaran', 'route' => 'admin.master-data.tahun-ajaran.index', 'aktif' => 'admin.master-data.tahun-ajaran.*', 'model' => App\Models\TahunAjaran::class],
         ['teks' => 'Rombel', 'route' => 'admin.master-data.rombel.index', 'aktif' => 'admin.master-data.rombel.*', 'model' => App\Models\Rombel::class],
         ['teks' => 'Murid', 'route' => 'admin.master-data.murid.index', 'aktif' => 'admin.master-data.murid.*', 'model' => App\Models\Murid::class],
+        ['teks' => 'Orang Tua/Wali', 'route' => 'admin.master-data.orang-tua-wali.index', 'aktif' => 'admin.master-data.orang-tua-wali.*', 'model' => App\Models\OrangTuaWali::class],
         ['teks' => 'Tenaga Pendidik', 'route' => 'admin.master-data.tenaga-pendidik.index', 'aktif' => 'admin.master-data.tenaga-pendidik.*', 'model' => App\Models\TenagaPendidik::class],
         ['teks' => 'Tenaga Kependidikan', 'route' => 'admin.master-data.tenaga-kependidikan.index', 'aktif' => 'admin.master-data.tenaga-kependidikan.*', 'model' => App\Models\TenagaKependidikan::class],
         ['teks' => 'Penugasan', 'route' => 'admin.master-data.penugasan.index', 'aktif' => 'admin.master-data.penugasan.*', 'model' => App\Models\Penugasan::class],

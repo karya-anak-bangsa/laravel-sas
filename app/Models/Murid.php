@@ -10,6 +10,7 @@ use Database\Factories\MuridFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -54,6 +55,19 @@ class Murid extends Model
     public function berkebutuhanKhusus(): HasMany
     {
         return $this->hasMany(MuridBerkebutuhanKhusus::class, 'id_murid', 'id_murid');
+    }
+
+    /**
+     * Orang tua/wali beserta hubungannya (pivot `hubungan`).
+     *
+     * @return BelongsToMany<OrangTuaWali, $this, MuridOrangTua>
+     */
+    public function orangTuaWali(): BelongsToMany
+    {
+        return $this->belongsToMany(OrangTuaWali::class, 'tb_murid_orang_tua', 'id_murid', 'id_orang_tua_wali', 'id_murid', 'id_orang_tua_wali')
+            ->using(MuridOrangTua::class)
+            ->withPivot('hubungan')
+            ->withTimestamps();
     }
 
     /**

@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin\MasterData;
 use App\Actions\MasterData\SimpanMurid;
 use App\Enums\Agama;
 use App\Enums\BerkebutuhanKhusus;
+use App\Enums\HubunganOrangTua;
 use App\Enums\JenisKelamin;
 use App\Enums\ModaTransportasi;
 use App\Enums\TempatTinggal;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterData\MuridRequest;
 use App\Models\Murid;
+use App\Models\OrangTuaWali;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -59,7 +61,20 @@ class MuridController extends Controller
     {
         Gate::authorize('update', $murid);
 
-        return $this->form($murid->load('berkebutuhanKhusus'));
+        $murid->load(['berkebutuhanKhusus', 'orangTuaWali']);
+
+        return $this->form($murid)->with([
+            'pilihanHubungan' => collect(HubunganOrangTua::cases())
+                ->reject(fn (HubunganOrangTua $hubungan) => $murid->orangTuaWali->contains(fn ($orangTua) => $orangTua->pivot->hubungan === $hubungan))
+                ->mapWithKeys(fn (HubunganOrangTua $hubungan) => [$hubungan->value => $hubungan->label()]),
+            'pilihanOrangTuaWali' => OrangTuaWali::query()
+                ->whereNotIn('id_orang_tua_wali', $murid->orangTuaWali->modelKeys())
+                ->orderBy('nama')
+                ->get(['id_orang_tua_wali', 'nama', 'nomor_hp'])
+                ->mapWithKeys(fn (OrangTuaWali $orangTua) => [
+                    $orangTua->id_orang_tua_wali => $orangTua->nama.($orangTua->nomor_hp ? " ({$orangTua->nomor_hp})" : ''),
+                ]),
+        ]);
     }
 
     public function update(MuridRequest $request, Murid $murid, SimpanMurid $simpan): RedirectResponse

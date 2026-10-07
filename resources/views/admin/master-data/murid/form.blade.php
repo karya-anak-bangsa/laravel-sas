@@ -87,4 +87,8 @@
             <a href="{{ route('admin.master-data.murid.index') }}" class="btn btn-outline">Kembali ke daftar</a>
         </div>
     </form>
+
+    @if ($sedangMengubah)
+        @include('admin.master-data.murid.partials.orang-tua-wali')
+    @endif
 @endsection
