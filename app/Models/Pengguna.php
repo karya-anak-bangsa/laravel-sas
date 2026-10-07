@@ -22,6 +22,11 @@ class Pengguna extends Authenticatable
     /** @use HasFactory<PenggunaFactory> */
     use HasFactory, Notifiable, SoftDeletes;
 
+    /**
+     * Pola nama pengguna: huruf, angka, titik, tanda hubung, dan garis bawah.
+     */
+    public const POLA_NAMA_PENGGUNA = '/^[A-Za-z0-9._-]+$/';
+
     protected $table = 'tb_pengguna';
 
     protected $primaryKey = 'id_pengguna';

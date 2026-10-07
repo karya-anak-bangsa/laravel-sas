@@ -37,6 +37,7 @@ class KebijakanMasterDataTest extends TestCase
             'rombel' => [Rombel::class],
             'tenaga pendidik' => [TenagaPendidik::class],
             'penugasan' => [Penugasan::class],
+            'pengguna' => [Pengguna::class],
         ];
     }
 

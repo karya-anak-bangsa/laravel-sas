@@ -20,5 +20,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth', 'can:akses-admin'])->group(function () {
         require __DIR__.'/admin/dasbor.php';
         require __DIR__.'/admin/master-data.php';
+        require __DIR__.'/admin/pengguna.php';
     });
 });

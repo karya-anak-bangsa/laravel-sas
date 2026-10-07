@@ -206,6 +206,8 @@ Setiap fitur memperhatikan karakteristik berikut:
 - Hanya akun `aktif` yang dapat masuk; percobaan gagal dibatasi 5 kali per login + IP (`App\Actions\Autentikasi\AutentikasiPengguna`).
 - Seluruh route admin selain masuk/keluar memakai middleware `auth` + `can:akses-admin` (lihat `routes/web.php`).
 - Lupa kata sandi: sementara diatur ulang oleh Administrator (belum ada reset via email).
+- Akun dikelola di menu **Pengguna** (`/admin/pengguna`, khusus Administrator): nama pengguna (huruf, angka, titik, `-`, `_` — `Pengguna::POLA_NAMA_PENGGUNA`), email opsional, kata sandi, aktif, peran tetap, dan tautan ke data tenaga pendidik yang belum punya akun. Nama pengguna/email unik terhadap semua akun termasuk yang sudah dihapus.
+- Administrator tidak dapat menghapus, menonaktifkan, atau mencabut peran Administrator dari akunnya sendiri.
 
 ## Tahapan pengembangan (usulan urutan)
 

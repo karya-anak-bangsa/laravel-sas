@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Actions\Pengguna\BuatPengguna;
 use App\Enums\KodePeran;
+use App\Models\Pengguna;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
@@ -29,9 +30,11 @@ class BuatAdministrator extends Command
         ];
 
         $validator = Validator::make($data, [
-            'nama_pengguna' => ['required', 'alpha_dash', 'max:50', 'unique:tb_pengguna,nama_pengguna'],
+            'nama_pengguna' => ['required', 'regex:'.Pengguna::POLA_NAMA_PENGGUNA, 'max:50', 'unique:tb_pengguna,nama_pengguna'],
             'email' => ['nullable', 'email', 'max:255', 'unique:tb_pengguna,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], messages: [
+            'nama_pengguna.regex' => 'Nama pengguna hanya boleh berisi huruf, angka, titik, tanda hubung, dan garis bawah.',
         ], attributes: [
             'nama_pengguna' => 'nama pengguna',
         ]);

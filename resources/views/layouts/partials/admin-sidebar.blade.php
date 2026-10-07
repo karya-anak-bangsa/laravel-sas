@@ -18,6 +18,8 @@
     ])->filter(fn (array $item) => $pengguna->can('viewAny', $item['model']));
 
     $masterDataAktif = $menuMasterData->contains(fn (array $item) => request()->routeIs($item['aktif']));
+
+    $penggunaAktif = request()->routeIs('admin.pengguna.*');
 @endphp
 
 <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
@@ -55,6 +57,16 @@
                 </div>
             </div>
         @endif
+
+        @can('viewAny', App\Models\Pengguna::class)
+            <div class="nav-group">
+                <div class="nav-label">Pengaturan</div>
+                <a @class(['nav-link', 'active' => $penggunaAktif]) href="{{ route('admin.pengguna.index') }}" @if ($penggunaAktif) aria-current="page" @endif>
+                    <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
+                    <span class="nav-text">Pengguna</span>
+                </a>
+            </div>
+        @endcan
     </nav>
 
     <div class="sidebar-footer">
