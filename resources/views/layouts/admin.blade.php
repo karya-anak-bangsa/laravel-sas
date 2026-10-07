@@ -46,6 +46,12 @@
                 </div>
             @endif
 
+            @if (session('galat'))
+                <div class="alert alert-error" role="alert">
+                    <div class="alert-body">{{ session('galat') }}</div>
+                </div>
+            @endif
+
             @yield('konten')
         </div>
 

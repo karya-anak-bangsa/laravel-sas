@@ -24,3 +24,49 @@
         display: none;
     }
 }
+
+/* Penanda isian wajib pada label form. */
+.wajib {
+    color: var(--red);
+}
+
+/* Form satu tombol (mis. hapus) di dalam baris tabel. */
+.form-inline {
+    display: inline;
+    margin: 0;
+}
+
+/* Kolom aksi tabel. */
+table.table .kolom-aksi {
+    text-align: end;
+    white-space: nowrap;
+}
+
+/* Paginasi (layouts/partials/admin-paginasi.blade.php). */
+.paginasi {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.paginasi-info {
+    font-size: 12.5px;
+    color: var(--text-muted);
+}
+
+.pagination a.page-btn {
+    text-decoration: none;
+}
+
+.pagination .page-btn[aria-disabled='true'] {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Tombol aksi di footer form. */
+.aksi-form {
+    display: flex;
+    gap: var(--space-2);
+}

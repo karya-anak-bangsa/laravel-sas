@@ -70,6 +70,13 @@ Peran:
 
 ## Master data
 
+**Pengelola: hanya Administrator** yang boleh menambah/mengubah/menghapus master data. Peran lain akan diberi akses baca per modul bila dibutuhkan (override method di Policy-nya).
+
+### Satuan Pendidikan
+- `tb_satuan_pendidikan`: nama, `bentuk_pendidikan` (enum `BentukPendidikan`: smp, smk, mts — istilah Dapodik), NPSN (8 digit, opsional), alamat.
+- Tingkat per bentuk pendidikan: `BentukPendidikan::tingkat()` (SMP/MTs: VII–IX, SMK: X–XII); enum `Tingkat` disimpan sebagai angka 7–12.
+- Data awal (SMP & SMK Puspita Bangsa) diisi oleh `DataAwalSeeder`.
+
 ### Tenaga Pendidik
 - Kolom: nama lengkap, NUPTK, tempat lahir, tanggal lahir, pendidikan terakhir, status, TMT GTT, TMT GTY, masa kerja, satuan pendidikan.
 - Status: **GTT** (Guru Tidak Tetap) atau **GTY** (Guru Tetap Yayasan). Tidak ada status honorer.
@@ -125,6 +132,14 @@ Struktur kode (agar modul baru mudah ditambahkan):
 - Route per modul di `routes/admin/<modul>.php` dan `routes/publik/<modul>.php`, di-include dari `routes/web.php`.
 - Controller tipis: validasi di Form Request, otorisasi di Policy, logika bisnis di Action. Operasi multi-tabel dibungkus `DB::transaction`.
 - Hindari query N+1 (eager loading) dan beri index pada setiap foreign key serta kolom pencarian (NISN, NIK, NUPTK).
+
+Pola CRUD area admin (ikuti modul Satuan Pendidikan sebagai contoh):
+- Route `Route::resource(...)->except('show')` dengan nama parameter camelCase (`satuanPendidikan`); otorisasi `Gate::authorize()` di controller dan `authorize()` di Form Request (satu Request untuk store & update).
+- Policy master data meng-extend `App\Policies\KebijakanMasterData` (semua aksi ditolak; Administrator lolos lewat `Gate::before`).
+- Komponen Blade `resources/views/components/admin/`: `header-halaman`, `input`, `textarea`, `select`, `tombol-hapus` (konfirmasi via `data-konfirmasi`), `kosong`. Paginasi: `->links('layouts.partials.admin-paginasi')`. Pesan sukses `session('status')`, pesan gagal `session('galat')`.
+- Menu baru ditambahkan ke array di `layouts/partials/admin-sidebar.blade.php` (otomatis disaring dengan Policy `viewAny`).
+- Validasi unik pada tabel ber-soft-delete memakai `Rule::unique(...)->withoutTrashed()` dan **tanpa** unique index di database (index biasa), agar data yang sudah dihapus tidak menghalangi isian baru.
+- Data awal yang dibutuhkan di semua lingkungan masuk `DataAwalSeeder` (idempoten, aman di production); data contoh hanya di `DatabaseSeeder` (non-production).
 
 Data pribadi (NIK, No. KK, NUPTK, data orang tua):
 - Simpan sebagai string dengan panjang tetap dan validasi digit (NIK/No. KK 16 digit, NISN 10 digit, NUPTK 16 digit).

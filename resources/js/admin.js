@@ -8,3 +8,17 @@ import 'gentelella/scss/v4/main.scss';
 import { mountShell } from 'gentelella/v4/shell';
 
 mountShell();
+
+// Form dengan atribut data-konfirmasi (mis. tombol hapus) meminta
+// konfirmasi sebelum dikirim.
+document.addEventListener('submit', (event) => {
+    const form = event.target;
+
+    if (!(form instanceof HTMLFormElement) || !form.dataset.konfirmasi) {
+        return;
+    }
+
+    if (!window.confirm(form.dataset.konfirmasi)) {
+        event.preventDefault();
+    }
+});

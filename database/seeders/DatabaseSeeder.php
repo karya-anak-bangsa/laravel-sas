@@ -14,11 +14,13 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      *
-     * Hanya untuk pengembangan lokal. Di production, buat akun dengan
-     * `php artisan pengguna:buat-administrator`.
+     * Data awal yayasan selalu diisi. Data contoh hanya untuk pengembangan
+     * lokal; di production, buat akun dengan `php artisan pengguna:buat-administrator`.
      */
     public function run(): void
     {
+        $this->call(DataAwalSeeder::class);
+
         if (app()->isProduction()) {
             $this->command->warn('Seeder data contoh tidak dijalankan di production.');
 
