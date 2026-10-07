@@ -8,6 +8,9 @@
     // Hanya item yang boleh dilihat pengguna (Policy viewAny) yang ditampilkan.
     $menuMasterData = collect([
         ['teks' => 'Satuan Pendidikan', 'route' => 'admin.master-data.satuan-pendidikan.index', 'aktif' => 'admin.master-data.satuan-pendidikan.*', 'model' => App\Models\SatuanPendidikan::class],
+        ['teks' => 'Bidang Keahlian', 'route' => 'admin.master-data.bidang-keahlian.index', 'aktif' => 'admin.master-data.bidang-keahlian.*', 'model' => App\Models\BidangKeahlian::class],
+        ['teks' => 'Program Keahlian', 'route' => 'admin.master-data.program-keahlian.index', 'aktif' => 'admin.master-data.program-keahlian.*', 'model' => App\Models\ProgramKeahlian::class],
+        ['teks' => 'Konsentrasi Keahlian', 'route' => 'admin.master-data.konsentrasi-keahlian.index', 'aktif' => 'admin.master-data.konsentrasi-keahlian.*', 'model' => App\Models\KonsentrasiKeahlian::class],
     ])->filter(fn (array $item) => $pengguna->can('viewAny', $item['model']));
 
     $masterDataAktif = $menuMasterData->contains(fn (array $item) => request()->routeIs($item['aktif']));

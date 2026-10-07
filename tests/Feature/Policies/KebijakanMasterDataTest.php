@@ -3,7 +3,10 @@
 namespace Tests\Feature\Policies;
 
 use App\Enums\KodePeran;
+use App\Models\BidangKeahlian;
+use App\Models\KonsentrasiKeahlian;
 use App\Models\Pengguna;
+use App\Models\ProgramKeahlian;
 use App\Models\SatuanPendidikan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -23,6 +26,9 @@ class KebijakanMasterDataTest extends TestCase
     {
         return [
             'satuan pendidikan' => [SatuanPendidikan::class],
+            'bidang keahlian' => [BidangKeahlian::class],
+            'program keahlian' => [ProgramKeahlian::class],
+            'konsentrasi keahlian' => [KonsentrasiKeahlian::class],
         ];
     }
 

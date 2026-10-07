@@ -44,7 +44,7 @@ Spektrum keahlian SMK (Kepmendikbudristek No. 244/M/2024, Kurikulum Merdeka):
 | Bisnis dan Manajemen | Pemasaran | Bisnis Retail | BR | 1 |
 | Bisnis dan Manajemen | Akuntansi dan Keuangan Lembaga | Akuntansi | AK | 1 |
 
-Hierarki disimpan sebagai tiga tabel: bidang → program → konsentrasi keahlian.
+Hierarki disimpan sebagai tiga tabel: bidang → program → konsentrasi keahlian (`tb_bidang_keahlian`, `tb_program_keahlian`, `tb_konsentrasi_keahlian` dengan `singkatan` unik). Data di atas diisi oleh `DataAwalSeeder`.
 
 ## Pengguna dan peran
 
@@ -139,6 +139,7 @@ Pola CRUD area admin (ikuti modul Satuan Pendidikan sebagai contoh):
 - Komponen Blade `resources/views/components/admin/`: `header-halaman`, `input`, `textarea`, `select`, `tombol-hapus` (konfirmasi via `data-konfirmasi`), `kosong`. Paginasi: `->links('layouts.partials.admin-paginasi')`. Pesan sukses `session('status')`, pesan gagal `session('galat')`.
 - Menu baru ditambahkan ke array di `layouts/partials/admin-sidebar.blade.php` (otomatis disaring dengan Policy `viewAny`).
 - Validasi unik pada tabel ber-soft-delete memakai `Rule::unique(...)->withoutTrashed()` dan **tanpa** unique index di database (index biasa), agar data yang sudah dihapus tidak menghalangi isian baru.
+- Data yang masih dirujuk data lain tidak boleh dihapus: Action `Hapus<Entitas>` melempar `App\Exceptions\DataMasihDipakai`, yang otomatis dirender sebagai redirect kembali dengan `session('galat')` (lihat `bootstrap/app.php`).
 - Data awal yang dibutuhkan di semua lingkungan masuk `DataAwalSeeder` (idempoten, aman di production); data contoh hanya di `DatabaseSeeder` (non-production).
 
 Data pribadi (NIK, No. KK, NUPTK, data orang tua):

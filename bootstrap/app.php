@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\DataMasihDipakai;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -19,4 +20,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
+
+        // Penolakan hapus karena data masih dirujuk adalah kondisi wajar, bukan galat sistem.
+        $exceptions->dontReport(DataMasihDipakai::class);
+        $exceptions->render(fn (DataMasihDipakai $e, Request $request) => $request->expectsJson()
+            ? null
+            : back()->with('galat', $e->getMessage()));
     })->create();
