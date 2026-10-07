@@ -41,6 +41,16 @@ class SatuanPendidikan extends Model
     }
 
     /**
+     * Penugasan Kepala/Wakil Kepala Sekolah.
+     *
+     * @return HasMany<Penugasan, $this>
+     */
+    public function penugasan(): HasMany
+    {
+        return $this->hasMany(Penugasan::class, 'id_satuan_pendidikan', 'id_satuan_pendidikan');
+    }
+
+    /**
      * @return HasMany<TenagaPendidik, $this>
      */
     public function tenagaPendidik(): HasMany

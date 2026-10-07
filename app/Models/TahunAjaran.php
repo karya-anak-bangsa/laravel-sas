@@ -38,6 +38,14 @@ class TahunAjaran extends Model
     }
 
     /**
+     * @return HasMany<Penugasan, $this>
+     */
+    public function penugasan(): HasMany
+    {
+        return $this->hasMany(Penugasan::class, 'id_tahun_ajaran', 'id_tahun_ajaran');
+    }
+
+    /**
      * @return HasOne<Semester, $this>
      */
     public function semesterGanjil(): HasOne

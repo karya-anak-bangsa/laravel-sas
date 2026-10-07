@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-body">
             <p>Selamat datang, <strong>{{ $pengguna->nama_pengguna }}</strong>.</p>
-            <p>Peran Anda: {{ $pengguna->peran->map(fn ($peran) => $peran->kode->label())->join(', ') }}.</p>
+            <p>Peran Anda: {{ $pengguna->kodePeran()->map(fn ($kode) => $kode->label())->join(', ') }}.</p>
             <p>
                 @if ($semesterAktif)
                     Semester aktif: <strong>{{ $semesterAktif->namaLengkap() }}</strong>

@@ -32,7 +32,8 @@ class AppServiceProvider extends ServiceProvider
         // Administrator aktif boleh melakukan semua aksi.
         Gate::before(fn (Pengguna $pengguna) => $pengguna->aktif && $pengguna->adalahAdministrator() ? true : null);
 
-        // Area admin hanya untuk akun aktif yang memiliki paling sedikit satu peran.
-        Gate::define('akses-admin', fn (Pengguna $pengguna) => $pengguna->aktif && $pengguna->peran->isNotEmpty());
+        // Area admin hanya untuk akun aktif yang memiliki paling sedikit satu peran
+        // (peran tetap atau peran dari penugasan tahun ajaran aktif).
+        Gate::define('akses-admin', fn (Pengguna $pengguna) => $pengguna->aktif && $pengguna->kodePeran()->isNotEmpty());
     }
 }

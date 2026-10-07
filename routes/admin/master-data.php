@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\MasterData\BidangKeahlianController;
 use App\Http\Controllers\Admin\MasterData\KonsentrasiKeahlianController;
+use App\Http\Controllers\Admin\MasterData\PenugasanController;
 use App\Http\Controllers\Admin\MasterData\ProgramKeahlianController;
 use App\Http\Controllers\Admin\MasterData\RombelController;
 use App\Http\Controllers\Admin\MasterData\SatuanPendidikanController;
@@ -39,4 +40,6 @@ Route::prefix('master-data')->name('master-data.')->group(function () {
     Route::resource('tenaga-pendidik', TenagaPendidikController::class)
         ->except('show')
         ->parameters(['tenaga-pendidik' => 'tenagaPendidik']);
+
+    Route::resource('penugasan', PenugasanController::class)->except('show');
 });

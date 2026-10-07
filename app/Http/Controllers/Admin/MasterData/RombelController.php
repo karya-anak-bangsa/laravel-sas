@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\MasterData;
 
+use App\Actions\MasterData\HapusRombel;
 use App\Enums\Tingkat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterData\RombelRequest;
@@ -76,11 +77,11 @@ class RombelController extends Controller
             ->with('status', 'Rombel berhasil diperbarui.');
     }
 
-    public function destroy(Rombel $rombel): RedirectResponse
+    public function destroy(Rombel $rombel, HapusRombel $hapus): RedirectResponse
     {
         Gate::authorize('delete', $rombel);
 
-        $rombel->delete();
+        $hapus->handle($rombel);
 
         return redirect()->route('admin.master-data.rombel.index', ['tahun_ajaran' => $rombel->id_tahun_ajaran])
             ->with('status', 'Rombel berhasil dihapus.');

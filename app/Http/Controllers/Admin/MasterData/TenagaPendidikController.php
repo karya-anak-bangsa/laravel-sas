@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\MasterData;
 
+use App\Actions\MasterData\HapusTenagaPendidik;
 use App\Enums\JenjangPendidikan;
 use App\Enums\StatusTenagaPendidik;
 use App\Http\Controllers\Controller;
@@ -71,11 +72,11 @@ class TenagaPendidikController extends Controller
             ->with('status', 'Data tenaga pendidik berhasil diperbarui.');
     }
 
-    public function destroy(TenagaPendidik $tenagaPendidik): RedirectResponse
+    public function destroy(TenagaPendidik $tenagaPendidik, HapusTenagaPendidik $hapus): RedirectResponse
     {
         Gate::authorize('delete', $tenagaPendidik);
 
-        $tenagaPendidik->delete();
+        $hapus->handle($tenagaPendidik);
 
         return redirect()->route('admin.master-data.tenaga-pendidik.index')
             ->with('status', 'Data tenaga pendidik berhasil dihapus.');

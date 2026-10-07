@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable(['id_tahun_ajaran', 'id_satuan_pendidikan', 'id_konsentrasi_keahlian', 'tingkat', 'nama'])]
@@ -56,5 +57,15 @@ class Rombel extends Model
     public function konsentrasiKeahlian(): BelongsTo
     {
         return $this->belongsTo(KonsentrasiKeahlian::class, 'id_konsentrasi_keahlian', 'id_konsentrasi_keahlian');
+    }
+
+    /**
+     * Penugasan Wali Kelas.
+     *
+     * @return HasMany<Penugasan, $this>
+     */
+    public function penugasan(): HasMany
+    {
+        return $this->hasMany(Penugasan::class, 'id_rombel', 'id_rombel');
     }
 }

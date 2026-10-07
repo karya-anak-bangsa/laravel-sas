@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable([
@@ -58,6 +59,14 @@ class TenagaPendidik extends Model
     public function pengguna(): BelongsTo
     {
         return $this->belongsTo(Pengguna::class, 'id_pengguna', 'id_pengguna');
+    }
+
+    /**
+     * @return HasMany<Penugasan, $this>
+     */
+    public function penugasan(): HasMany
+    {
+        return $this->hasMany(Penugasan::class, 'id_tenaga_pendidik', 'id_tenaga_pendidik');
     }
 
     /**

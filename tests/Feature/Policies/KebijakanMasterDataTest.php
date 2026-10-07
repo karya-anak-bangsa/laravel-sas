@@ -6,6 +6,7 @@ use App\Enums\KodePeran;
 use App\Models\BidangKeahlian;
 use App\Models\KonsentrasiKeahlian;
 use App\Models\Pengguna;
+use App\Models\Penugasan;
 use App\Models\ProgramKeahlian;
 use App\Models\Rombel;
 use App\Models\SatuanPendidikan;
@@ -35,6 +36,7 @@ class KebijakanMasterDataTest extends TestCase
             'tahun ajaran' => [TahunAjaran::class],
             'rombel' => [Rombel::class],
             'tenaga pendidik' => [TenagaPendidik::class],
+            'penugasan' => [Penugasan::class],
         ];
     }
 

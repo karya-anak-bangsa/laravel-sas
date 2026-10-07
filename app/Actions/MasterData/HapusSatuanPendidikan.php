@@ -20,6 +20,10 @@ class HapusSatuanPendidikan
             throw new DataMasihDipakai("Satuan pendidikan {$satuanPendidikan->nama} masih memiliki tenaga pendidik.");
         }
 
+        if ($satuanPendidikan->penugasan()->exists()) {
+            throw new DataMasihDipakai("Satuan pendidikan {$satuanPendidikan->nama} masih dipakai oleh penugasan.");
+        }
+
         $satuanPendidikan->delete();
     }
 }

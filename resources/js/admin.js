@@ -22,3 +22,25 @@ document.addEventListener('submit', (event) => {
         event.preventDefault();
     }
 });
+
+// Elemen dengan data-tampil-untuk="nama_isian:nilai1,nilai2" hanya ditampilkan
+// jika isian bernama nama_isian bernilai salah satu dari daftar nilai.
+// Tanpa JavaScript semua elemen tetap tampil, dan server mengabaikan isian
+// yang tidak relevan.
+const elemenBersyarat = document.querySelectorAll('[data-tampil-untuk]');
+
+const perbaruiTampilan = () => {
+    elemenBersyarat.forEach((elemen) => {
+        const [nama, daftarNilai] = elemen.dataset.tampilUntuk.split(':');
+        const isian = elemen.closest('form')?.elements.namedItem(nama);
+
+        if (isian) {
+            elemen.hidden = !daftarNilai.split(',').includes(isian.value);
+        }
+    });
+};
+
+if (elemenBersyarat.length > 0) {
+    document.addEventListener('change', perbaruiTampilan);
+    perbaruiTampilan();
+}

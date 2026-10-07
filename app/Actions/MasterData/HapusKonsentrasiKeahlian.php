@@ -16,6 +16,10 @@ class HapusKonsentrasiKeahlian
             throw new DataMasihDipakai("Konsentrasi keahlian {$konsentrasiKeahlian->nama} masih dipakai oleh rombel.");
         }
 
+        if ($konsentrasiKeahlian->penugasan()->exists()) {
+            throw new DataMasihDipakai("Konsentrasi keahlian {$konsentrasiKeahlian->nama} masih dipakai oleh penugasan.");
+        }
+
         $konsentrasiKeahlian->delete();
     }
 }

@@ -20,6 +20,10 @@ class HapusTahunAjaran
             throw new DataMasihDipakai("Tahun ajaran {$tahunAjaran->nama} masih memiliki rombel.");
         }
 
+        if ($tahunAjaran->penugasan()->exists()) {
+            throw new DataMasihDipakai("Tahun ajaran {$tahunAjaran->nama} masih memiliki penugasan.");
+        }
+
         $tahunAjaran->delete();
     }
 }

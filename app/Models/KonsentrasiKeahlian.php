@@ -35,4 +35,14 @@ class KonsentrasiKeahlian extends Model
     {
         return $this->hasMany(Rombel::class, 'id_konsentrasi_keahlian', 'id_konsentrasi_keahlian');
     }
+
+    /**
+     * Penugasan Ketua Jurusan.
+     *
+     * @return HasMany<Penugasan, $this>
+     */
+    public function penugasan(): HasMany
+    {
+        return $this->hasMany(Penugasan::class, 'id_konsentrasi_keahlian', 'id_konsentrasi_keahlian');
+    }
 }

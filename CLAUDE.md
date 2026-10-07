@@ -65,8 +65,10 @@ Peran:
   - Ketua Jurusan → konsentrasi keahlian + tahun ajaran
   - Kepala/Wakil Kepala Sekolah → satuan pendidikan + tahun ajaran
 - Otorisasi memakai Gate/Policy Laravel. Tabel peran mengikuti konvensi penamaan proyek (`tb_peran`, `tb_pengguna_peran`). Jangan memasang paket RBAC yang memaksakan nama tabel/PK sendiri tanpa persetujuan.
-- Implementasi: kode peran adalah enum `App\Enums\KodePeran` (disimpan di `tb_peran.kode`; baris `tb_peran` diisi oleh migration-nya, jadi menambah peran = enum + migration baru). `Pengguna::memilikiPeran(KodePeran ...)` untuk pengecekan. Gate di `AppServiceProvider`: `Gate::before` meloloskan Administrator aktif; `akses-admin` = akun aktif dengan ≥1 peran.
-- Tabel penugasan per tahun ajaran dibuat setelah master data yang dirujuknya (tahun ajaran, rombel, konsentrasi keahlian, satuan pendidikan, tenaga pendidik) tersedia di tahap 1.
+- Implementasi: kode peran adalah enum `App\Enums\KodePeran` (disimpan di `tb_peran.kode`; baris `tb_peran` diisi oleh migration-nya, jadi menambah peran = enum + migration baru). Gate di `AppServiceProvider`: `Gate::before` meloloskan Administrator aktif; `akses-admin` = akun aktif dengan ≥1 peran efektif.
+- **Peran tetap vs kontekstual** (keputusan): `tb_pengguna_peran` hanya untuk peran tetap (Administrator, Tenaga Pendidik, Tenaga Kependidikan — `KodePeran::daftarTetap()`). Peran kontekstual (Kepala/Wakil Kepala Sekolah, Ketua Jurusan, Wali Kelas — `KodePeran::daftarKontekstual()`) **berasal dari `tb_penugasan` pada tahun ajaran aktif** lewat data tenaga pendidik yang tertaut ke akun. Saat semester aktif pindah tahun ajaran, peran kontekstual ikut berganti.
+- Selalu cek peran dengan `Pengguna::memilikiPeran(KodePeran ...)` / `kodePeran()` (gabungan peran tetap + penugasan aktif), jangan membaca relasi `peran` langsung.
+- `tb_penugasan`: tenaga pendidik + tahun ajaran + `id_peran` + konteks: Wali Kelas → `id_rombel` (satu wali per rombel), Ketua Jurusan → `id_konsentrasi_keahlian` (satu per konsentrasi per tahun ajaran), Kepala Sekolah → `id_satuan_pendidikan` (satu per satuan per tahun ajaran), Wakil Kepala Sekolah → `id_satuan_pendidikan` + `bidang` teks bebas (boleh beberapa).
 
 ## Master data
 

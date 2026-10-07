@@ -25,6 +25,11 @@
     }
 }
 
+/* Atribut hidden harus menang atas display milik komponen (mis. .form-row). */
+[hidden] {
+    display: none !important;
+}
+
 /* Penanda isian wajib pada label form. */
 .wajib {
     color: var(--red);

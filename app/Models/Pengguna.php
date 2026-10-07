@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 
 #[Fillable(['nama_pengguna', 'email', 'password', 'aktif'])]
 #[Hidden(['password', 'remember_token'])]
@@ -37,6 +40,9 @@ class Pengguna extends Authenticatable
     }
 
     /**
+     * Peran tetap yang diberikan langsung ke akun (Administrator, Tenaga
+     * Pendidik, Tenaga Kependidikan).
+     *
      * @return BelongsToMany<Peran, $this>
      */
     public function peran(): BelongsToMany
@@ -47,11 +53,51 @@ class Pengguna extends Authenticatable
     }
 
     /**
-     * Apakah pengguna memiliki salah satu dari peran yang diberikan.
+     * Data tenaga pendidik yang terhubung ke akun ini.
+     *
+     * @return HasOne<TenagaPendidik, $this>
+     */
+    public function tenagaPendidik(): HasOne
+    {
+        return $this->hasOne(TenagaPendidik::class, 'id_pengguna', 'id_pengguna');
+    }
+
+    /**
+     * Penugasan (peran kontekstual) pada tahun ajaran aktif, lewat data tenaga pendidik.
+     *
+     * @return HasManyThrough<Penugasan, TenagaPendidik, $this>
+     */
+    public function penugasanAktif(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Penugasan::class, TenagaPendidik::class,
+            'id_pengguna', 'id_tenaga_pendidik',
+            'id_pengguna', 'id_tenaga_pendidik',
+        )
+            ->whereIn('tb_penugasan.id_tahun_ajaran', Semester::query()->aktif()->select('id_tahun_ajaran'))
+            ->with('peran');
+    }
+
+    /**
+     * Seluruh peran efektif: peran tetap + peran dari penugasan tahun ajaran aktif.
+     *
+     * @return Collection<int, KodePeran>
+     */
+    public function kodePeran(): Collection
+    {
+        return $this->peran->pluck('kode')
+            ->merge($this->penugasanAktif->pluck('peran.kode'))
+            ->unique(fn (KodePeran $kode) => $kode->value)
+            ->sortBy(fn (KodePeran $kode) => array_search($kode, KodePeran::cases(), true))
+            ->values();
+    }
+
+    /**
+     * Apakah pengguna memiliki salah satu dari peran yang diberikan (termasuk peran dari penugasan).
      */
     public function memilikiPeran(KodePeran ...$kode): bool
     {
-        return $this->peran->contains(fn (Peran $peran) => in_array($peran->kode, $kode, true));
+        return $this->kodePeran()->contains(fn (KodePeran $milik) => in_array($milik, $kode, true));
     }
 
     public function adalahAdministrator(): bool

@@ -12,7 +12,7 @@ class DasborController extends Controller
     public function __invoke(Request $request): View
     {
         return view('admin.dasbor.index', [
-            'pengguna' => $request->user()->loadMissing('peran'),
+            'pengguna' => $request->user()->loadMissing(['peran', 'penugasanAktif']),
             'semesterAktif' => Semester::query()->aktif()->with('tahunAjaran')->first(),
         ]);
     }
