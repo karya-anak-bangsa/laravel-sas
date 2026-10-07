@@ -2,15 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Pengguna;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends Factory<User>
+ * @extends Factory<Pengguna>
  */
-class UserFactory extends Factory
+class PenggunaFactory extends Factory
 {
     /**
      * The current password being used by the factory.
@@ -25,21 +25,21 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'nama_pengguna' => fake()->unique()->userName(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'aktif' => true,
             'remember_token' => Str::random(10),
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Akun dinonaktifkan sehingga tidak dapat masuk.
      */
-    public function unverified(): static
+    public function nonaktif(): static
     {
         return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+            'aktif' => false,
         ]);
     }
 }
