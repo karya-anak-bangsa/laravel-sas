@@ -150,9 +150,10 @@ Setiap fitur memperhatikan karakteristik berikut:
 ## Lingkungan
 
 - Lokal: Laragon 8.4.0 (Apache 2.4.62, PHP 8.3.28, MySQL 8.0.40, Node 24.12, Git 2.47.1, Composer 2.10.1). Editor: VS Code + Claude Code.
-- `.env` lokal/production: `DB_CONNECTION=mysql`, `APP_LOCALE=id`, `APP_FAKER_LOCALE=id_ID`. Skeleton bawaan masih `sqlite`/`en`.
-- Zona waktu aplikasi: `Asia/Jakarta` (`config/app.php`, saat ini masih `UTC`).
-- Test: PHPUnit (bawaan skeleton). `phpunit.xml` saat ini memakai SQLite in-memory. Pertimbangkan database MySQL khusus test (`sas_testing`) agar perilakunya sama dengan production.
+- `.env` lokal/production: `DB_CONNECTION=mysql`, `DB_DATABASE=sas`, `APP_LOCALE=id`, `APP_FAKER_LOCALE=id_ID`, `APP_TIMEZONE=Asia/Jakarta` (lihat `.env.example`).
+- Zona waktu aplikasi: `Asia/Jakarta` (`config/app.php`, dapat diubah lewat `APP_TIMEZONE`).
+- Terjemahan Bahasa Indonesia di `lang/id/` (auth, pagination, passwords, validation). Nama kolom khusus modul diatur di `attributes()` Form Request.
+- Test: PHPUnit dengan database MySQL khusus `sas_testing` (diatur di `phpunit.xml`), agar perilakunya sama dengan production. Database ini harus dibuat dulu di MySQL lokal.
 - Perintah:
   - `composer dev`: server + Vite
   - `php artisan test`: jalankan test
