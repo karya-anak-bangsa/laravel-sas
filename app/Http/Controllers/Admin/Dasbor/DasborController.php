@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Dasbor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Semester;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -12,6 +13,7 @@ class DasborController extends Controller
     {
         return view('admin.dasbor.index', [
             'pengguna' => $request->user()->loadMissing('peran'),
+            'semesterAktif' => Semester::query()->aktif()->with('tahunAjaran')->first(),
         ]);
     }
 }

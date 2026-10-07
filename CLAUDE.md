@@ -77,6 +77,11 @@ Peran:
 - Tingkat per bentuk pendidikan: `BentukPendidikan::tingkat()` (SMP/MTs: VII–IX, SMK: X–XII); enum `Tingkat` disimpan sebagai angka 7–12.
 - Data awal (SMP & SMK Puspita Bangsa) diisi oleh `DataAwalSeeder`.
 
+### Tahun Ajaran dan Semester
+- `tb_tahun_ajaran` (nama `TTTT/TTTT`, tahun kedua = tahun pertama + 1) memiliki tepat dua `tb_semester` (enum `JenisSemester`: ganjil, genap) dengan tanggal mulai/selesai; keduanya disimpan bersama lewat Action `SimpanTahunAjaran`.
+- **Hanya satu semester aktif** (`tb_semester.aktif`), diatur lewat Action `AktifkanSemester`. Tahun ajaran aktif = tahun ajaran dari semester aktif (tidak ada kolom aktif di tahun ajaran). Ambil dengan `Semester::query()->aktif()`.
+- Tahun ajaran yang semesternya sedang aktif tidak dapat dihapus.
+
 ### Tenaga Pendidik
 - Kolom: nama lengkap, NUPTK, tempat lahir, tanggal lahir, pendidikan terakhir, status, TMT GTT, TMT GTY, masa kerja, satuan pendidikan.
 - Status: **GTT** (Guru Tidak Tetap) atau **GTY** (Guru Tetap Yayasan). Tidak ada status honorer.

@@ -1,19 +1,23 @@
 @extends('layouts.admin')
 
 @section('konten')
-    <div class="page-header">
-        <div class="page-header-row">
-            <div>
-                <div class="page-pretitle">Sistem Akademik Sekolah</div>
-                <h1 class="page-title">Dasbor</h1>
-            </div>
-        </div>
-    </div>
+    <x-admin.header-halaman pretitle="Sistem Akademik Sekolah" judul="Dasbor" />
 
     <div class="card">
         <div class="card-body">
             <p>Selamat datang, <strong>{{ $pengguna->nama_pengguna }}</strong>.</p>
             <p>Peran Anda: {{ $pengguna->peran->map(fn ($peran) => $peran->kode->label())->join(', ') }}.</p>
+            <p>
+                @if ($semesterAktif)
+                    Semester aktif: <strong>{{ $semesterAktif->namaLengkap() }}</strong>
+                    ({{ $semesterAktif->tanggal_mulai->translatedFormat('j F Y') }} – {{ $semesterAktif->tanggal_selesai->translatedFormat('j F Y') }}).
+                @else
+                    Belum ada semester aktif.
+                    @can('viewAny', App\Models\TahunAjaran::class)
+                        <a href="{{ route('admin.master-data.tahun-ajaran.index') }}">Atur di Tahun Ajaran</a>.
+                    @endcan
+                @endif
+            </p>
         </div>
     </div>
 @endsection

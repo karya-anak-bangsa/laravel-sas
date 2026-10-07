@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Dasbor;
 
+use App\Enums\JenisSemester;
 use App\Enums\KodePeran;
 use App\Models\Pengguna;
+use App\Models\TahunAjaran;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -28,6 +30,29 @@ class DasborTest extends TestCase
             ->assertViewIs('admin.dasbor.index')
             ->assertSee($pengguna->nama_pengguna)
             ->assertSee('Wali Kelas, Tenaga Pendidik');
+    }
+
+    public function test_dasbor_menampilkan_semester_aktif(): void
+    {
+        TahunAjaran::factory()->denganSemester(JenisSemester::Ganjil)->create(['nama' => '2026/2027']);
+        $pengguna = Pengguna::factory()->denganPeran(KodePeran::TenagaPendidik)->create();
+
+        $this->actingAs($pengguna)
+            ->get(route('admin.dasbor'))
+            ->assertOk()
+            ->assertSee('Ganjil 2026/2027')
+            ->assertSee('1 Juli 2026');
+    }
+
+    public function test_dasbor_memberi_tahu_jika_belum_ada_semester_aktif(): void
+    {
+        $pengguna = Pengguna::factory()->denganPeran(KodePeran::TenagaPendidik)->create();
+
+        $this->actingAs($pengguna)
+            ->get(route('admin.dasbor'))
+            ->assertOk()
+            ->assertSee('Belum ada semester aktif.')
+            ->assertDontSee('Atur di Tahun Ajaran');
     }
 
     public function test_pengguna_tanpa_peran_ditolak(): void

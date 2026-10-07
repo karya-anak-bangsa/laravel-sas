@@ -8,6 +8,7 @@ use App\Models\KonsentrasiKeahlian;
 use App\Models\Pengguna;
 use App\Models\ProgramKeahlian;
 use App\Models\SatuanPendidikan;
+use App\Models\TahunAjaran;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -29,6 +30,7 @@ class KebijakanMasterDataTest extends TestCase
             'bidang keahlian' => [BidangKeahlian::class],
             'program keahlian' => [ProgramKeahlian::class],
             'konsentrasi keahlian' => [KonsentrasiKeahlian::class],
+            'tahun ajaran' => [TahunAjaran::class],
         ];
     }
 
