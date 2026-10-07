@@ -4,13 +4,14 @@ namespace App\Actions\Pengguna;
 
 use App\Exceptions\DataMasihDipakai;
 use App\Models\Pengguna;
+use App\Models\TenagaKependidikan;
 use App\Models\TenagaPendidik;
 use Illuminate\Support\Facades\DB;
 
 class HapusPengguna
 {
     /**
-     * Hapus akun (soft delete) dan lepaskan tautannya dari data tenaga pendidik.
+     * Hapus akun (soft delete) dan lepaskan tautannya dari data tenaga pendidik/kependidikan.
      *
      * @throws DataMasihDipakai
      */
@@ -21,9 +22,8 @@ class HapusPengguna
         }
 
         DB::transaction(function () use ($pengguna) {
-            TenagaPendidik::query()
-                ->where('id_pengguna', $pengguna->id_pengguna)
-                ->update(['id_pengguna' => null]);
+            TenagaPendidik::query()->where('id_pengguna', $pengguna->id_pengguna)->update(['id_pengguna' => null]);
+            TenagaKependidikan::query()->where('id_pengguna', $pengguna->id_pengguna)->update(['id_pengguna' => null]);
 
             $pengguna->delete();
         });

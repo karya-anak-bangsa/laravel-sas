@@ -5,15 +5,18 @@ namespace App\Actions\Pengguna;
 use App\Enums\KodePeran;
 use App\Models\Pengguna;
 use App\Models\Peran;
+use App\Models\TenagaKependidikan;
 use App\Models\TenagaPendidik;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class SimpanPengguna
 {
     /**
-     * Simpan akun, peran tetapnya, dan tautan ke data tenaga pendidik dalam satu transaksi.
+     * Simpan akun, peran tetapnya, dan tautan ke data tenaga pendidik/kependidikan
+     * dalam satu transaksi.
      *
-     * @param  array{nama_pengguna: string, email?: string|null, password?: string|null, aktif: bool, peran: list<string>, id_tenaga_pendidik?: int|string|null}  $data
+     * @param  array{nama_pengguna: string, email?: string|null, password?: string|null, aktif: bool, peran: list<string>, id_tenaga_pendidik?: int|string|null, id_tenaga_kependidikan?: int|string|null}  $data
      */
     public function handle(Pengguna $pengguna, array $data): Pengguna
     {
@@ -39,23 +42,27 @@ class SimpanPengguna
                 Peran::query()->whereIn('kode', $kodePeranTetap->all())->pluck('id_peran')
             );
 
-            $this->tautkanTenagaPendidik($pengguna, $data['id_tenaga_pendidik'] ?? null);
+            $this->tautkan(TenagaPendidik::class, $pengguna, $data['id_tenaga_pendidik'] ?? null);
+            $this->tautkan(TenagaKependidikan::class, $pengguna, $data['id_tenaga_kependidikan'] ?? null);
 
             return $pengguna;
         });
     }
 
-    private function tautkanTenagaPendidik(Pengguna $pengguna, int|string|null $idTenagaPendidik): void
+    /**
+     * Tautkan akun ke satu baris data pribadi dan lepaskan tautan lamanya.
+     *
+     * @param  class-string<Model>  $kelasModel
+     */
+    private function tautkan(string $kelasModel, Pengguna $pengguna, int|string|null $id): void
     {
-        TenagaPendidik::query()
+        $kelasModel::query()
             ->where('id_pengguna', $pengguna->id_pengguna)
-            ->when($idTenagaPendidik, fn ($query) => $query->whereKeyNot($idTenagaPendidik))
+            ->when($id, fn ($query) => $query->whereKeyNot($id))
             ->update(['id_pengguna' => null]);
 
-        if ($idTenagaPendidik) {
-            TenagaPendidik::query()
-                ->whereKey($idTenagaPendidik)
-                ->update(['id_pengguna' => $pengguna->id_pengguna]);
+        if ($id) {
+            $kelasModel::query()->whereKey($id)->update(['id_pengguna' => $pengguna->id_pengguna]);
         }
     }
 }

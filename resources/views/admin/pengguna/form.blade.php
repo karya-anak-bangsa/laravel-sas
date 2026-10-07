@@ -59,8 +59,12 @@
             </div>
 
             <h2 class="card-title">Data pribadi</h2>
-            <x-admin.select name="id_tenaga_pendidik" label="Tautkan ke data tenaga pendidik" kosong="— Tidak ditautkan —"
-                :pilihan="$pilihanTenagaPendidik" :terpilih="$pengguna->tenagaPendidik?->id_tenaga_pendidik" />
+            <div class="form-row">
+                <x-admin.select name="id_tenaga_pendidik" label="Tautkan ke data tenaga pendidik" kosong="— Tidak ditautkan —"
+                    :pilihan="$pilihanTenagaPendidik" :terpilih="$pengguna->tenagaPendidik?->id_tenaga_pendidik" />
+                <x-admin.select name="id_tenaga_kependidikan" label="Tautkan ke data tenaga kependidikan" kosong="— Tidak ditautkan —"
+                    :pilihan="$pilihanTenagaKependidikan" :terpilih="$pengguna->tenagaKependidikan?->id_tenaga_kependidikan" />
+            </div>
         </div>
 
         <div class="card-footer aksi-form">

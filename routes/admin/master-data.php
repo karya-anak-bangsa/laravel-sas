@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MasterData\RombelController;
 use App\Http\Controllers\Admin\MasterData\SatuanPendidikanController;
 use App\Http\Controllers\Admin\MasterData\SemesterAktifController;
 use App\Http\Controllers\Admin\MasterData\TahunAjaranController;
+use App\Http\Controllers\Admin\MasterData\TenagaKependidikanController;
 use App\Http\Controllers\Admin\MasterData\TenagaPendidikController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,4 +43,8 @@ Route::prefix('master-data')->name('master-data.')->group(function () {
         ->parameters(['tenaga-pendidik' => 'tenagaPendidik']);
 
     Route::resource('penugasan', PenugasanController::class)->except('show');
+
+    Route::resource('tenaga-kependidikan', TenagaKependidikanController::class)
+        ->except('show')
+        ->parameters(['tenaga-kependidikan' => 'tenagaKependidikan']);
 });

@@ -8,6 +8,7 @@ use App\Enums\KodePeran;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pengguna\PenggunaRequest;
 use App\Models\Pengguna;
+use App\Models\TenagaKependidikan;
 use App\Models\TenagaPendidik;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -25,7 +26,7 @@ class PenggunaController extends Controller
 
         return view('admin.pengguna.index', [
             'daftarPengguna' => Pengguna::query()
-                ->with(['peran', 'tenagaPendidik'])
+                ->with(['peran', 'tenagaPendidik', 'tenagaKependidikan'])
                 ->when($cari !== '', fn (Builder $query) => $query->where(fn (Builder $query) => $query
                     ->where('nama_pengguna', 'like', "%{$cari}%")
                     ->orWhere('email', 'like', "%{$cari}%")))
@@ -55,7 +56,7 @@ class PenggunaController extends Controller
     {
         Gate::authorize('update', $pengguna);
 
-        return $this->form($pengguna->load(['peran', 'tenagaPendidik']));
+        return $this->form($pengguna->load(['peran', 'tenagaPendidik', 'tenagaKependidikan']));
     }
 
     public function update(PenggunaRequest $request, Pengguna $pengguna, SimpanPengguna $simpan): RedirectResponse
@@ -82,13 +83,27 @@ class PenggunaController extends Controller
             'pengguna' => $pengguna,
             'pilihanPeran' => KodePeran::daftarTetap(),
             'peranTerpilih' => old('peran', $pengguna->exists ? $pengguna->peran->map(fn ($peran) => $peran->kode->value)->all() : []),
-            // Tenaga pendidik yang belum punya akun, ditambah yang sudah tertaut ke akun ini.
-            'pilihanTenagaPendidik' => TenagaPendidik::query()
-                ->where(fn (Builder $query) => $query
-                    ->whereNull('id_pengguna')
-                    ->when($pengguna->exists, fn (Builder $query) => $query->orWhere('id_pengguna', $pengguna->id_pengguna)))
-                ->orderBy('nama_lengkap')
+            'pilihanTenagaPendidik' => $this->belumPunyaAkun(TenagaPendidik::query(), $pengguna)
                 ->pluck('nama_lengkap', 'id_tenaga_pendidik'),
+            'pilihanTenagaKependidikan' => $this->belumPunyaAkun(TenagaKependidikan::query(), $pengguna)
+                ->pluck('nama_lengkap', 'id_tenaga_kependidikan'),
         ]);
+    }
+
+    /**
+     * Data pribadi yang belum punya akun, ditambah yang sudah tertaut ke akun ini.
+     *
+     * @template TModel of \Illuminate\Database\Eloquent\Model
+     *
+     * @param  Builder<TModel>  $query
+     * @return Builder<TModel>
+     */
+    private function belumPunyaAkun(Builder $query, Pengguna $pengguna): Builder
+    {
+        return $query
+            ->where(fn (Builder $query) => $query
+                ->whereNull('id_pengguna')
+                ->when($pengguna->exists, fn (Builder $query) => $query->orWhere('id_pengguna', $pengguna->id_pengguna)))
+            ->orderBy('nama_lengkap');
     }
 }

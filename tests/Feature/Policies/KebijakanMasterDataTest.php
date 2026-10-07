@@ -11,6 +11,7 @@ use App\Models\ProgramKeahlian;
 use App\Models\Rombel;
 use App\Models\SatuanPendidikan;
 use App\Models\TahunAjaran;
+use App\Models\TenagaKependidikan;
 use App\Models\TenagaPendidik;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -38,6 +39,7 @@ class KebijakanMasterDataTest extends TestCase
             'tenaga pendidik' => [TenagaPendidik::class],
             'penugasan' => [Penugasan::class],
             'pengguna' => [Pengguna::class],
+            'tenaga kependidikan' => [TenagaKependidikan::class],
         ];
     }
 

@@ -101,6 +101,7 @@ Peran:
 - Status dan cara pencatatan **belum diketahui**. Sementara kolom mengikuti data KTP: NIK, nama lengkap, tempat lahir, tanggal lahir, jenis kelamin, alamat (RT/RW, kelurahan/desa, kecamatan), agama.
 - Terhubung opsional ke akun pengguna (`id_pengguna` nullable).
 - Jangan menambah status atau aturan lain sampai ada informasi dari yayasan.
+- Implementasi sementara (`tb_tenaga_kependidikan`): hanya nama lengkap dan jenis kelamin yang wajib; NIK opsional (16 digit, unik). Alamat: `alamat`, `rt`, `rw`, `kelurahan_desa`, `kecamatan`. Enum `JenisKelamin` (L/P) dan `Agama`.
 
 ### Murid
 - Identitas: nama lengkap, jenis kelamin, NISN, **NIK**, **Nomor KK**, no. seri ijazah, no. seri SKHUS, tempat lahir, tanggal lahir, agama, berkebutuhan khusus, alamat, moda transportasi, tempat tinggal, nomor HP (WA), email, no. KPS/PKH, nomor KIP.

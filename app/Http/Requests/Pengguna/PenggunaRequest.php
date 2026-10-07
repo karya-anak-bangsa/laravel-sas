@@ -4,6 +4,7 @@ namespace App\Http\Requests\Pengguna;
 
 use App\Enums\KodePeran;
 use App\Models\Pengguna;
+use App\Models\TenagaKependidikan;
 use App\Models\TenagaPendidik;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Database\Query\Builder;
@@ -67,6 +68,14 @@ class PenggunaRequest extends FormRequest
                         ->whereNull('id_pengguna')
                         ->when($pengguna, fn (Builder $query) => $query->orWhere('id_pengguna', $pengguna->id_pengguna))),
             ],
+            'id_tenaga_kependidikan' => [
+                'nullable', 'integer',
+                Rule::exists(TenagaKependidikan::class, 'id_tenaga_kependidikan')
+                    ->withoutTrashed()
+                    ->where(fn (Builder $query) => $query
+                        ->whereNull('id_pengguna')
+                        ->when($pengguna, fn (Builder $query) => $query->orWhere('id_pengguna', $pengguna->id_pengguna))),
+            ],
         ];
     }
 
@@ -105,6 +114,7 @@ class PenggunaRequest extends FormRequest
             'nama_pengguna' => 'nama pengguna',
             'peran.*' => 'peran',
             'id_tenaga_pendidik' => 'data tenaga pendidik',
+            'id_tenaga_kependidikan' => 'data tenaga kependidikan',
         ];
     }
 
@@ -116,6 +126,7 @@ class PenggunaRequest extends FormRequest
         return [
             'nama_pengguna.regex' => 'Nama pengguna hanya boleh berisi huruf, angka, titik, tanda hubung, dan garis bawah.',
             'id_tenaga_pendidik.exists' => 'Data tenaga pendidik tidak ditemukan atau sudah tertaut ke akun lain.',
+            'id_tenaga_kependidikan.exists' => 'Data tenaga kependidikan tidak ditemukan atau sudah tertaut ke akun lain.',
         ];
     }
 }

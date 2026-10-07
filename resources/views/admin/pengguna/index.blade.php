@@ -31,7 +31,7 @@
                             <th>Nama pengguna</th>
                             <th>Email</th>
                             <th>Peran tetap</th>
-                            <th>Data tenaga pendidik</th>
+                            <th>Data pribadi</th>
                             <th>Status</th>
                             <th class="kolom-aksi">Aksi</th>
                         </tr>
@@ -42,7 +42,7 @@
                                 <td class="cell-strong">{{ $pengguna->nama_pengguna }}</td>
                                 <td>{{ $pengguna->email ?? '—' }}</td>
                                 <td>{{ $pengguna->peran->map(fn ($peran) => $peran->kode->label())->join(', ') ?: '—' }}</td>
-                                <td>{{ $pengguna->tenagaPendidik?->nama_lengkap ?? '—' }}</td>
+                                <td>{{ $pengguna->tenagaPendidik?->nama_lengkap ?? $pengguna->tenagaKependidikan?->nama_lengkap ?? '—' }}</td>
                                 <td>
                                     @if ($pengguna->aktif)
                                         <span class="status status-green">Aktif</span>

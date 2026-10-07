@@ -68,6 +68,16 @@ class Pengguna extends Authenticatable
     }
 
     /**
+     * Data tenaga kependidikan yang terhubung ke akun ini.
+     *
+     * @return HasOne<TenagaKependidikan, $this>
+     */
+    public function tenagaKependidikan(): HasOne
+    {
+        return $this->hasOne(TenagaKependidikan::class, 'id_pengguna', 'id_pengguna');
+    }
+
+    /**
      * Penugasan (peran kontekstual) pada tahun ajaran aktif, lewat data tenaga pendidik.
      *
      * @return HasManyThrough<Penugasan, TenagaPendidik, $this>
