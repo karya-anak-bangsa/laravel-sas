@@ -76,6 +76,13 @@ table.table .kolom-aksi {
     align-items: flex-end;
 }
 
+/* Daftar checkbox yang panjang dibagi beberapa kolom. */
+.pilihan-kolom {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-1) var(--space-4);
+}
+
 /* Tombol aksi di footer form. */
 .aksi-form {
     display: flex;

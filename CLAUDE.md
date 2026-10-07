@@ -106,6 +106,8 @@ Peran:
 ### Murid
 - Identitas: nama lengkap, jenis kelamin, NISN, **NIK**, **Nomor KK**, no. seri ijazah, no. seri SKHUS, tempat lahir, tanggal lahir, agama, berkebutuhan khusus, alamat, moda transportasi, tempat tinggal, nomor HP (WA), email, no. KPS/PKH, nomor KIP.
 - Berkebutuhan khusus boleh **lebih dari satu** (tabel relasi), sehingga kebutuhan ganda tetap tercatat.
+- Implementasi: `tb_murid` + `tb_murid_berkebutuhan_khusus` (kode enum `BerkebutuhanKhusus`; **tanpa baris = "Tidak Ada"**). Alamat rinci ala Dapodik: `alamat_jalan`, `rt`, `rw`, `dusun`, `kelurahan_desa`, `kecamatan`, `kode_pos`.
+- Isian wajib di admin **minimal**: nama lengkap, jenis kelamin, tanggal lahir. NISN (10 digit) dan NIK (16 digit) opsional tetapi unik bila diisi; No. KK (16 digit) boleh sama antar-murid bersaudara. Nomor HP dinormalkan (tanpa spasi/tanda hubung) dan divalidasi sebagai nomor ponsel Indonesia. Aturan wajib PPDB ditentukan terpisah di tahap 3.
 
 ### Orang Tua/Wali
 - **Tabel terpisah dari murid**, dihubungkan lewat tabel relasi dengan kolom `hubungan` (ayah kandung / ibu kandung / wali). Murid bersaudara dapat memakai data orang tua yang sama.

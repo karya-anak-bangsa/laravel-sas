@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\MasterData\BidangKeahlianController;
 use App\Http\Controllers\Admin\MasterData\KonsentrasiKeahlianController;
+use App\Http\Controllers\Admin\MasterData\MuridController;
 use App\Http\Controllers\Admin\MasterData\PenugasanController;
 use App\Http\Controllers\Admin\MasterData\ProgramKeahlianController;
 use App\Http\Controllers\Admin\MasterData\RombelController;
@@ -47,4 +48,6 @@ Route::prefix('master-data')->name('master-data.')->group(function () {
     Route::resource('tenaga-kependidikan', TenagaKependidikanController::class)
         ->except('show')
         ->parameters(['tenaga-kependidikan' => 'tenagaKependidikan']);
+
+    Route::resource('murid', MuridController::class)->except('show');
 });
