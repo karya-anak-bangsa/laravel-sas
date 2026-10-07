@@ -30,6 +30,14 @@ class TahunAjaran extends Model
     }
 
     /**
+     * @return HasMany<Rombel, $this>
+     */
+    public function rombel(): HasMany
+    {
+        return $this->hasMany(Rombel::class, 'id_tahun_ajaran', 'id_tahun_ajaran');
+    }
+
+    /**
      * @return HasOne<Semester, $this>
      */
     public function semesterGanjil(): HasOne

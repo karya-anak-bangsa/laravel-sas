@@ -7,6 +7,7 @@ use App\Models\BidangKeahlian;
 use App\Models\KonsentrasiKeahlian;
 use App\Models\Pengguna;
 use App\Models\ProgramKeahlian;
+use App\Models\Rombel;
 use App\Models\SatuanPendidikan;
 use App\Models\TahunAjaran;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +32,7 @@ class KebijakanMasterDataTest extends TestCase
             'program keahlian' => [ProgramKeahlian::class],
             'konsentrasi keahlian' => [KonsentrasiKeahlian::class],
             'tahun ajaran' => [TahunAjaran::class],
+            'rombel' => [Rombel::class],
         ];
     }
 

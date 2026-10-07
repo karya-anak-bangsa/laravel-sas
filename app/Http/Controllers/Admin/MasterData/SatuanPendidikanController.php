@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\MasterData;
 
+use App\Actions\MasterData\HapusSatuanPendidikan;
 use App\Enums\BentukPendidikan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterData\SatuanPendidikanRequest;
@@ -60,11 +61,11 @@ class SatuanPendidikanController extends Controller
             ->with('status', 'Satuan pendidikan berhasil diperbarui.');
     }
 
-    public function destroy(SatuanPendidikan $satuanPendidikan): RedirectResponse
+    public function destroy(SatuanPendidikan $satuanPendidikan, HapusSatuanPendidikan $hapus): RedirectResponse
     {
         Gate::authorize('delete', $satuanPendidikan);
 
-        $satuanPendidikan->delete();
+        $hapus->handle($satuanPendidikan);
 
         return redirect()->route('admin.master-data.satuan-pendidikan.index')
             ->with('status', 'Satuan pendidikan berhasil dihapus.');

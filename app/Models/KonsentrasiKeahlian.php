@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable(['id_program_keahlian', 'nama', 'singkatan'])]
@@ -25,5 +26,13 @@ class KonsentrasiKeahlian extends Model
     public function programKeahlian(): BelongsTo
     {
         return $this->belongsTo(ProgramKeahlian::class, 'id_program_keahlian', 'id_program_keahlian');
+    }
+
+    /**
+     * @return HasMany<Rombel, $this>
+     */
+    public function rombel(): HasMany
+    {
+        return $this->hasMany(Rombel::class, 'id_konsentrasi_keahlian', 'id_konsentrasi_keahlian');
     }
 }

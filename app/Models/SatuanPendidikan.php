@@ -7,6 +7,7 @@ use Database\Factories\SatuanPendidikanFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable(['nama', 'bentuk_pendidikan', 'npsn', 'alamat'])]
@@ -29,5 +30,13 @@ class SatuanPendidikan extends Model
         return [
             'bentuk_pendidikan' => BentukPendidikan::class,
         ];
+    }
+
+    /**
+     * @return HasMany<Rombel, $this>
+     */
+    public function rombel(): HasMany
+    {
+        return $this->hasMany(Rombel::class, 'id_satuan_pendidikan', 'id_satuan_pendidikan');
     }
 }

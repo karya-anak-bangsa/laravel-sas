@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\MasterData\BidangKeahlianController;
 use App\Http\Controllers\Admin\MasterData\KonsentrasiKeahlianController;
 use App\Http\Controllers\Admin\MasterData\ProgramKeahlianController;
+use App\Http\Controllers\Admin\MasterData\RombelController;
 use App\Http\Controllers\Admin\MasterData\SatuanPendidikanController;
 use App\Http\Controllers\Admin\MasterData\SemesterAktifController;
 use App\Http\Controllers\Admin\MasterData\TahunAjaranController;
@@ -31,4 +32,6 @@ Route::prefix('master-data')->name('master-data.')->group(function () {
 
     Route::put('semester-aktif/{semester}', [SemesterAktifController::class, 'update'])
         ->name('semester-aktif.update');
+
+    Route::resource('rombel', RombelController::class)->except('show');
 });

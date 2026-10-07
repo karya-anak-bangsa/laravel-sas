@@ -82,6 +82,11 @@ Peran:
 - **Hanya satu semester aktif** (`tb_semester.aktif`), diatur lewat Action `AktifkanSemester`. Tahun ajaran aktif = tahun ajaran dari semester aktif (tidak ada kolom aktif di tahun ajaran). Ambil dengan `Semester::query()->aktif()`.
 - Tahun ajaran yang semesternya sedang aktif tidak dapat dihapus.
 
+### Rombel
+- `tb_rombel`: tahun ajaran, satuan pendidikan, tingkat (sesuai `BentukPendidikan::tingkat()`), konsentrasi keahlian (**wajib untuk SMK, dilarang untuk SMP/MTs**), dan **nama bebas** diisi Administrator (mis. "X PH 1", "VII"), unik per satuan pendidikan + tahun ajaran.
+- Daftar rombel secara bawaan disaring ke tahun ajaran aktif.
+- Satuan pendidikan, tahun ajaran, dan konsentrasi keahlian yang masih memiliki rombel tidak dapat dihapus.
+
 ### Tenaga Pendidik
 - Kolom: nama lengkap, NUPTK, tempat lahir, tanggal lahir, pendidikan terakhir, status, TMT GTT, TMT GTY, masa kerja, satuan pendidikan.
 - Status: **GTT** (Guru Tidak Tetap) atau **GTY** (Guru Tetap Yayasan). Tidak ada status honorer.

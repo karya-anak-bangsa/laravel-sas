@@ -65,6 +65,12 @@ table.table .kolom-aksi {
     cursor: not-allowed;
 }
 
+/* Tombol "Terapkan" sejajar dengan isian saringan. */
+.filter-aksi {
+    display: flex;
+    align-items: flex-end;
+}
+
 /* Tombol aksi di footer form. */
 .aksi-form {
     display: flex;

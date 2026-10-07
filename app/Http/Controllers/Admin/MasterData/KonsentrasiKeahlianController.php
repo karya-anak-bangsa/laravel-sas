@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\MasterData;
 
+use App\Actions\MasterData\HapusKonsentrasiKeahlian;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterData\KonsentrasiKeahlianRequest;
 use App\Models\KonsentrasiKeahlian;
@@ -55,11 +56,11 @@ class KonsentrasiKeahlianController extends Controller
             ->with('status', 'Konsentrasi keahlian berhasil diperbarui.');
     }
 
-    public function destroy(KonsentrasiKeahlian $konsentrasiKeahlian): RedirectResponse
+    public function destroy(KonsentrasiKeahlian $konsentrasiKeahlian, HapusKonsentrasiKeahlian $hapus): RedirectResponse
     {
         Gate::authorize('delete', $konsentrasiKeahlian);
 
-        $konsentrasiKeahlian->delete();
+        $hapus->handle($konsentrasiKeahlian);
 
         return redirect()->route('admin.master-data.konsentrasi-keahlian.index')
             ->with('status', 'Konsentrasi keahlian berhasil dihapus.');
