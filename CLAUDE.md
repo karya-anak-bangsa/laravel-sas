@@ -177,7 +177,7 @@ Data pribadi (NIK, No. KK, NUPTK, data orang tua):
   - Sidebar/topbar/footer dirender di Blade (`layouts/partials/admin-sidebar.blade.php`), bukan oleh JS Gentelella. Menu modul baru ditambahkan di partial itu dan dibungkus `@can`.
   - Entry demo Gentelella (`gentelella` / `main-v4.js`: command palette, data contoh, form palsu) **tidak** dimuat. Modul JS lain diimpor per kebutuhan dari `gentelella/v4/*`.
   - Referensi markup komponen: halaman `node_modules/gentelella/production/*.html`.
-- **Area publik (company profile, PPDB)**: **Tailwind CSS v4**. Entry Vite `resources/css/app.css` + `resources/js/app.js`, layout `resources/views/layouts/publik.blade.php`.
+- **Area publik (company profile, PPDB)**: **Tailwind CSS v4**. Entry Vite `resources/css/app.css` + `resources/js/app.js`. Layout publik (`resources/views/layouts/publik.blade.php`) dan halamannya **belum dibuat**; dibuat di Tahap 2 setelah konten company profile dan library komponen diputuskan. Sementara itu `/` (route `beranda`) diarahkan ke halaman masuk admin.
 - Kedua bundel **tidak boleh dimuat bersama** dalam satu layout. Jangan memakai class Tailwind di view admin, dan jangan memakai class Gentelella di view publik.
 - Font di-host sendiri lewat opsi `fonts` laravel-vite-plugin dan direktif `@fonts`: Inter (admin), Instrument Sans (publik).
 - Library komponen Tailwind (daisyUI / shadcn / Flowbite / Preline / HyperUI): **TBD**. Jangan memasang salah satunya sebelum diputuskan.

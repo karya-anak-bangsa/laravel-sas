@@ -6,12 +6,9 @@ use Tests\TestCase;
 
 class BerandaTest extends TestCase
 {
-    public function test_beranda_dapat_diakses_tanpa_login(): void
+    public function test_beranda_diarahkan_ke_halaman_masuk(): void
     {
         $this->get(route('beranda'))
-            ->assertOk()
-            ->assertViewIs('publik.beranda')
-            ->assertSee('Yayasan Puspita Bangsa Ciputat')
-            ->assertSee('SMK Puspita Bangsa');
+            ->assertRedirect(route('admin.masuk'));
     }
 }
