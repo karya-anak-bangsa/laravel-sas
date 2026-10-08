@@ -1,10 +1,14 @@
-{{-- Tampilan paginasi area admin: $paginator->links('layouts.partials.admin-paginasi') --}}
-@if ($paginator->hasPages())
-    <div class="paginasi">
-        <span class="paginasi-info">
+{{-- Tampilan paginasi area admin: $paginator->links('layouts.partials.admin-paginasi'). Info jumlah data selalu tampil. --}}
+<div class="paginasi">
+    <span class="paginasi-info">
+        @if ($paginator->total() > 0)
             Menampilkan {{ $paginator->firstItem() }}–{{ $paginator->lastItem() }} dari {{ $paginator->total() }} data
-        </span>
+        @else
+            Tidak ada data
+        @endif
+    </span>
 
+    @if ($paginator->hasPages())
         <nav class="pagination" aria-label="Navigasi halaman">
             @if ($paginator->onFirstPage())
                 <span class="page-btn" aria-disabled="true">&lsaquo;</span>
@@ -34,5 +38,5 @@
                 <span class="page-btn" aria-disabled="true">&rsaquo;</span>
             @endif
         </nav>
-    </div>
-@endif
+    @endif
+</div>

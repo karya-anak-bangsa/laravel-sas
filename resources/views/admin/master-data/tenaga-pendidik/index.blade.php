@@ -3,26 +3,28 @@
 @section('judul', 'Tenaga Pendidik')
 
 @section('konten')
-    <x-admin.header-halaman pretitle="Master Data" judul="Tenaga Pendidik">
-        @can('create', App\Models\TenagaPendidik::class)
-            <a href="{{ route('admin.master-data.tenaga-pendidik.create') }}" class="btn btn-success">Tambah tenaga pendidik</a>
-        @endcan
-    </x-admin.header-halaman>
+    <x-admin.header-halaman pretitle="Master Data" judul="Tenaga Pendidik" />
 
-    <form method="GET" action="{{ route('admin.master-data.tenaga-pendidik.index') }}" class="card">
-        <div class="card-body">
-            <div class="form-row cols-3">
-                <x-admin.input name="cari" label="Cari nama atau NUPTK" :value="$saringan['cari']" type="search" />
-                <x-admin.select name="satuan_pendidikan" label="Satuan pendidikan" kosong="Semua satuan pendidikan"
-                    :pilihan="$pilihanSatuanPendidikan" :terpilih="$saringan['satuan_pendidikan']" />
-                <x-admin.select name="status" label="Status" kosong="Semua status"
-                    :pilihan="$pilihanStatus" :terpilih="$saringan['status']" />
-            </div>
-            <button type="submit" class="btn btn-outline">Terapkan</button>
-        </div>
-    </form>
+    <x-admin.kartu-daftar judul="Daftar Tenaga Pendidik" :paginator="$daftarTenagaPendidik">
+        <x-slot:aksi>
+            @can('create', App\Models\TenagaPendidik::class)
+                <a href="{{ route('admin.master-data.tenaga-pendidik.create') }}" class="btn btn-success">Tambah tenaga pendidik</a>
+            @endcan
+        </x-slot:aksi>
 
-    <div class="card">
+        <x-slot:pencarian>
+            <form method="GET" action="{{ route('admin.master-data.tenaga-pendidik.index') }}">
+                <div class="form-row cols-3">
+                    <x-admin.input name="cari" label="Cari nama atau NUPTK" :value="$saringan['cari']" type="search" />
+                    <x-admin.select name="satuan_pendidikan" label="Satuan pendidikan" kosong="Semua satuan pendidikan"
+                        :pilihan="$pilihanSatuanPendidikan" :terpilih="$saringan['satuan_pendidikan']" />
+                    <x-admin.select name="status" label="Status" kosong="Semua status"
+                        :pilihan="$pilihanStatus" :terpilih="$saringan['status']" />
+                </div>
+                <button type="submit" class="btn btn-outline">Terapkan</button>
+            </form>
+        </x-slot:pencarian>
+
         @if ($daftarTenagaPendidik->isEmpty())
             <x-admin.kosong judul="Belum ada data tenaga pendidik">
                 Tidak ada data yang sesuai dengan pencarian atau saringan.
@@ -68,11 +70,5 @@
                 </table>
             </div>
         @endif
-
-        @if ($daftarTenagaPendidik->hasPages())
-            <div class="card-footer">
-                {{ $daftarTenagaPendidik->links('layouts.partials.admin-paginasi') }}
-            </div>
-        @endif
-    </div>
+    </x-admin.kartu-daftar>
 @endsection

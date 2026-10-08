@@ -3,27 +3,29 @@
 @section('judul', 'Penugasan')
 
 @section('konten')
-    <x-admin.header-halaman pretitle="Master Data" judul="Penugasan">
-        @can('create', App\Models\Penugasan::class)
-            <a href="{{ route('admin.master-data.penugasan.create', array_filter(['tahun_ajaran' => $saringan['tahun_ajaran']])) }}" class="btn btn-success">Tambah penugasan</a>
-        @endcan
-    </x-admin.header-halaman>
+    <x-admin.header-halaman pretitle="Master Data" judul="Penugasan" />
 
-    <form method="GET" action="{{ route('admin.master-data.penugasan.index') }}" class="card">
-        <div class="card-body">
-            <div class="form-row cols-3">
-                <x-admin.select name="tahun_ajaran" label="Tahun ajaran" kosong="Semua tahun ajaran"
-                    :pilihan="$pilihanTahunAjaran" :terpilih="$saringan['tahun_ajaran']" />
-                <x-admin.select name="peran" label="Peran" kosong="Semua peran"
-                    :pilihan="$pilihanPeran" :terpilih="$saringan['peran']" />
-                <div class="form-group filter-aksi">
-                    <button type="submit" class="btn btn-outline">Terapkan</button>
+    <x-admin.kartu-daftar judul="Daftar Penugasan" :paginator="$daftarPenugasan">
+        <x-slot:aksi>
+            @can('create', App\Models\Penugasan::class)
+                <a href="{{ route('admin.master-data.penugasan.create', array_filter(['tahun_ajaran' => $saringan['tahun_ajaran']])) }}" class="btn btn-success">Tambah penugasan</a>
+            @endcan
+        </x-slot:aksi>
+
+        <x-slot:pencarian>
+            <form method="GET" action="{{ route('admin.master-data.penugasan.index') }}">
+                <div class="form-row cols-3">
+                    <x-admin.select name="tahun_ajaran" label="Tahun ajaran" kosong="Semua tahun ajaran"
+                        :pilihan="$pilihanTahunAjaran" :terpilih="$saringan['tahun_ajaran']" />
+                    <x-admin.select name="peran" label="Peran" kosong="Semua peran"
+                        :pilihan="$pilihanPeran" :terpilih="$saringan['peran']" />
+                    <div class="form-group filter-aksi">
+                        <button type="submit" class="btn btn-outline">Terapkan</button>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </form>
+            </form>
+        </x-slot:pencarian>
 
-    <div class="card">
         @if ($daftarPenugasan->isEmpty())
             <x-admin.kosong judul="Belum ada penugasan">
                 Penugasan menentukan siapa Kepala Sekolah, Wakil Kepala Sekolah, Ketua Jurusan, dan Wali Kelas pada suatu tahun ajaran.
@@ -63,11 +65,5 @@
                 </table>
             </div>
         @endif
-
-        @if ($daftarPenugasan->hasPages())
-            <div class="card-footer">
-                {{ $daftarPenugasan->links('layouts.partials.admin-paginasi') }}
-            </div>
-        @endif
-    </div>
+    </x-admin.kartu-daftar>
 @endsection

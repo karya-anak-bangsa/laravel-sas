@@ -3,24 +3,26 @@
 @section('judul', 'Murid')
 
 @section('konten')
-    <x-admin.header-halaman pretitle="Master Data" judul="Murid">
-        @can('create', App\Models\Murid::class)
-            <a href="{{ route('admin.master-data.murid.create') }}" class="btn btn-success">Tambah murid</a>
-        @endcan
-    </x-admin.header-halaman>
+    <x-admin.header-halaman pretitle="Master Data" judul="Murid" />
 
-    <form method="GET" action="{{ route('admin.master-data.murid.index') }}" class="card">
-        <div class="card-body">
-            <div class="form-row">
-                <x-admin.input name="cari" label="Cari nama, NISN, atau NIK" :value="$cari" type="search" />
-                <div class="form-group filter-aksi">
-                    <button type="submit" class="btn btn-outline">Cari</button>
+    <x-admin.kartu-daftar judul="Daftar Murid" :paginator="$daftarMurid">
+        <x-slot:aksi>
+            @can('create', App\Models\Murid::class)
+                <a href="{{ route('admin.master-data.murid.create') }}" class="btn btn-success">Tambah murid</a>
+            @endcan
+        </x-slot:aksi>
+
+        <x-slot:pencarian>
+            <form method="GET" action="{{ route('admin.master-data.murid.index') }}">
+                <div class="form-row">
+                    <x-admin.input name="cari" label="Cari nama, NISN, atau NIK" :value="$cari" type="search" />
+                    <div class="form-group filter-aksi">
+                        <button type="submit" class="btn btn-outline">Cari</button>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </form>
+            </form>
+        </x-slot:pencarian>
 
-    <div class="card">
         @if ($daftarMurid->isEmpty())
             <x-admin.kosong judul="Belum ada data murid" />
         @else
@@ -60,11 +62,5 @@
                 </table>
             </div>
         @endif
-
-        @if ($daftarMurid->hasPages())
-            <div class="card-footer">
-                {{ $daftarMurid->links('layouts.partials.admin-paginasi') }}
-            </div>
-        @endif
-    </div>
+    </x-admin.kartu-daftar>
 @endsection

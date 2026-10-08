@@ -3,27 +3,29 @@
 @section('judul', 'Rombel')
 
 @section('konten')
-    <x-admin.header-halaman pretitle="Master Data" judul="Rombongan Belajar (Rombel)">
-        @can('create', App\Models\Rombel::class)
-            <a href="{{ route('admin.master-data.rombel.create') }}" class="btn btn-success">Tambah rombel</a>
-        @endcan
-    </x-admin.header-halaman>
+    <x-admin.header-halaman pretitle="Master Data" judul="Rombongan Belajar (Rombel)" />
 
-    <form method="GET" action="{{ route('admin.master-data.rombel.index') }}" class="card">
-        <div class="card-body">
-            <div class="form-row cols-3">
-                <x-admin.select name="tahun_ajaran" label="Tahun ajaran" kosong="Semua tahun ajaran"
-                    :pilihan="$pilihanTahunAjaran" :terpilih="$idTahunAjaran" />
-                <x-admin.select name="satuan_pendidikan" label="Satuan pendidikan" kosong="Semua satuan pendidikan"
-                    :pilihan="$pilihanSatuanPendidikan" :terpilih="$idSatuanPendidikan" />
-                <div class="form-group filter-aksi">
-                    <button type="submit" class="btn btn-outline">Terapkan</button>
+    <x-admin.kartu-daftar judul="Daftar Rombel" :paginator="$daftarRombel">
+        <x-slot:aksi>
+            @can('create', App\Models\Rombel::class)
+                <a href="{{ route('admin.master-data.rombel.create') }}" class="btn btn-success">Tambah rombel</a>
+            @endcan
+        </x-slot:aksi>
+
+        <x-slot:pencarian>
+            <form method="GET" action="{{ route('admin.master-data.rombel.index') }}">
+                <div class="form-row cols-3">
+                    <x-admin.select name="tahun_ajaran" label="Tahun ajaran" kosong="Semua tahun ajaran"
+                        :pilihan="$pilihanTahunAjaran" :terpilih="$idTahunAjaran" />
+                    <x-admin.select name="satuan_pendidikan" label="Satuan pendidikan" kosong="Semua satuan pendidikan"
+                        :pilihan="$pilihanSatuanPendidikan" :terpilih="$idSatuanPendidikan" />
+                    <div class="form-group filter-aksi">
+                        <button type="submit" class="btn btn-outline">Terapkan</button>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </form>
+            </form>
+        </x-slot:pencarian>
 
-    <div class="card">
         @if ($daftarRombel->isEmpty())
             <x-admin.kosong judul="Belum ada rombel">
                 Tidak ada rombel yang sesuai dengan saringan.
@@ -68,11 +70,5 @@
                 </table>
             </div>
         @endif
-
-        @if ($daftarRombel->hasPages())
-            <div class="card-footer">
-                {{ $daftarRombel->links('layouts.partials.admin-paginasi') }}
-            </div>
-        @endif
-    </div>
+    </x-admin.kartu-daftar>
 @endsection

@@ -3,13 +3,15 @@
 @section('judul', 'Program Keahlian')
 
 @section('konten')
-    <x-admin.header-halaman pretitle="Master Data · Spektrum Keahlian" judul="Program Keahlian">
-        @can('create', App\Models\ProgramKeahlian::class)
-            <a href="{{ route('admin.master-data.program-keahlian.create') }}" class="btn btn-success">Tambah program keahlian</a>
-        @endcan
-    </x-admin.header-halaman>
+    <x-admin.header-halaman pretitle="Master Data · Spektrum Keahlian" judul="Program Keahlian" />
 
-    <div class="card">
+    <x-admin.kartu-daftar judul="Daftar Program Keahlian" :paginator="$daftarProgramKeahlian">
+        <x-slot:aksi>
+            @can('create', App\Models\ProgramKeahlian::class)
+                <a href="{{ route('admin.master-data.program-keahlian.create') }}" class="btn btn-success">Tambah program keahlian</a>
+            @endcan
+        </x-slot:aksi>
+
         @if ($daftarProgramKeahlian->isEmpty())
             <x-admin.kosong judul="Belum ada program keahlian" />
         @else
@@ -45,11 +47,5 @@
                 </table>
             </div>
         @endif
-
-        @if ($daftarProgramKeahlian->hasPages())
-            <div class="card-footer">
-                {{ $daftarProgramKeahlian->links('layouts.partials.admin-paginasi') }}
-            </div>
-        @endif
-    </div>
+    </x-admin.kartu-daftar>
 @endsection

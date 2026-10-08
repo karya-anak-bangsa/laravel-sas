@@ -3,24 +3,26 @@
 @section('judul', 'Orang Tua/Wali')
 
 @section('konten')
-    <x-admin.header-halaman pretitle="Master Data" judul="Orang Tua/Wali">
-        @can('create', App\Models\OrangTuaWali::class)
-            <a href="{{ route('admin.master-data.orang-tua-wali.create') }}" class="btn btn-success">Tambah orang tua/wali</a>
-        @endcan
-    </x-admin.header-halaman>
+    <x-admin.header-halaman pretitle="Master Data" judul="Orang Tua/Wali" />
 
-    <form method="GET" action="{{ route('admin.master-data.orang-tua-wali.index') }}" class="card">
-        <div class="card-body">
-            <div class="form-row">
-                <x-admin.input name="cari" label="Cari nama atau nomor HP" :value="$cari" type="search" />
-                <div class="form-group filter-aksi">
-                    <button type="submit" class="btn btn-outline">Cari</button>
+    <x-admin.kartu-daftar judul="Daftar Orang Tua/Wali" :paginator="$daftarOrangTuaWali">
+        <x-slot:aksi>
+            @can('create', App\Models\OrangTuaWali::class)
+                <a href="{{ route('admin.master-data.orang-tua-wali.create') }}" class="btn btn-success">Tambah orang tua/wali</a>
+            @endcan
+        </x-slot:aksi>
+
+        <x-slot:pencarian>
+            <form method="GET" action="{{ route('admin.master-data.orang-tua-wali.index') }}">
+                <div class="form-row">
+                    <x-admin.input name="cari" label="Cari nama atau nomor HP" :value="$cari" type="search" />
+                    <div class="form-group filter-aksi">
+                        <button type="submit" class="btn btn-outline">Cari</button>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </form>
+            </form>
+        </x-slot:pencarian>
 
-    <div class="card">
         @if ($daftarOrangTuaWali->isEmpty())
             <x-admin.kosong judul="Belum ada data orang tua/wali" />
         @else
@@ -62,11 +64,5 @@
                 </table>
             </div>
         @endif
-
-        @if ($daftarOrangTuaWali->hasPages())
-            <div class="card-footer">
-                {{ $daftarOrangTuaWali->links('layouts.partials.admin-paginasi') }}
-            </div>
-        @endif
-    </div>
+    </x-admin.kartu-daftar>
 @endsection

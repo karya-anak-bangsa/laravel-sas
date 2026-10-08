@@ -3,24 +3,26 @@
 @section('judul', 'Pengguna')
 
 @section('konten')
-    <x-admin.header-halaman pretitle="Pengaturan" judul="Pengguna">
-        @can('create', App\Models\Pengguna::class)
-            <a href="{{ route('admin.pengguna.create') }}" class="btn btn-success">Tambah pengguna</a>
-        @endcan
-    </x-admin.header-halaman>
+    <x-admin.header-halaman pretitle="Pengaturan" judul="Pengguna" />
 
-    <form method="GET" action="{{ route('admin.pengguna.index') }}" class="card">
-        <div class="card-body">
-            <div class="form-row">
-                <x-admin.input name="cari" label="Cari email" :value="$cari" type="search" />
-                <div class="form-group filter-aksi">
-                    <button type="submit" class="btn btn-outline">Cari</button>
+    <x-admin.kartu-daftar judul="Daftar Pengguna" :paginator="$daftarPengguna">
+        <x-slot:aksi>
+            @can('create', App\Models\Pengguna::class)
+                <a href="{{ route('admin.pengguna.create') }}" class="btn btn-success">Tambah pengguna</a>
+            @endcan
+        </x-slot:aksi>
+
+        <x-slot:pencarian>
+            <form method="GET" action="{{ route('admin.pengguna.index') }}">
+                <div class="form-row">
+                    <x-admin.input name="cari" label="Cari email" :value="$cari" type="search" />
+                    <div class="form-group filter-aksi">
+                        <button type="submit" class="btn btn-outline">Cari</button>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </form>
+            </form>
+        </x-slot:pencarian>
 
-    <div class="card">
         @if ($daftarPengguna->isEmpty())
             <x-admin.kosong judul="Tidak ada pengguna" />
         @else
@@ -66,11 +68,5 @@
                 </table>
             </div>
         @endif
-
-        @if ($daftarPengguna->hasPages())
-            <div class="card-footer">
-                {{ $daftarPengguna->links('layouts.partials.admin-paginasi') }}
-            </div>
-        @endif
-    </div>
+    </x-admin.kartu-daftar>
 @endsection

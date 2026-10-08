@@ -3,24 +3,26 @@
 @section('judul', 'Tenaga Kependidikan')
 
 @section('konten')
-    <x-admin.header-halaman pretitle="Master Data" judul="Tenaga Kependidikan">
-        @can('create', App\Models\TenagaKependidikan::class)
-            <a href="{{ route('admin.master-data.tenaga-kependidikan.create') }}" class="btn btn-success">Tambah tenaga kependidikan</a>
-        @endcan
-    </x-admin.header-halaman>
+    <x-admin.header-halaman pretitle="Master Data" judul="Tenaga Kependidikan" />
 
-    <form method="GET" action="{{ route('admin.master-data.tenaga-kependidikan.index') }}" class="card">
-        <div class="card-body">
-            <div class="form-row">
-                <x-admin.input name="cari" label="Cari nama atau NIK" :value="$cari" type="search" />
-                <div class="form-group filter-aksi">
-                    <button type="submit" class="btn btn-outline">Cari</button>
+    <x-admin.kartu-daftar judul="Daftar Tenaga Kependidikan" :paginator="$daftarTenagaKependidikan">
+        <x-slot:aksi>
+            @can('create', App\Models\TenagaKependidikan::class)
+                <a href="{{ route('admin.master-data.tenaga-kependidikan.create') }}" class="btn btn-success">Tambah tenaga kependidikan</a>
+            @endcan
+        </x-slot:aksi>
+
+        <x-slot:pencarian>
+            <form method="GET" action="{{ route('admin.master-data.tenaga-kependidikan.index') }}">
+                <div class="form-row">
+                    <x-admin.input name="cari" label="Cari nama atau NIK" :value="$cari" type="search" />
+                    <div class="form-group filter-aksi">
+                        <button type="submit" class="btn btn-outline">Cari</button>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </form>
+            </form>
+        </x-slot:pencarian>
 
-    <div class="card">
         @if ($daftarTenagaKependidikan->isEmpty())
             <x-admin.kosong judul="Belum ada data tenaga kependidikan" />
         @else
@@ -60,11 +62,5 @@
                 </table>
             </div>
         @endif
-
-        @if ($daftarTenagaKependidikan->hasPages())
-            <div class="card-footer">
-                {{ $daftarTenagaKependidikan->links('layouts.partials.admin-paginasi') }}
-            </div>
-        @endif
-    </div>
+    </x-admin.kartu-daftar>
 @endsection

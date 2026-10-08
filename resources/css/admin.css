@@ -80,6 +80,21 @@ table.table .kolom-aksi {
     cursor: not-allowed;
 }
 
+/* Pencarian/saringan di atas tabel pada komponen kartu-daftar. */
+.kartu-pencarian {
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-color-light);
+}
+
+.kartu-pencarian .form-group {
+    margin-bottom: 0;
+}
+
+.kartu-pencarian form > .btn {
+    margin-top: 12px;
+}
+
 /* Tombol "Terapkan" sejajar dengan isian saringan. */
 .filter-aksi {
     display: flex;

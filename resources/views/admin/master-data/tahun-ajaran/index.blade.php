@@ -3,13 +3,15 @@
 @section('judul', 'Tahun Ajaran')
 
 @section('konten')
-    <x-admin.header-halaman pretitle="Master Data" judul="Tahun Ajaran">
-        @can('create', App\Models\TahunAjaran::class)
-            <a href="{{ route('admin.master-data.tahun-ajaran.create') }}" class="btn btn-success">Tambah tahun ajaran</a>
-        @endcan
-    </x-admin.header-halaman>
+    <x-admin.header-halaman pretitle="Master Data" judul="Tahun Ajaran" />
 
-    <div class="card">
+    <x-admin.kartu-daftar judul="Daftar Tahun Ajaran" :paginator="$daftarTahunAjaran">
+        <x-slot:aksi>
+            @can('create', App\Models\TahunAjaran::class)
+                <a href="{{ route('admin.master-data.tahun-ajaran.create') }}" class="btn btn-success">Tambah tahun ajaran</a>
+            @endcan
+        </x-slot:aksi>
+
         @if ($daftarTahunAjaran->isEmpty())
             <x-admin.kosong judul="Belum ada tahun ajaran" />
         @else
@@ -64,11 +66,5 @@
                 </table>
             </div>
         @endif
-
-        @if ($daftarTahunAjaran->hasPages())
-            <div class="card-footer">
-                {{ $daftarTahunAjaran->links('layouts.partials.admin-paginasi') }}
-            </div>
-        @endif
-    </div>
+    </x-admin.kartu-daftar>
 @endsection
