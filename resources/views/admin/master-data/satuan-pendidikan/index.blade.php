@@ -8,7 +8,7 @@
     <x-admin.kartu-daftar judul="Daftar Satuan Pendidikan" :paginator="$daftarSatuanPendidikan">
         <x-slot:aksi>
             @can('create', App\Models\SatuanPendidikan::class)
-                <a href="{{ route('admin.master-data.satuan-pendidikan.create') }}" class="btn btn-success">Tambah satuan pendidikan</a>
+                <a href="{{ route('admin.master-data.satuan-pendidikan.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah satuan pendidikan</a>
             @endcan
         </x-slot:aksi>
 
@@ -33,7 +33,7 @@
                                 <td>{{ $satuanPendidikan->npsn ?? '—' }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $satuanPendidikan)
-                                        <a href="{{ route('admin.master-data.satuan-pendidikan.edit', $satuanPendidikan) }}" class="btn btn-warning btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.satuan-pendidikan.edit', $satuanPendidikan) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Ubah</a>
                                     @endcan
                                     @can('delete', $satuanPendidikan)
                                         <x-admin.tombol-hapus

@@ -8,7 +8,7 @@
     <x-admin.kartu-daftar judul="Daftar Program Keahlian" :paginator="$daftarProgramKeahlian">
         <x-slot:aksi>
             @can('create', App\Models\ProgramKeahlian::class)
-                <a href="{{ route('admin.master-data.program-keahlian.create') }}" class="btn btn-success">Tambah program keahlian</a>
+                <a href="{{ route('admin.master-data.program-keahlian.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah program keahlian</a>
             @endcan
         </x-slot:aksi>
 
@@ -33,7 +33,7 @@
                                 <td>{{ $programKeahlian->konsentrasi_keahlian_count }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $programKeahlian)
-                                        <a href="{{ route('admin.master-data.program-keahlian.edit', $programKeahlian) }}" class="btn btn-warning btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.program-keahlian.edit', $programKeahlian) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Ubah</a>
                                     @endcan
                                     @can('delete', $programKeahlian)
                                         <x-admin.tombol-hapus

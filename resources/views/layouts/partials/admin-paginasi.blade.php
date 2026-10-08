@@ -11,9 +11,9 @@
     @if ($paginator->hasPages())
         <nav class="pagination" aria-label="Navigasi halaman">
             @if ($paginator->onFirstPage())
-                <span class="page-btn" aria-disabled="true">&lsaquo;</span>
+                <span class="page-btn" aria-disabled="true"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></span>
             @else
-                <a class="page-btn" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="Sebelumnya">&lsaquo;</a>
+                <a class="page-btn" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="Sebelumnya"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></a>
             @endif
 
             @foreach ($elements as $element)
@@ -33,9 +33,9 @@
             @endforeach
 
             @if ($paginator->hasMorePages())
-                <a class="page-btn" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="Berikutnya">&rsaquo;</a>
+                <a class="page-btn" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="Berikutnya"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
             @else
-                <span class="page-btn" aria-disabled="true">&rsaquo;</span>
+                <span class="page-btn" aria-disabled="true"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></span>
             @endif
         </nav>
     @endif

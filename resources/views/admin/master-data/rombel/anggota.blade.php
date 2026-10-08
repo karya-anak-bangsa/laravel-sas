@@ -6,7 +6,7 @@
     <x-admin.header-halaman
         :pretitle="'Rombel · '.($rombel->satuanPendidikan?->nama ?? '—').' · '.($rombel->tahunAjaran?->nama ?? '—')"
         :judul="'Anggota '.$rombel->nama">
-        <a href="{{ route('admin.master-data.rombel.index', ['tahun_ajaran' => $rombel->id_tahun_ajaran]) }}" class="btn btn-outline">Kembali ke daftar rombel</a>
+        <a href="{{ route('admin.master-data.rombel.index', ['tahun_ajaran' => $rombel->id_tahun_ajaran]) }}" class="btn btn-outline"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Kembali ke daftar rombel</a>
     </x-admin.header-halaman>
 
     @can('update', $rombel)
@@ -36,7 +36,7 @@
             </div>
             @if ($pilihanMurid->isNotEmpty())
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-success">Tambahkan ke rombel</button>
+                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-user-plus" aria-hidden="true"></i> Tambahkan ke rombel</button>
                 </div>
             @endif
         </form>
@@ -75,7 +75,7 @@
                                             data-konfirmasi="Keluarkan {{ $murid->nama_lengkap }} dari rombel {{ $rombel->nama }}?">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-ghost btn-sm">Keluarkan</button>
+                                            <button type="submit" class="btn btn-ghost btn-sm"><i class="fa-solid fa-user-minus" aria-hidden="true"></i> Keluarkan</button>
                                         </form>
                                     @endcan
                                 </td>

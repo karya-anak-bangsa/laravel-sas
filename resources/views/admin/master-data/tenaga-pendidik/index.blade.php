@@ -8,7 +8,7 @@
     <x-admin.kartu-daftar judul="Daftar Tenaga Pendidik" :paginator="$daftarTenagaPendidik">
         <x-slot:aksi>
             @can('create', App\Models\TenagaPendidik::class)
-                <a href="{{ route('admin.master-data.tenaga-pendidik.create') }}" class="btn btn-success">Tambah tenaga pendidik</a>
+                <a href="{{ route('admin.master-data.tenaga-pendidik.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah tenaga pendidik</a>
             @endcan
         </x-slot:aksi>
 
@@ -21,7 +21,7 @@
                     <x-admin.select name="status" label="Status" kosong="Semua status"
                         :pilihan="$pilihanStatus" :terpilih="$saringan['status']" />
                 </div>
-                <button type="submit" class="btn btn-outline">Terapkan</button>
+                <button type="submit" class="btn btn-outline"><i class="fa-solid fa-filter" aria-hidden="true"></i> Terapkan</button>
             </form>
         </x-slot:pencarian>
 
@@ -56,7 +56,7 @@
                                 <td>{{ $tenagaPendidik->pengguna?->email ?? '—' }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $tenagaPendidik)
-                                        <a href="{{ route('admin.master-data.tenaga-pendidik.edit', $tenagaPendidik) }}" class="btn btn-warning btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.tenaga-pendidik.edit', $tenagaPendidik) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Ubah</a>
                                     @endcan
                                     @can('delete', $tenagaPendidik)
                                         <x-admin.tombol-hapus

@@ -83,8 +83,8 @@
         </div>
 
         <div class="card-footer aksi-form">
-            <button type="submit" class="btn btn-success">Simpan</button>
-            <a href="{{ route('admin.master-data.murid.index') }}" class="btn btn-secondary">Kembali ke daftar</a>
+            <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Simpan</button>
+            <a href="{{ route('admin.master-data.murid.index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Kembali ke daftar</a>
         </div>
     </form>
 

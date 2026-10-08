@@ -8,7 +8,7 @@
     <x-admin.kartu-daftar judul="Daftar Pengguna" :paginator="$daftarPengguna">
         <x-slot:aksi>
             @can('create', App\Models\Pengguna::class)
-                <a href="{{ route('admin.pengguna.create') }}" class="btn btn-success">Tambah pengguna</a>
+                <a href="{{ route('admin.pengguna.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah pengguna</a>
             @endcan
         </x-slot:aksi>
 
@@ -17,7 +17,7 @@
                 <div class="form-row">
                     <x-admin.input name="cari" label="Cari email" :value="$cari" type="search" />
                     <div class="form-group filter-aksi">
-                        <button type="submit" class="btn btn-outline">Cari</button>
+                        <button type="submit" class="btn btn-outline"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Cari</button>
                     </div>
                 </div>
             </form>
@@ -52,7 +52,7 @@
                                 </td>
                                 <td class="kolom-aksi">
                                     @can('update', $pengguna)
-                                        <a href="{{ route('admin.pengguna.edit', $pengguna) }}" class="btn btn-warning btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.pengguna.edit', $pengguna) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Ubah</a>
                                     @endcan
                                     @if (! $pengguna->is(auth()->user()))
                                         @can('delete', $pengguna)

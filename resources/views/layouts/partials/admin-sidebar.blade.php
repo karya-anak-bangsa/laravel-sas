@@ -35,7 +35,7 @@
         <div class="nav-group">
             <div class="nav-label">Umum</div>
             <a @class(['nav-link', 'active' => request()->routeIs('admin.dasbor')]) href="{{ route('admin.dasbor') }}" @if (request()->routeIs('admin.dasbor')) aria-current="page" @endif>
-                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="4" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="10" width="7" height="11" rx="1.5"/></svg>
+                <i class="icon fa-solid fa-gauge-high" aria-hidden="true"></i>
                 <span class="nav-text">Dasbor</span>
             </a>
         </div>
@@ -45,9 +45,9 @@
                 <div class="nav-label">Data Sekolah</div>
                 <div @class(['nav-tree', 'open' => $masterDataAktif, 'has-active' => $masterDataAktif])>
                     <button type="button" class="nav-link nav-toggle" aria-expanded="{{ $masterDataAktif ? 'true' : 'false' }}">
-                        <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+                        <i class="icon fa-solid fa-database" aria-hidden="true"></i>
                         <span class="nav-text">Master Data</span>
-                        <svg class="nav-chev" width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                        <i class="nav-chev fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </button>
                     <div class="nav-sub">
                         <div class="nav-sub-inner">
@@ -65,7 +65,7 @@
             <div class="nav-group">
                 <div class="nav-label">Pengaturan</div>
                 <a @class(['nav-link', 'active' => $penggunaAktif]) href="{{ route('admin.pengguna.index') }}" @if ($penggunaAktif) aria-current="page" @endif>
-                    <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
+                    <i class="icon fa-solid fa-users-gear" aria-hidden="true"></i>
                     <span class="nav-text">Pengguna</span>
                 </a>
             </div>

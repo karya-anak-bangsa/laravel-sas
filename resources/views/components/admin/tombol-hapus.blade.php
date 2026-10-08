@@ -4,5 +4,5 @@
 <form method="POST" action="{{ $action }}" data-konfirmasi="{{ $konfirmasi }}" class="form-inline">
     @csrf
     @method('DELETE')
-    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+    <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can" aria-hidden="true"></i> Hapus</button>
 </form>

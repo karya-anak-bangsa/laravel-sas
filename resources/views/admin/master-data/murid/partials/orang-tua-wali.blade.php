@@ -29,13 +29,13 @@
                             <td>{{ $orangTua->nomor_hp ?? '—' }}</td>
                             <td>{{ $orangTua->pekerjaan?->label() ?? '—' }}</td>
                             <td class="kolom-aksi">
-                                <a href="{{ route('admin.master-data.orang-tua-wali.edit', $orangTua) }}" class="btn btn-warning btn-sm">Ubah data</a>
+                                <a href="{{ route('admin.master-data.orang-tua-wali.edit', $orangTua) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Ubah data</a>
                                 <form method="POST" class="form-inline"
                                     action="{{ route('admin.master-data.murid.orang-tua-wali.destroy', [$murid, $orangTua]) }}"
                                     data-konfirmasi="Lepas tautan {{ $orangTua->nama }} dari murid ini?">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-ghost btn-sm">Lepas</button>
+                                    <button type="submit" class="btn btn-ghost btn-sm"><i class="fa-solid fa-link-slash" aria-hidden="true"></i> Lepas</button>
                                 </form>
                             </td>
                         </tr>
@@ -53,7 +53,7 @@
                 <x-admin.select name="id_orang_tua_wali" label="Pilih data orang tua/wali yang sudah ada" required
                     :pilihan="$pilihanOrangTuaWali" kosong="— Pilih —" />
                 <div class="form-group filter-aksi">
-                    <button type="submit" class="btn btn-outline">Tautkan</button>
+                    <button type="submit" class="btn btn-outline"><i class="fa-solid fa-link" aria-hidden="true"></i> Tautkan</button>
                 </div>
             </div>
             <div class="form-hint">

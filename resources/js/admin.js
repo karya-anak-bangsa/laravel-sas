@@ -5,6 +5,10 @@
 // submenu, dan pengalih tema terang/gelap. Entry demo Gentelella
 // (command palette, data contoh, form palsu) sengaja tidak dimuat.
 import 'gentelella/scss/v4/main.scss';
+// Ikon: Font Awesome Free (gaya solid & regular), di-host sendiri lewat Vite.
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+import '@fortawesome/fontawesome-free/css/solid.min.css';
+import '@fortawesome/fontawesome-free/css/regular.min.css';
 import { mountShell } from 'gentelella/v4/shell';
 
 mountShell();

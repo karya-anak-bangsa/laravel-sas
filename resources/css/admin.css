@@ -35,6 +35,38 @@
     flex: 1;
 }
 
+/*
+ * Ikon Font Awesome (<i class="fa-…">). Ukuran bawaan Gentelella hanya
+ * berlaku untuk <svg>, jadi disetel ulang di sini.
+ */
+.nav-link i.icon {
+    width: 18px;
+    height: auto;
+    font-size: 15px;
+    text-align: center;
+}
+
+.nav-chev {
+    font-size: 10px;
+}
+
+.sidebar-toggle i,
+.tb-btn i {
+    font-size: 16px;
+}
+
+.btn i {
+    font-size: 0.95em;
+}
+
+.pagination .page-btn i {
+    font-size: 10px;
+}
+
+.empty-state-icon i {
+    font-size: 26px;
+}
+
 /* Atribut hidden harus menang atas display milik komponen (mis. .form-row). */
 [hidden] {
     display: none !important;

@@ -8,7 +8,7 @@
     <x-admin.kartu-daftar judul="Daftar Tahun Ajaran" :paginator="$daftarTahunAjaran">
         <x-slot:aksi>
             @can('create', App\Models\TahunAjaran::class)
-                <a href="{{ route('admin.master-data.tahun-ajaran.create') }}" class="btn btn-success">Tambah tahun ajaran</a>
+                <a href="{{ route('admin.master-data.tahun-ajaran.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah tahun ajaran</a>
             @endcan
         </x-slot:aksi>
 
@@ -41,7 +41,7 @@
                                                         data-konfirmasi="Jadikan semester {{ $semester->jenis->label() }} {{ $tahunAjaran->nama }} sebagai semester aktif?">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-ghost btn-sm">Aktifkan</button>
+                                                        <button type="submit" class="btn btn-ghost btn-sm"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Aktifkan</button>
                                                     </form>
                                                 @endcan
                                             @endif
@@ -52,7 +52,7 @@
                                 @endforeach
                                 <td class="kolom-aksi">
                                     @can('update', $tahunAjaran)
-                                        <a href="{{ route('admin.master-data.tahun-ajaran.edit', $tahunAjaran) }}" class="btn btn-warning btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.tahun-ajaran.edit', $tahunAjaran) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Ubah</a>
                                     @endcan
                                     @can('delete', $tahunAjaran)
                                         <x-admin.tombol-hapus

@@ -9,7 +9,7 @@
     <header class="topbar">
         <div class="topbar-left">
             <button class="sidebar-toggle" type="button" aria-label="Buka menu" aria-controls="sidebar" aria-expanded="false">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
             </button>
             <nav class="breadcrumb" aria-label="Breadcrumb">
                 @hasSection('judul')
@@ -24,15 +24,15 @@
 
         <div class="topbar-right">
             <button class="tb-btn theme-toggle" type="button" title="Ganti tema" aria-label="Ganti tema terang/gelap" aria-pressed="false">
-                <svg class="theme-icon-light" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-                <svg class="theme-icon-dark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <i class="theme-icon-light fa-solid fa-sun" aria-hidden="true"></i>
+                <i class="theme-icon-dark fa-regular fa-moon" aria-hidden="true"></i>
             </button>
 
             <div class="topbar-user">
                 <span class="topbar-user-name">{{ auth()->user()->email }}</span>
                 <form method="POST" action="{{ route('admin.keluar') }}">
                     @csrf
-                    <button type="submit" class="btn btn-outline btn-sm">Keluar</button>
+                    <button type="submit" class="btn btn-outline btn-sm"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Keluar</button>
                 </form>
             </div>
         </div>

@@ -42,7 +42,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;height:38px">
-            Masuk
+            <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Masuk
         </button>
     </form>
 
