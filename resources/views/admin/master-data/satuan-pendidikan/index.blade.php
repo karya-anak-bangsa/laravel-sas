@@ -5,7 +5,7 @@
 @section('konten')
     <x-admin.header-halaman pretitle="Master Data" judul="Satuan Pendidikan">
         @can('create', App\Models\SatuanPendidikan::class)
-            <a href="{{ route('admin.master-data.satuan-pendidikan.create') }}" class="btn btn-primary">Tambah satuan pendidikan</a>
+            <a href="{{ route('admin.master-data.satuan-pendidikan.create') }}" class="btn btn-success">Tambah satuan pendidikan</a>
         @endcan
     </x-admin.header-halaman>
 
@@ -31,7 +31,7 @@
                                 <td>{{ $satuanPendidikan->npsn ?? '—' }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $satuanPendidikan)
-                                        <a href="{{ route('admin.master-data.satuan-pendidikan.edit', $satuanPendidikan) }}" class="btn btn-outline btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.satuan-pendidikan.edit', $satuanPendidikan) }}" class="btn btn-warning btn-sm">Ubah</a>
                                     @endcan
                                     @can('delete', $satuanPendidikan)
                                         <x-admin.tombol-hapus

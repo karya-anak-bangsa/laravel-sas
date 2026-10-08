@@ -5,7 +5,7 @@
 @section('konten')
     <x-admin.header-halaman pretitle="Pengaturan" judul="Pengguna">
         @can('create', App\Models\Pengguna::class)
-            <a href="{{ route('admin.pengguna.create') }}" class="btn btn-primary">Tambah pengguna</a>
+            <a href="{{ route('admin.pengguna.create') }}" class="btn btn-success">Tambah pengguna</a>
         @endcan
     </x-admin.header-halaman>
 
@@ -50,7 +50,7 @@
                                 </td>
                                 <td class="kolom-aksi">
                                     @can('update', $pengguna)
-                                        <a href="{{ route('admin.pengguna.edit', $pengguna) }}" class="btn btn-outline btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.pengguna.edit', $pengguna) }}" class="btn btn-warning btn-sm">Ubah</a>
                                     @endcan
                                     @if (! $pengguna->is(auth()->user()))
                                         @can('delete', $pengguna)

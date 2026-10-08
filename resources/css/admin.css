@@ -93,6 +93,62 @@ table.table .kolom-aksi {
     gap: var(--space-1) var(--space-4);
 }
 
+/*
+ * Warna tombol aksi mengikuti Bootstrap 5.3 (hanya kode warnanya, Bootstrap tidak dipasang):
+ * Tambah & Simpan = success, Ubah = warning, Hapus = danger, Batal = secondary.
+ */
+.btn-success {
+    background: #198754;
+    border-color: #198754;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: #157347;
+    border-color: #146c43;
+    color: #fff;
+}
+
+.btn-warning {
+    background: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
+
+.btn-warning:hover {
+    background: #ffca2c;
+    border-color: #ffc720;
+    color: #000;
+}
+
+.btn-danger {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #bb2d3b;
+    border-color: #b02a37;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background: #5c636a;
+    border-color: #565e64;
+    color: #fff;
+}
+
+a.btn {
+    text-decoration: none;
+}
+
 /* Tombol aksi di footer form. */
 .aksi-form {
     display: flex;

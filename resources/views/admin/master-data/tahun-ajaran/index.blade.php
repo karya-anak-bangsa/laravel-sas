@@ -5,7 +5,7 @@
 @section('konten')
     <x-admin.header-halaman pretitle="Master Data" judul="Tahun Ajaran">
         @can('create', App\Models\TahunAjaran::class)
-            <a href="{{ route('admin.master-data.tahun-ajaran.create') }}" class="btn btn-primary">Tambah tahun ajaran</a>
+            <a href="{{ route('admin.master-data.tahun-ajaran.create') }}" class="btn btn-success">Tambah tahun ajaran</a>
         @endcan
     </x-admin.header-halaman>
 
@@ -50,7 +50,7 @@
                                 @endforeach
                                 <td class="kolom-aksi">
                                     @can('update', $tahunAjaran)
-                                        <a href="{{ route('admin.master-data.tahun-ajaran.edit', $tahunAjaran) }}" class="btn btn-outline btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.tahun-ajaran.edit', $tahunAjaran) }}" class="btn btn-warning btn-sm">Ubah</a>
                                     @endcan
                                     @can('delete', $tahunAjaran)
                                         <x-admin.tombol-hapus

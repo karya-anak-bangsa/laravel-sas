@@ -5,7 +5,7 @@
 @section('konten')
     <x-admin.header-halaman pretitle="Master Data" judul="Rombongan Belajar (Rombel)">
         @can('create', App\Models\Rombel::class)
-            <a href="{{ route('admin.master-data.rombel.create') }}" class="btn btn-primary">Tambah rombel</a>
+            <a href="{{ route('admin.master-data.rombel.create') }}" class="btn btn-success">Tambah rombel</a>
         @endcan
     </x-admin.header-halaman>
 
@@ -54,7 +54,7 @@
                                 <td class="kolom-aksi">
                                     @can('update', $rombel)
                                         <a href="{{ route('admin.master-data.rombel.anggota.index', $rombel) }}" class="btn btn-outline btn-sm">Anggota</a>
-                                        <a href="{{ route('admin.master-data.rombel.edit', $rombel) }}" class="btn btn-outline btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.rombel.edit', $rombel) }}" class="btn btn-warning btn-sm">Ubah</a>
                                     @endcan
                                     @can('delete', $rombel)
                                         <x-admin.tombol-hapus

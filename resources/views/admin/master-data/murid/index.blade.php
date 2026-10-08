@@ -5,7 +5,7 @@
 @section('konten')
     <x-admin.header-halaman pretitle="Master Data" judul="Murid">
         @can('create', App\Models\Murid::class)
-            <a href="{{ route('admin.master-data.murid.create') }}" class="btn btn-primary">Tambah murid</a>
+            <a href="{{ route('admin.master-data.murid.create') }}" class="btn btn-success">Tambah murid</a>
         @endcan
     </x-admin.header-halaman>
 
@@ -46,7 +46,7 @@
                                 <td>{{ $murid->rombelAktif->first()?->nama ?? '—' }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $murid)
-                                        <a href="{{ route('admin.master-data.murid.edit', $murid) }}" class="btn btn-outline btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.murid.edit', $murid) }}" class="btn btn-warning btn-sm">Ubah</a>
                                     @endcan
                                     @can('delete', $murid)
                                         <x-admin.tombol-hapus

@@ -36,7 +36,7 @@
             </div>
             @if ($pilihanMurid->isNotEmpty())
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Tambahkan ke rombel</button>
+                    <button type="submit" class="btn btn-success">Tambahkan ke rombel</button>
                 </div>
             @endif
         </form>

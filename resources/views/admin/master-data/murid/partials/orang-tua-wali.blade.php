@@ -29,7 +29,7 @@
                             <td>{{ $orangTua->nomor_hp ?? '—' }}</td>
                             <td>{{ $orangTua->pekerjaan?->label() ?? '—' }}</td>
                             <td class="kolom-aksi">
-                                <a href="{{ route('admin.master-data.orang-tua-wali.edit', $orangTua) }}" class="btn btn-outline btn-sm">Ubah data</a>
+                                <a href="{{ route('admin.master-data.orang-tua-wali.edit', $orangTua) }}" class="btn btn-warning btn-sm">Ubah data</a>
                                 <form method="POST" class="form-inline"
                                     action="{{ route('admin.master-data.murid.orang-tua-wali.destroy', [$murid, $orangTua]) }}"
                                     data-konfirmasi="Lepas tautan {{ $orangTua->nama }} dari murid ini?">

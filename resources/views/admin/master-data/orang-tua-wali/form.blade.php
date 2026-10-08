@@ -48,8 +48,8 @@
         </div>
 
         <div class="card-footer aksi-form">
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ $murid ? route('admin.master-data.murid.edit', $murid) : route('admin.master-data.orang-tua-wali.index') }}" class="btn btn-outline">Batal</a>
+            <button type="submit" class="btn btn-success">Simpan</button>
+            <a href="{{ $murid ? route('admin.master-data.murid.edit', $murid) : route('admin.master-data.orang-tua-wali.index') }}" class="btn btn-secondary">Batal</a>
         </div>
     </form>
 @endsection

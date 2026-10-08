@@ -5,7 +5,7 @@
 @section('konten')
     <x-admin.header-halaman pretitle="Master Data" judul="Orang Tua/Wali">
         @can('create', App\Models\OrangTuaWali::class)
-            <a href="{{ route('admin.master-data.orang-tua-wali.create') }}" class="btn btn-primary">Tambah orang tua/wali</a>
+            <a href="{{ route('admin.master-data.orang-tua-wali.create') }}" class="btn btn-success">Tambah orang tua/wali</a>
         @endcan
     </x-admin.header-halaman>
 
@@ -48,7 +48,7 @@
                                 </td>
                                 <td class="kolom-aksi">
                                     @can('update', $orangTuaWali)
-                                        <a href="{{ route('admin.master-data.orang-tua-wali.edit', $orangTuaWali) }}" class="btn btn-outline btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.orang-tua-wali.edit', $orangTuaWali) }}" class="btn btn-warning btn-sm">Ubah</a>
                                     @endcan
                                     @can('delete', $orangTuaWali)
                                         <x-admin.tombol-hapus

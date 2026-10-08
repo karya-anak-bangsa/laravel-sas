@@ -5,7 +5,7 @@
 @section('konten')
     <x-admin.header-halaman pretitle="Master Data" judul="Penugasan">
         @can('create', App\Models\Penugasan::class)
-            <a href="{{ route('admin.master-data.penugasan.create', array_filter(['tahun_ajaran' => $saringan['tahun_ajaran']])) }}" class="btn btn-primary">Tambah penugasan</a>
+            <a href="{{ route('admin.master-data.penugasan.create', array_filter(['tahun_ajaran' => $saringan['tahun_ajaran']])) }}" class="btn btn-success">Tambah penugasan</a>
         @endcan
     </x-admin.header-halaman>
 
@@ -49,7 +49,7 @@
                                 <td>{{ $penugasan->tahunAjaran?->nama ?? '—' }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $penugasan)
-                                        <a href="{{ route('admin.master-data.penugasan.edit', $penugasan) }}" class="btn btn-outline btn-sm">Ubah</a>
+                                        <a href="{{ route('admin.master-data.penugasan.edit', $penugasan) }}" class="btn btn-warning btn-sm">Ubah</a>
                                     @endcan
                                     @can('delete', $penugasan)
                                         <x-admin.tombol-hapus

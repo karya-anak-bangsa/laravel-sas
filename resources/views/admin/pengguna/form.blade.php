@@ -66,8 +66,8 @@
         </div>
 
         <div class="card-footer aksi-form">
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ route('admin.pengguna.index') }}" class="btn btn-outline">Batal</a>
+            <button type="submit" class="btn btn-success">Simpan</button>
+            <a href="{{ route('admin.pengguna.index') }}" class="btn btn-secondary">Batal</a>
         </div>
     </form>
 @endsection
