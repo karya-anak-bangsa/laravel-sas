@@ -8,7 +8,7 @@
     <x-admin.kartu-daftar judul="Daftar Tenaga Pendidik" :paginator="$daftarTenagaPendidik">
         <x-slot:aksi>
             @can('create', App\Models\TenagaPendidik::class)
-                <a href="{{ route('admin.master-data.tenaga-pendidik.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah tenaga pendidik</a>
+                <a href="{{ route('admin.master-data.tenaga-pendidik.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah Data</a>
             @endcan
         </x-slot:aksi>
 
@@ -21,7 +21,7 @@
                     <x-admin.select name="status" label="Status" kosong="Semua status"
                         :pilihan="$pilihanStatus" :terpilih="$saringan['status']" />
                 </div>
-                <button type="submit" class="btn btn-outline"><i class="fa-solid fa-filter" aria-hidden="true"></i> Terapkan</button>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-filter" aria-hidden="true"></i> Terapkan</button>
             </form>
         </x-slot:pencarian>
 

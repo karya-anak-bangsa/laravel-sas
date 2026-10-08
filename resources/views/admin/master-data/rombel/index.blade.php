@@ -8,7 +8,7 @@
     <x-admin.kartu-daftar judul="Daftar Rombel" :paginator="$daftarRombel">
         <x-slot:aksi>
             @can('create', App\Models\Rombel::class)
-                <a href="{{ route('admin.master-data.rombel.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah rombel</a>
+                <a href="{{ route('admin.master-data.rombel.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah Data</a>
             @endcan
         </x-slot:aksi>
 
@@ -20,7 +20,7 @@
                     <x-admin.select name="satuan_pendidikan" label="Satuan pendidikan" kosong="Semua satuan pendidikan"
                         :pilihan="$pilihanSatuanPendidikan" :terpilih="$idSatuanPendidikan" />
                     <div class="form-group filter-aksi">
-                        <button type="submit" class="btn btn-outline"><i class="fa-solid fa-filter" aria-hidden="true"></i> Terapkan</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-filter" aria-hidden="true"></i> Terapkan</button>
                     </div>
                 </div>
             </form>

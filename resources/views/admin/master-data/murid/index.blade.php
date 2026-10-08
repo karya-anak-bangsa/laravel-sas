@@ -8,7 +8,7 @@
     <x-admin.kartu-daftar judul="Daftar Murid" :paginator="$daftarMurid">
         <x-slot:aksi>
             @can('create', App\Models\Murid::class)
-                <a href="{{ route('admin.master-data.murid.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah murid</a>
+                <a href="{{ route('admin.master-data.murid.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah Data</a>
             @endcan
         </x-slot:aksi>
 
@@ -17,7 +17,7 @@
                 <div class="form-row">
                     <x-admin.input name="cari" label="Cari nama, NISN, atau NIK" :value="$cari" type="search" />
                     <div class="form-group filter-aksi">
-                        <button type="submit" class="btn btn-outline"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Cari</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Cari</button>
                     </div>
                 </div>
             </form>

@@ -52,7 +52,7 @@
 
         <div class="card-footer aksi-form">
             <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Simpan</button>
-            <a href="{{ route('admin.master-data.tenaga-pendidik.index') }}" class="btn btn-secondary"><i class="fa-solid fa-xmark" aria-hidden="true"></i> Batal</a>
+            <a href="{{ route('admin.master-data.tenaga-pendidik.index') }}" class="btn btn-secondary"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Batal</a>
         </div>
     </form>
 @endsection

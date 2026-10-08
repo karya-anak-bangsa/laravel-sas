@@ -8,7 +8,7 @@
     <x-admin.kartu-daftar judul="Daftar Satuan Pendidikan" :paginator="$daftarSatuanPendidikan">
         <x-slot:aksi>
             @can('create', App\Models\SatuanPendidikan::class)
-                <a href="{{ route('admin.master-data.satuan-pendidikan.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah satuan pendidikan</a>
+                <a href="{{ route('admin.master-data.satuan-pendidikan.create') }}" class="btn btn-success"><i class="fa-solid fa-plus" aria-hidden="true"></i> Tambah Data</a>
             @endcan
         </x-slot:aksi>
 

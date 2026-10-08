@@ -89,6 +89,13 @@ table.table .kolom-aksi {
     white-space: nowrap;
 }
 
+/* Tombol di kolom aksi (Ubah, Hapus, dll.) sama lebar dan tinggi. */
+table.table .kolom-aksi .btn {
+    min-width: 76px;
+    justify-content: center;
+    vertical-align: middle;
+}
+
 /* Paginasi (layouts/partials/admin-paginasi.blade.php). */
 .paginasi {
     display: flex;
@@ -141,42 +148,56 @@ table.table .kolom-aksi {
 }
 
 /*
- * Warna tombol aksi mengikuti Bootstrap 5.3 (hanya kode warnanya, Bootstrap tidak dipasang):
- * Tambah & Simpan = success, Ubah = warning, Hapus = danger, Batal = secondary.
+ * Warna tombol aksi: kode warna Bootstrap 5.3 (Bootstrap tidak dipasang) yang
+ * kecerahannya diturunkan 20% (setiap kanal RGB x 0,8); hover x 0,7.
+ * Tambah & Simpan = success, Ubah = warning, Hapus = danger,
+ * Cari & Terapkan = primary, Batal = secondary (warna asli Bootstrap).
  */
 .btn-success {
-    background: #198754;
-    border-color: #198754;
-    color: #fff;
-}
-
-.btn-success:hover {
-    background: #157347;
+    background: #146c43;
     border-color: #146c43;
     color: #fff;
 }
 
+.btn-success:hover {
+    background: #125e3b;
+    border-color: #125e3b;
+    color: #fff;
+}
+
 .btn-warning {
-    background: #ffc107;
-    border-color: #ffc107;
+    background: #cc9a06;
+    border-color: #cc9a06;
     color: #000;
 }
 
 .btn-warning:hover {
-    background: #ffca2c;
-    border-color: #ffc720;
+    background: #b28705;
+    border-color: #b28705;
     color: #000;
 }
 
 .btn-danger {
-    background: #dc3545;
-    border-color: #dc3545;
+    background: #b02a37;
+    border-color: #b02a37;
     color: #fff;
 }
 
 .btn-danger:hover {
-    background: #bb2d3b;
-    border-color: #b02a37;
+    background: #9a2530;
+    border-color: #9a2530;
+    color: #fff;
+}
+
+.btn-primary {
+    background: #0a58ca;
+    border-color: #0a58ca;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #094db1;
+    border-color: #094db1;
     color: #fff;
 }
 
@@ -200,4 +221,10 @@ a.btn {
 .aksi-form {
     display: flex;
     gap: var(--space-2);
+}
+
+/* Simpan dan Batal sama lebar dan tinggi. */
+.aksi-form .btn {
+    min-width: 110px;
+    justify-content: center;
 }
