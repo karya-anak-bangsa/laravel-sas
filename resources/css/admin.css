@@ -148,56 +148,44 @@ table.table .kolom-aksi .btn {
 }
 
 /*
- * Warna tombol aksi: kode warna Bootstrap 5.3 (Bootstrap tidak dipasang) yang
- * kecerahannya diturunkan 20% (setiap kanal RGB x 0,8); hover x 0,7.
- * Tambah & Simpan = success, Ubah = warning, Hapus = danger,
- * Cari & Terapkan = primary, Batal = secondary (warna asli Bootstrap).
+ * Warna tombol aksi: kode warna asli Bootstrap 5.3 (Bootstrap tidak dipasang).
+ * Tambah & Simpan = success, Ubah = warning, Hapus = danger, Batal = secondary;
+ * keempatnya dibuat 15% lebih pudar (opacity 0,85) dan kembali penuh saat hover.
+ * Cari & Terapkan = primary (#0d6efd dengan kecerahan diturunkan 20%).
  */
 .btn-success {
-    background: #146c43;
-    border-color: #146c43;
+    background: #198754;
+    border-color: #198754;
     color: #fff;
 }
 
 .btn-success:hover {
-    background: #125e3b;
-    border-color: #125e3b;
+    background: #157347;
+    border-color: #146c43;
     color: #fff;
 }
 
 .btn-warning {
-    background: #cc9a06;
-    border-color: #cc9a06;
+    background: #ffc107;
+    border-color: #ffc107;
     color: #000;
 }
 
 .btn-warning:hover {
-    background: #b28705;
-    border-color: #b28705;
+    background: #ffca2c;
+    border-color: #ffc720;
     color: #000;
 }
 
 .btn-danger {
-    background: #b02a37;
-    border-color: #b02a37;
+    background: #dc3545;
+    border-color: #dc3545;
     color: #fff;
 }
 
 .btn-danger:hover {
-    background: #9a2530;
-    border-color: #9a2530;
-    color: #fff;
-}
-
-.btn-primary {
-    background: #0a58ca;
-    border-color: #0a58ca;
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background: #094db1;
-    border-color: #094db1;
+    background: #bb2d3b;
+    border-color: #b02a37;
     color: #fff;
 }
 
@@ -210,6 +198,32 @@ table.table .kolom-aksi .btn {
 .btn-secondary:hover {
     background: #5c636a;
     border-color: #565e64;
+    color: #fff;
+}
+
+.btn-success,
+.btn-warning,
+.btn-danger,
+.btn-secondary {
+    opacity: 0.85;
+}
+
+.btn-success:hover,
+.btn-warning:hover,
+.btn-danger:hover,
+.btn-secondary:hover {
+    opacity: 1;
+}
+
+.btn-primary {
+    background: #0a58ca;
+    border-color: #0a58ca;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #094db1;
+    border-color: #094db1;
     color: #fff;
 }
 
