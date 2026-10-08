@@ -217,6 +217,8 @@ Setiap fitur memperhatikan karakteristik berikut:
 
 ## Tahapan pengembangan (usulan urutan)
 
+> **Status (2026-10-08): tahapan dihentikan sementara.** Fokus memperbaiki detail Tahap 1 (master data) sesuai masukan pengguna. Jangan memulai Tahap 2 dst. sampai pengguna menyatakan perbaikan Tahap 1 selesai.
+
 0. **Fondasi** ✅: konfigurasi `.env`/locale/timezone, `tb_pengguna`, autentikasi, peran, layout admin (Gentelella) dan publik (Tailwind).
 1. **Master data** ✅: satuan pendidikan, spektrum keahlian, tahun ajaran + semester, rombel + anggota rombel, tenaga pendidik, penugasan, tenaga kependidikan (kolom sementara), murid, orang tua/wali, menu Pengguna.
 2. **Company profile** (publik).
