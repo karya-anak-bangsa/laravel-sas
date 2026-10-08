@@ -25,6 +25,16 @@
     }
 }
 
+/* Footer selalu di dasar layar walaupun konten halaman pendek. */
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.main > .page-wrapper {
+    flex: 1;
+}
+
 /* Atribut hidden harus menang atas display milik komponen (mis. .form-row). */
 [hidden] {
     display: none !important;
