@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             return;
         }
 
-        // Akun lokal: aryajaya.alamsyah@gmail.com / 12341234
+        // Akun lokal: aryajayaalamsyah@gmail.com / 12341234
         Pengguna::factory()->denganPeran(KodePeran::Administrator)->create([
             'email' => 'aryajayaalamsyah@gmail.com',
             'password' => '12341234',
