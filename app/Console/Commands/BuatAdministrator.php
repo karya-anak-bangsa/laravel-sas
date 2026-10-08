@@ -9,6 +9,7 @@ use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 use function Laravel\Prompts\password;
 use function Laravel\Prompts\text;
@@ -23,20 +24,14 @@ class BuatAdministrator extends Command
     public function handle(BuatPengguna $buatPengguna): int
     {
         $data = [
-            'nama_pengguna' => text('Nama pengguna', required: true),
-            'email' => text('Email (opsional)') ?: null,
+            'email' => text('Email', required: true),
             'password' => password('Kata sandi', required: true),
             'password_confirmation' => password('Ulangi kata sandi', required: true),
         ];
 
         $validator = Validator::make($data, [
-            'nama_pengguna' => ['required', 'regex:'.Pengguna::POLA_NAMA_PENGGUNA, 'max:50', 'unique:tb_pengguna,nama_pengguna'],
-            'email' => ['nullable', 'email', 'max:255', 'unique:tb_pengguna,email'],
+            'email' => ['required', 'email', 'max:255', Rule::unique(Pengguna::class, 'email')],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ], messages: [
-            'nama_pengguna.regex' => 'Nama pengguna hanya boleh berisi huruf, angka, titik, tanda hubung, dan garis bawah.',
-        ], attributes: [
-            'nama_pengguna' => 'nama pengguna',
         ]);
 
         if ($validator->fails()) {
@@ -48,13 +43,12 @@ class BuatAdministrator extends Command
         }
 
         $pengguna = $buatPengguna->handle(
-            $data['nama_pengguna'],
             $data['email'],
             $data['password'],
             KodePeran::Administrator,
         );
 
-        $this->components->info("Akun Administrator \"{$pengguna->nama_pengguna}\" berhasil dibuat.");
+        $this->components->info("Akun Administrator \"{$pengguna->email}\" berhasil dibuat.");
 
         return self::SUCCESS;
     }

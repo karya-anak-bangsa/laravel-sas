@@ -53,7 +53,7 @@ Hierarki disimpan sebagai tiga tabel: bidang → program → konsentrasi keahlia
 Peran: Administrator, Kepala Sekolah, Wakil Kepala Sekolah, Ketua Jurusan (khusus SMK), Wali Kelas, Tenaga Pendidik, Tenaga Kependidikan.
 
 Akun:
-- `tb_pengguna` adalah **satu-satunya tabel akun** untuk semua peran di atas. Tabel ini hanya berisi data login (username/email, password, status aktif), bukan data pribadi.
+- `tb_pengguna` adalah **satu-satunya tabel akun** untuk semua peran di atas. Tabel ini hanya berisi data login (email, password, status aktif), bukan data pribadi.
 - Data pribadi tetap di `tb_tenaga_pendidik` / `tb_tenaga_kependidikan`. Keduanya memiliki `id_pengguna` nullable, sehingga data bisa diinput dulu sebelum akunnya dibuat.
 - Administrator boleh hanya memiliki akun, tanpa data tenaga pendidik/kependidikan.
 - Kepala Sekolah, Wakil Kepala Sekolah, Ketua Jurusan, dan Wali Kelas adalah tenaga pendidik dengan tugas tambahan: satu akun, satu data di `tb_tenaga_pendidik`, ditambah penugasan.
@@ -203,16 +203,16 @@ Setiap fitur memperhatikan karakteristik berikut:
   - `vendor/bin/pint --dirty`: format kode
   - `npm run build`: build aset
   - `php artisan pengguna:buat-administrator`: buat akun Administrator (instalasi awal/production)
-  - `php artisan migrate:fresh --seed`: database lokal dengan akun Administrator `aryajaya.alamsyah` / `12341234` (seeder tidak berjalan di production)
+  - `php artisan migrate:fresh --seed`: database lokal dengan akun Administrator `aryajaya.alamsyah@gmail.com` / `12341234` (seeder tidak berjalan di production)
 - Cara deploy ke production: **TBD**.
 
 ## Autentikasi
 
-- Halaman masuk `/admin/masuk` (nama pengguna **atau** email + kata sandi), keluar lewat POST `/admin/keluar`. Tidak ada pendaftaran mandiri; akun dibuat oleh Administrator.
-- Hanya akun `aktif` yang dapat masuk; percobaan gagal dibatasi 5 kali per login + IP (`App\Actions\Autentikasi\AutentikasiPengguna`).
+- Halaman masuk `/admin/masuk` (**email** + kata sandi; tidak ada nama pengguna/username), keluar lewat POST `/admin/keluar`. Tidak ada pendaftaran mandiri; akun dibuat oleh Administrator.
+- Hanya akun `aktif` yang dapat masuk; percobaan gagal dibatasi 5 kali per email + IP (`App\Actions\Autentikasi\AutentikasiPengguna`).
 - Seluruh route admin selain masuk/keluar memakai middleware `auth` + `can:akses-admin` (lihat `routes/web.php`).
 - Lupa kata sandi: sementara diatur ulang oleh Administrator (belum ada reset via email).
-- Akun dikelola di menu **Pengguna** (`/admin/pengguna`, khusus Administrator): nama pengguna (huruf, angka, titik, `-`, `_` — `Pengguna::POLA_NAMA_PENGGUNA`), email opsional, kata sandi, aktif, peran tetap, dan tautan ke data tenaga pendidik yang belum punya akun. Nama pengguna/email unik terhadap semua akun termasuk yang sudah dihapus.
+- Akun dikelola di menu **Pengguna** (`/admin/pengguna`, khusus Administrator): email (wajib), kata sandi, aktif, peran tetap, dan tautan ke data tenaga pendidik/kependidikan yang belum punya akun. Email unik terhadap semua akun termasuk yang sudah dihapus. Di UI (topbar, sidebar, dasbor, daftar) akun ditampilkan dengan email-nya.
 - Administrator tidak dapat menghapus, menonaktifkan, atau mencabut peran Administrator dari akunnya sendiri.
 
 ## Tahapan pengembangan (usulan urutan)

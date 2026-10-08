@@ -13,41 +13,37 @@ class BuatAdministratorTest extends TestCase
     public function test_perintah_membuat_akun_administrator(): void
     {
         $this->artisan('pengguna:buat-administrator')
-            ->expectsQuestion('Nama pengguna', 'admin')
-            ->expectsQuestion('Email (opsional)', 'admin@sekolah.test')
+            ->expectsQuestion('Email', 'admin@sekolah.test')
             ->expectsQuestion('Kata sandi', 'rahasia123')
             ->expectsQuestion('Ulangi kata sandi', 'rahasia123')
             ->assertSuccessful();
 
-        $pengguna = Pengguna::query()->where('nama_pengguna', 'admin')->firstOrFail();
+        $pengguna = Pengguna::query()->where('email', 'admin@sekolah.test')->firstOrFail();
 
-        $this->assertSame('admin@sekolah.test', $pengguna->email);
         $this->assertTrue($pengguna->adalahAdministrator());
     }
 
     public function test_perintah_gagal_jika_konfirmasi_kata_sandi_tidak_cocok(): void
     {
         $this->artisan('pengguna:buat-administrator')
-            ->expectsQuestion('Nama pengguna', 'admin')
-            ->expectsQuestion('Email (opsional)', '')
+            ->expectsQuestion('Email', 'admin@sekolah.test')
             ->expectsQuestion('Kata sandi', 'rahasia123')
             ->expectsQuestion('Ulangi kata sandi', 'berbeda123')
             ->assertFailed();
 
-        $this->assertDatabaseMissing('tb_pengguna', ['nama_pengguna' => 'admin']);
+        $this->assertDatabaseMissing('tb_pengguna', ['email' => 'admin@sekolah.test']);
     }
 
-    public function test_perintah_gagal_jika_nama_pengguna_sudah_dipakai(): void
+    public function test_perintah_gagal_jika_email_sudah_dipakai(): void
     {
-        Pengguna::factory()->create(['nama_pengguna' => 'admin']);
+        Pengguna::factory()->create(['email' => 'admin@sekolah.test']);
 
         $this->artisan('pengguna:buat-administrator')
-            ->expectsQuestion('Nama pengguna', 'admin')
-            ->expectsQuestion('Email (opsional)', '')
+            ->expectsQuestion('Email', 'admin@sekolah.test')
             ->expectsQuestion('Kata sandi', 'rahasia123')
             ->expectsQuestion('Ulangi kata sandi', 'rahasia123')
             ->assertFailed();
 
-        $this->assertSame(1, Pengguna::query()->where('nama_pengguna', 'admin')->count());
+        $this->assertSame(1, Pengguna::query()->where('email', 'admin@sekolah.test')->count());
     }
 }

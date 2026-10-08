@@ -74,9 +74,9 @@
 
     <div class="sidebar-footer">
         <div class="sidebar-user">
-            <div class="avatar">{{ Str::upper(Str::substr($pengguna->nama_pengguna, 0, 1)) }}</div>
+            <div class="avatar">{{ Str::upper(Str::substr($pengguna->email, 0, 1)) }}</div>
             <div class="sidebar-user-info">
-                <div class="name">{{ $pengguna->nama_pengguna }}</div>
+                <div class="name">{{ $pengguna->email }}</div>
                 <div class="role">{{ $pengguna->kodePeran()->map(fn ($kode) => $kode->label())->join(', ') }}</div>
             </div>
         </div>

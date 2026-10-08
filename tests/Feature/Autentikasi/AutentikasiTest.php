@@ -17,19 +17,7 @@ class AutentikasiTest extends TestCase
         $this->get(route('admin.masuk'))
             ->assertOk()
             ->assertViewIs('admin.autentikasi.masuk')
-            ->assertSee('Nama pengguna atau email');
-    }
-
-    public function test_pengguna_dapat_masuk_dengan_nama_pengguna(): void
-    {
-        $pengguna = Pengguna::factory()->denganPeran(KodePeran::TenagaPendidik)->create();
-
-        $this->post(route('admin.masuk'), [
-            'login' => $pengguna->nama_pengguna,
-            'password' => 'password',
-        ])->assertRedirect(route('admin.dasbor'));
-
-        $this->assertAuthenticatedAs($pengguna);
+            ->assertSee('name="email"', false);
     }
 
     public function test_pengguna_dapat_masuk_dengan_email(): void
@@ -37,7 +25,7 @@ class AutentikasiTest extends TestCase
         $pengguna = Pengguna::factory()->denganPeran(KodePeran::TenagaPendidik)->create();
 
         $this->post(route('admin.masuk'), [
-            'login' => $pengguna->email,
+            'email' => $pengguna->email,
             'password' => 'password',
         ])->assertRedirect(route('admin.dasbor'));
 
@@ -49,10 +37,10 @@ class AutentikasiTest extends TestCase
         $pengguna = Pengguna::factory()->create();
 
         $this->from(route('admin.masuk'))->post(route('admin.masuk'), [
-            'login' => $pengguna->nama_pengguna,
+            'email' => $pengguna->email,
             'password' => 'salah-sandi',
         ])->assertRedirect(route('admin.masuk'))
-            ->assertSessionHasErrors(['login' => __('auth.failed')]);
+            ->assertSessionHasErrors(['email' => __('auth.failed')]);
 
         $this->assertGuest();
     }
@@ -62,9 +50,9 @@ class AutentikasiTest extends TestCase
         $pengguna = Pengguna::factory()->nonaktif()->denganPeran(KodePeran::TenagaPendidik)->create();
 
         $this->post(route('admin.masuk'), [
-            'login' => $pengguna->nama_pengguna,
+            'email' => $pengguna->email,
             'password' => 'password',
-        ])->assertSessionHasErrors('login');
+        ])->assertSessionHasErrors('email');
 
         $this->assertGuest();
     }
@@ -73,7 +61,7 @@ class AutentikasiTest extends TestCase
     {
         $this->post(route('admin.masuk'), [])
             ->assertSessionHasErrors([
-                'login' => 'Nama pengguna atau email wajib diisi.',
+                'email' => 'Email wajib diisi.',
                 'password' => 'Kata sandi wajib diisi.',
             ]);
     }
@@ -84,18 +72,18 @@ class AutentikasiTest extends TestCase
 
         for ($i = 0; $i < AutentikasiPengguna::MAKS_PERCOBAAN; $i++) {
             $this->post(route('admin.masuk'), [
-                'login' => $pengguna->nama_pengguna,
+                'email' => $pengguna->email,
                 'password' => 'salah-sandi',
             ]);
         }
 
         $this->post(route('admin.masuk'), [
-            'login' => $pengguna->nama_pengguna,
+            'email' => $pengguna->email,
             'password' => 'password',
-        ])->assertSessionHasErrors('login');
+        ])->assertSessionHasErrors('email');
 
         $this->assertGuest();
-        $this->assertStringContainsString('Terlalu banyak percobaan masuk', session('errors')->first('login'));
+        $this->assertStringContainsString('Terlalu banyak percobaan masuk', session('errors')->first('email'));
     }
 
     public function test_pengguna_dapat_keluar(): void

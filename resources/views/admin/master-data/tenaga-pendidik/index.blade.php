@@ -51,7 +51,7 @@
                                 <td>{{ $tenagaPendidik->status->label() }}</td>
                                 <td>{{ $tenagaPendidik->pendidikan_terakhir->label() }}</td>
                                 <td>{{ $tenagaPendidik->masaKerja() }}</td>
-                                <td>{{ $tenagaPendidik->pengguna?->nama_pengguna ?? '—' }}</td>
+                                <td>{{ $tenagaPendidik->pengguna?->email ?? '—' }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $tenagaPendidik)
                                         <a href="{{ route('admin.master-data.tenaga-pendidik.edit', $tenagaPendidik) }}" class="btn btn-outline btn-sm">Ubah</a>

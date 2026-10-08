@@ -17,10 +17,8 @@
         <div class="card-body">
             <h2 class="card-title">Akun</h2>
             <div class="form-row">
-                <x-admin.input name="nama_pengguna" label="Nama pengguna" :value="$pengguna->nama_pengguna" required
-                    maxlength="50" autocomplete="off" autocapitalize="none" bantuan="Huruf, angka, titik, tanda hubung, dan garis bawah." />
-                <x-admin.input type="email" name="email" label="Email" :value="$pengguna->email" maxlength="255"
-                    bantuan="Opsional. Dapat dipakai untuk masuk." />
+                <x-admin.input type="email" name="email" label="Email" :value="$pengguna->email" required maxlength="255"
+                    autocomplete="off" autocapitalize="none" bantuan="Dipakai untuk masuk." />
             </div>
             <div class="form-row">
                 <x-admin.input type="password" name="password" :label="$sedangMengubah ? 'Kata sandi baru' : 'Kata sandi'"

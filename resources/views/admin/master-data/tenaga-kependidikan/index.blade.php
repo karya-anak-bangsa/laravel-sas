@@ -43,7 +43,7 @@
                                 <td>{{ $tenagaKependidikan->nik ?? '—' }}</td>
                                 <td>{{ $tenagaKependidikan->jenis_kelamin->label() }}</td>
                                 <td>{{ $tenagaKependidikan->kecamatan ?? '—' }}</td>
-                                <td>{{ $tenagaKependidikan->pengguna?->nama_pengguna ?? '—' }}</td>
+                                <td>{{ $tenagaKependidikan->pengguna?->email ?? '—' }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $tenagaKependidikan)
                                         <a href="{{ route('admin.master-data.tenaga-kependidikan.edit', $tenagaKependidikan) }}" class="btn btn-outline btn-sm">Ubah</a>

@@ -28,7 +28,7 @@ class DasborTest extends TestCase
             ->get(route('admin.dasbor'))
             ->assertOk()
             ->assertViewIs('admin.dasbor.index')
-            ->assertSee($pengguna->nama_pengguna)
+            ->assertSee($pengguna->email)
             ->assertSee('Wali Kelas, Tenaga Pendidik');
     }
 

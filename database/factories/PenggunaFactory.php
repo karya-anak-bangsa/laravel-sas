@@ -27,7 +27,6 @@ class PenggunaFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_pengguna' => fake()->unique()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'aktif' => true,

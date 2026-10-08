@@ -16,14 +16,13 @@ class SimpanPengguna
      * Simpan akun, peran tetapnya, dan tautan ke data tenaga pendidik/kependidikan
      * dalam satu transaksi.
      *
-     * @param  array{nama_pengguna: string, email?: string|null, password?: string|null, aktif: bool, peran: list<string>, id_tenaga_pendidik?: int|string|null, id_tenaga_kependidikan?: int|string|null}  $data
+     * @param  array{email: string, password?: string|null, aktif: bool, peran: list<string>, id_tenaga_pendidik?: int|string|null, id_tenaga_kependidikan?: int|string|null}  $data
      */
     public function handle(Pengguna $pengguna, array $data): Pengguna
     {
         return DB::transaction(function () use ($pengguna, $data) {
             $pengguna->fill([
-                'nama_pengguna' => $data['nama_pengguna'],
-                'email' => $data['email'] ?? null,
+                'email' => $data['email'],
                 'aktif' => $data['aktif'],
             ]);
 

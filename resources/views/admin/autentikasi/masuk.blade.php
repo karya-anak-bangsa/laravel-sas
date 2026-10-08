@@ -16,11 +16,11 @@
         @csrf
 
         <div class="form-group">
-            <label class="form-label" for="login">Nama pengguna atau email</label>
-            <input type="text" id="login" name="login" value="{{ old('login') }}"
-                @class(['form-control', 'is-invalid' => $errors->has('login')])
+            <label class="form-label" for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ old('email') }}"
+                @class(['form-control', 'is-invalid' => $errors->has('email')])
                 autocomplete="username" autocapitalize="none" autofocus required>
-            @error('login')
+            @error('email')
                 <div class="form-error">{{ $message }}</div>
             @enderror
         </div>

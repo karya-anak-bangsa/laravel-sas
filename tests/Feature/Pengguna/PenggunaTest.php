@@ -18,7 +18,7 @@ class PenggunaTest extends TestCase
 
         $this->assertDatabaseHas('tb_pengguna', [
             'id_pengguna' => $pengguna->id_pengguna,
-            'nama_pengguna' => $pengguna->nama_pengguna,
+            'email' => $pengguna->email,
             'aktif' => true,
         ]);
         $this->assertTrue(Hash::check('rahasia123', $pengguna->password));

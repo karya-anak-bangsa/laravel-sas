@@ -12,7 +12,7 @@
     <form method="GET" action="{{ route('admin.pengguna.index') }}" class="card">
         <div class="card-body">
             <div class="form-row">
-                <x-admin.input name="cari" label="Cari nama pengguna atau email" :value="$cari" type="search" />
+                <x-admin.input name="cari" label="Cari email" :value="$cari" type="search" />
                 <div class="form-group filter-aksi">
                     <button type="submit" class="btn btn-outline">Cari</button>
                 </div>
@@ -28,7 +28,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Nama pengguna</th>
                             <th>Email</th>
                             <th>Peran tetap</th>
                             <th>Data pribadi</th>
@@ -39,8 +38,7 @@
                     <tbody>
                         @foreach ($daftarPengguna as $pengguna)
                             <tr>
-                                <td class="cell-strong">{{ $pengguna->nama_pengguna }}</td>
-                                <td>{{ $pengguna->email ?? '—' }}</td>
+                                <td class="cell-strong">{{ $pengguna->email }}</td>
                                 <td>{{ $pengguna->peran->map(fn ($peran) => $peran->kode->label())->join(', ') ?: '—' }}</td>
                                 <td>{{ $pengguna->tenagaPendidik?->nama_lengkap ?? $pengguna->tenagaKependidikan?->nama_lengkap ?? '—' }}</td>
                                 <td>
@@ -58,7 +56,7 @@
                                         @can('delete', $pengguna)
                                             <x-admin.tombol-hapus
                                                 :action="route('admin.pengguna.destroy', $pengguna)"
-                                                :konfirmasi="'Hapus akun '.$pengguna->nama_pengguna.'?'" />
+                                                :konfirmasi="'Hapus akun '.$pengguna->email.'?'" />
                                         @endcan
                                     @endif
                                 </td>

@@ -15,17 +15,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 
-#[Fillable(['nama_pengguna', 'email', 'password', 'aktif'])]
+#[Fillable(['email', 'password', 'aktif'])]
 #[Hidden(['password', 'remember_token'])]
 class Pengguna extends Authenticatable
 {
     /** @use HasFactory<PenggunaFactory> */
     use HasFactory, Notifiable, SoftDeletes;
-
-    /**
-     * Pola nama pengguna: huruf, angka, titik, tanda hubung, dan garis bawah.
-     */
-    public const POLA_NAMA_PENGGUNA = '/^[A-Za-z0-9._-]+$/';
 
     protected $table = 'tb_pengguna';
 

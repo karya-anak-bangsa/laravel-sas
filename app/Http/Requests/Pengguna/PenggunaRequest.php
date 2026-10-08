@@ -38,8 +38,8 @@ class PenggunaRequest extends FormRequest
     }
 
     /**
-     * Nama pengguna dan email adalah identitas login, jadi unik terhadap
-     * semua akun termasuk yang sudah dihapus (sesuai unique index).
+     * Email adalah identitas login, jadi unik terhadap semua akun termasuk
+     * yang sudah dihapus (sesuai unique index).
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
@@ -48,12 +48,8 @@ class PenggunaRequest extends FormRequest
         $pengguna = $this->route('pengguna');
 
         return [
-            'nama_pengguna' => [
-                'required', 'string', 'regex:'.Pengguna::POLA_NAMA_PENGGUNA, 'max:50',
-                Rule::unique(Pengguna::class, 'nama_pengguna')->ignore($pengguna, 'id_pengguna'),
-            ],
             'email' => [
-                'nullable', 'email', 'max:255',
+                'required', 'email', 'max:255',
                 Rule::unique(Pengguna::class, 'email')->ignore($pengguna, 'id_pengguna'),
             ],
             'password' => [$pengguna ? 'nullable' : 'required', 'string', 'min:8', 'confirmed'],
@@ -111,7 +107,6 @@ class PenggunaRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'nama_pengguna' => 'nama pengguna',
             'peran.*' => 'peran',
             'id_tenaga_pendidik' => 'data tenaga pendidik',
             'id_tenaga_kependidikan' => 'data tenaga kependidikan',
@@ -124,7 +119,6 @@ class PenggunaRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'nama_pengguna.regex' => 'Nama pengguna hanya boleh berisi huruf, angka, titik, tanda hubung, dan garis bawah.',
             'id_tenaga_pendidik.exists' => 'Data tenaga pendidik tidak ditemukan atau sudah tertaut ke akun lain.',
             'id_tenaga_kependidikan.exists' => 'Data tenaga kependidikan tidak ditemukan atau sudah tertaut ke akun lain.',
         ];

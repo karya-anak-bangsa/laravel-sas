@@ -18,7 +18,7 @@ class MasukController extends Controller
     public function store(MasukRequest $request, AutentikasiPengguna $autentikasi): RedirectResponse
     {
         $autentikasi->handle(
-            $request->string('login')->trim()->value(),
+            $request->string('email')->trim()->value(),
             $request->string('password')->value(),
             $request->boolean('ingat'),
             $request->ip(),

@@ -24,7 +24,6 @@ class PenggunaControllerTest extends TestCase
     private function isianValid(array $timpa = []): array
     {
         return array_merge([
-            'nama_pengguna' => 'siti.aminah',
             'email' => 'siti@sekolah.test',
             'password' => 'rahasia123',
             'password_confirmation' => 'rahasia123',
@@ -54,17 +53,17 @@ class PenggunaControllerTest extends TestCase
         $this->actingAs($this->admin())
             ->get(route('admin.pengguna.index'))
             ->assertOk()
-            ->assertSeeInOrder([$pengguna->nama_pengguna, 'Tenaga Pendidik', 'Siti Aminah', 'Nonaktif']);
+            ->assertSeeInOrder([$pengguna->email, 'Tenaga Pendidik', 'Siti Aminah', 'Nonaktif']);
     }
 
-    public function test_pencarian_nama_pengguna_atau_email(): void
+    public function test_pencarian_email(): void
     {
-        Pengguna::factory()->create(['nama_pengguna' => 'budi', 'email' => 'budi@sekolah.test']);
-        Pengguna::factory()->create(['nama_pengguna' => 'rina', 'email' => 'rina@sekolah.test']);
+        Pengguna::factory()->create(['email' => 'budi@sekolah.test']);
+        Pengguna::factory()->create(['email' => 'rina@sekolah.test']);
 
         $this->actingAs($this->admin())
             ->get(route('admin.pengguna.index', ['cari' => 'rina@']))
-            ->assertSee('rina')
+            ->assertSee('rina@sekolah.test')
             ->assertDontSee('budi@sekolah.test');
     }
 
@@ -79,7 +78,7 @@ class PenggunaControllerTest extends TestCase
             ->assertRedirect(route('admin.pengguna.index'))
             ->assertSessionHasNoErrors();
 
-        $pengguna = Pengguna::query()->where('nama_pengguna', 'siti.aminah')->firstOrFail();
+        $pengguna = Pengguna::query()->where('email', 'siti@sekolah.test')->firstOrFail();
         $this->assertTrue(Hash::check('rahasia123', $pengguna->password));
         $this->assertTrue($pengguna->aktif);
         $this->assertSame([KodePeran::TenagaPendidik], $pengguna->kodePeran()->all());
@@ -93,7 +92,7 @@ class PenggunaControllerTest extends TestCase
 
         auth()->logout();
 
-        $this->post(route('admin.masuk'), ['login' => 'siti.aminah', 'password' => 'rahasia123'])
+        $this->post(route('admin.masuk'), ['email' => 'siti@sekolah.test', 'password' => 'rahasia123'])
             ->assertRedirect(route('admin.dasbor'));
     }
 
@@ -117,13 +116,20 @@ class PenggunaControllerTest extends TestCase
             ->assertSessionHasErrors(['password' => 'Konfirmasi kata sandi tidak cocok.']);
     }
 
-    public function test_nama_pengguna_akun_yang_dihapus_tidak_dapat_dipakai_ulang(): void
+    public function test_email_wajib_diisi(): void
     {
-        Pengguna::factory()->create(['nama_pengguna' => 'siti.aminah'])->delete();
+        $this->actingAs($this->admin())
+            ->post(route('admin.pengguna.store'), $this->isianValid(['email' => '']))
+            ->assertSessionHasErrors(['email' => 'Email wajib diisi.']);
+    }
+
+    public function test_email_akun_yang_dihapus_tidak_dapat_dipakai_ulang(): void
+    {
+        Pengguna::factory()->create(['email' => 'siti@sekolah.test'])->delete();
 
         $this->actingAs($this->admin())
             ->post(route('admin.pengguna.store'), $this->isianValid())
-            ->assertSessionHasErrors(['nama_pengguna' => 'Nama pengguna sudah digunakan.']);
+            ->assertSessionHasErrors(['email' => 'Email sudah digunakan.']);
     }
 
     public function test_tenaga_pendidik_yang_sudah_punya_akun_tidak_dapat_ditautkan_lagi(): void
@@ -142,7 +148,7 @@ class PenggunaControllerTest extends TestCase
 
         $this->actingAs($this->admin())
             ->put(route('admin.pengguna.update', $pengguna), $this->isianValid([
-                'nama_pengguna' => $pengguna->nama_pengguna,
+                'email' => $pengguna->email,
                 'password' => '',
                 'password_confirmation' => '',
             ]))
@@ -157,7 +163,7 @@ class PenggunaControllerTest extends TestCase
 
         $this->actingAs($this->admin())
             ->put(route('admin.pengguna.update', $pengguna), $this->isianValid([
-                'nama_pengguna' => $pengguna->nama_pengguna,
+                'email' => $pengguna->email,
                 'password' => 'baru123456',
                 'password_confirmation' => 'baru123456',
                 'aktif' => '0',
@@ -178,7 +184,7 @@ class PenggunaControllerTest extends TestCase
 
         $this->actingAs($this->admin())
             ->put(route('admin.pengguna.update', $pengguna), $this->isianValid([
-                'nama_pengguna' => $pengguna->nama_pengguna,
+                'email' => $pengguna->email,
                 'password' => '',
                 'password_confirmation' => '',
                 'id_tenaga_pendidik' => $baru->id_tenaga_pendidik,
@@ -195,7 +201,7 @@ class PenggunaControllerTest extends TestCase
 
         $this->actingAs($admin)
             ->put(route('admin.pengguna.update', $admin), $this->isianValid([
-                'nama_pengguna' => $admin->nama_pengguna,
+                'email' => $admin->email,
                 'password' => '',
                 'password_confirmation' => '',
                 'aktif' => '0',

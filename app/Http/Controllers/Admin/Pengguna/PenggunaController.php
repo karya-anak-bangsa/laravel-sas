@@ -27,10 +27,8 @@ class PenggunaController extends Controller
         return view('admin.pengguna.index', [
             'daftarPengguna' => Pengguna::query()
                 ->with(['peran', 'tenagaPendidik', 'tenagaKependidikan'])
-                ->when($cari !== '', fn (Builder $query) => $query->where(fn (Builder $query) => $query
-                    ->where('nama_pengguna', 'like', "%{$cari}%")
-                    ->orWhere('email', 'like', "%{$cari}%")))
-                ->orderBy('nama_pengguna')
+                ->when($cari !== '', fn (Builder $query) => $query->where('email', 'like', "%{$cari}%"))
+                ->orderBy('email')
                 ->paginate(20)
                 ->withQueryString(),
             'cari' => $cari,

@@ -29,7 +29,7 @@
             </button>
 
             <div class="topbar-user">
-                <span class="topbar-user-name">{{ auth()->user()->nama_pengguna }}</span>
+                <span class="topbar-user-name">{{ auth()->user()->email }}</span>
                 <form method="POST" action="{{ route('admin.keluar') }}">
                     @csrf
                     <button type="submit" class="btn btn-outline btn-sm">Keluar</button>

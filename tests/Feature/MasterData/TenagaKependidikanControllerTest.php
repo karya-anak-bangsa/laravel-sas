@@ -147,7 +147,7 @@ class TenagaKependidikanControllerTest extends TestCase
 
         $this->actingAs($this->admin())
             ->post(route('admin.pengguna.store'), [
-                'nama_pengguna' => 'ahmad.fauzi',
+                'email' => 'ahmad.fauzi@sekolah.test',
                 'password' => 'rahasia123',
                 'password_confirmation' => 'rahasia123',
                 'aktif' => '1',
@@ -156,7 +156,7 @@ class TenagaKependidikanControllerTest extends TestCase
             ])
             ->assertSessionHasNoErrors();
 
-        $pengguna = Pengguna::query()->where('nama_pengguna', 'ahmad.fauzi')->firstOrFail();
+        $pengguna = Pengguna::query()->where('email', 'ahmad.fauzi@sekolah.test')->firstOrFail();
         $this->assertSame($pengguna->id_pengguna, $tenagaKependidikan->refresh()->id_pengguna);
     }
 }

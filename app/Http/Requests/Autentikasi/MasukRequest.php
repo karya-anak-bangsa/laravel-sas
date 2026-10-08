@@ -23,7 +23,7 @@ class MasukRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string'],
             'ingat' => ['nullable', 'boolean'],
         ];
@@ -35,7 +35,6 @@ class MasukRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'login' => 'nama pengguna atau email',
             'password' => 'kata sandi',
         ];
     }

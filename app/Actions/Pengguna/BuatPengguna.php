@@ -12,11 +12,10 @@ class BuatPengguna
     /**
      * Buat akun pengguna beserta perannya dalam satu transaksi.
      */
-    public function handle(string $namaPengguna, ?string $email, string $password, KodePeran ...$peran): Pengguna
+    public function handle(string $email, string $password, KodePeran ...$peran): Pengguna
     {
-        return DB::transaction(function () use ($namaPengguna, $email, $password, $peran) {
+        return DB::transaction(function () use ($email, $password, $peran) {
             $pengguna = Pengguna::create([
-                'nama_pengguna' => $namaPengguna,
                 'email' => $email,
                 'password' => $password,
                 'aktif' => true,
