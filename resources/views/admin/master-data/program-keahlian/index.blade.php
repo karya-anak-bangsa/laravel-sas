@@ -19,18 +19,18 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Nama</th>
-                            <th>Bidang keahlian</th>
-                            <th>Jumlah konsentrasi</th>
+                            <th>Bidang Keahlian</th>
+                            <th>Program Keahlian</th>
+                            <th>Jumlah</th>
                             <th class="kolom-aksi">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($daftarProgramKeahlian as $programKeahlian)
                             <tr>
-                                <td class="cell-strong">{{ $programKeahlian->nama }}</td>
                                 <td>{{ $programKeahlian->bidangKeahlian?->nama ?? '—' }}</td>
-                                <td>{{ $programKeahlian->konsentrasi_keahlian_count }}</td>
+                                <td class="cell-strong">{{ $programKeahlian->nama }}</td>
+                                <td>{{ $programKeahlian->konsentrasi_keahlian_count }} konsentrasi keahlian</td>
                                 <td class="kolom-aksi">
                                     @can('update', $programKeahlian)
                                         <a href="{{ route('admin.master-data.program-keahlian.edit', $programKeahlian) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Ubah</a>

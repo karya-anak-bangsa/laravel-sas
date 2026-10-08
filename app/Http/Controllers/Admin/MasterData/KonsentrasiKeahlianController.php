@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin\MasterData;
 use App\Actions\MasterData\HapusKonsentrasiKeahlian;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterData\KonsentrasiKeahlianRequest;
+use App\Models\BidangKeahlian;
 use App\Models\KonsentrasiKeahlian;
 use App\Models\ProgramKeahlian;
+use App\Models\Semester;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
@@ -20,6 +23,16 @@ class KonsentrasiKeahlianController extends Controller
         return view('admin.master-data.konsentrasi-keahlian.index', [
             'daftarKonsentrasiKeahlian' => KonsentrasiKeahlian::query()
                 ->with('programKeahlian.bidangKeahlian')
+                ->withCount(['rombel' => fn (Builder $query) => $query
+                    ->whereIn('id_tahun_ajaran', Semester::query()->aktif()->select('id_tahun_ajaran'))])
+                // Urut mengikuti hierarki: bidang keahlian, program keahlian, lalu konsentrasi keahlian.
+                ->orderBy(BidangKeahlian::query()
+                    ->select('tb_bidang_keahlian.nama')
+                    ->join('tb_program_keahlian', 'tb_program_keahlian.id_bidang_keahlian', '=', 'tb_bidang_keahlian.id_bidang_keahlian')
+                    ->whereColumn('tb_program_keahlian.id_program_keahlian', 'tb_konsentrasi_keahlian.id_program_keahlian'))
+                ->orderBy(ProgramKeahlian::query()
+                    ->select('nama')
+                    ->whereColumn('tb_program_keahlian.id_program_keahlian', 'tb_konsentrasi_keahlian.id_program_keahlian'))
                 ->orderBy('nama')
                 ->orderBy('id_konsentrasi_keahlian')
                 ->paginate(15),

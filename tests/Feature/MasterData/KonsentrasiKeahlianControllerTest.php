@@ -2,10 +2,13 @@
 
 namespace Tests\Feature\MasterData;
 
+use App\Enums\JenisSemester;
 use App\Enums\KodePeran;
 use App\Models\KonsentrasiKeahlian;
 use App\Models\Pengguna;
 use App\Models\ProgramKeahlian;
+use App\Models\Rombel;
+use App\Models\TahunAjaran;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -27,18 +30,33 @@ class KonsentrasiKeahlianControllerTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_administrator_melihat_daftar_dengan_program_dan_bidang(): void
+    public function test_administrator_melihat_daftar_dengan_bidang_program_dan_jumlah_rombel_tahun_ajaran_aktif(): void
     {
         $konsentrasi = KonsentrasiKeahlian::factory()->create();
+        $tahunAktif = TahunAjaran::factory()->denganSemester(JenisSemester::Ganjil)->create();
+        $tahunLalu = TahunAjaran::factory()->denganSemester()->create();
+        Rombel::factory()->smk()->count(2)->create([
+            'id_tahun_ajaran' => $tahunAktif->id_tahun_ajaran,
+            'id_konsentrasi_keahlian' => $konsentrasi->id_konsentrasi_keahlian,
+        ]);
+        Rombel::factory()->smk()->create([
+            'id_tahun_ajaran' => $tahunLalu->id_tahun_ajaran,
+            'id_konsentrasi_keahlian' => $konsentrasi->id_konsentrasi_keahlian,
+        ]);
 
         $this->actingAs($this->admin())
             ->get(route('admin.master-data.konsentrasi-keahlian.index'))
             ->assertOk()
             ->assertSeeInOrder([
+                '<th>Bidang Keahlian</th>', '<th>Program Keahlian</th>', '<th>Konsentrasi Keahlian</th>',
+                '<th>Singkatan</th>', 'Jumlah</th>', 'Aksi</th>',
+            ], false)
+            ->assertSeeInOrder([
+                $konsentrasi->programKeahlian->bidangKeahlian->nama,
+                $konsentrasi->programKeahlian->nama,
                 $konsentrasi->nama,
                 $konsentrasi->singkatan,
-                $konsentrasi->programKeahlian->nama,
-                $konsentrasi->programKeahlian->bidangKeahlian->nama,
+                '2 rombel',
             ]);
     }
 

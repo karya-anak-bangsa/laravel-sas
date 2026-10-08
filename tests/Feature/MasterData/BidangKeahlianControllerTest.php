@@ -34,7 +34,8 @@ class BidangKeahlianControllerTest extends TestCase
         $this->actingAs($this->admin())
             ->get(route('admin.master-data.bidang-keahlian.index'))
             ->assertOk()
-            ->assertSeeInOrder([$bidang->nama, '2']);
+            ->assertSeeInOrder(['<th>Bidang Keahlian</th>', '<th>Jumlah</th>', 'Aksi</th>'], false)
+            ->assertSeeInOrder([$bidang->nama, '2 program keahlian']);
     }
 
     public function test_administrator_menambah_bidang_keahlian(): void

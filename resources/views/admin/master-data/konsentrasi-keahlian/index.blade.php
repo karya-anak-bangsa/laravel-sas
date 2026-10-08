@@ -19,20 +19,22 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Nama</th>
+                            <th>Bidang Keahlian</th>
+                            <th>Program Keahlian</th>
+                            <th>Konsentrasi Keahlian</th>
                             <th>Singkatan</th>
-                            <th>Program keahlian</th>
-                            <th>Bidang keahlian</th>
+                            <th title="Jumlah rombel pada tahun ajaran aktif">Jumlah</th>
                             <th class="kolom-aksi">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($daftarKonsentrasiKeahlian as $konsentrasiKeahlian)
                             <tr>
+                                <td>{{ $konsentrasiKeahlian->programKeahlian?->bidangKeahlian?->nama ?? '—' }}</td>
+                                <td>{{ $konsentrasiKeahlian->programKeahlian?->nama ?? '—' }}</td>
                                 <td class="cell-strong">{{ $konsentrasiKeahlian->nama }}</td>
                                 <td>{{ $konsentrasiKeahlian->singkatan }}</td>
-                                <td>{{ $konsentrasiKeahlian->programKeahlian?->nama ?? '—' }}</td>
-                                <td>{{ $konsentrasiKeahlian->programKeahlian?->bidangKeahlian?->nama ?? '—' }}</td>
+                                <td>{{ $konsentrasiKeahlian->rombel_count }} rombel</td>
                                 <td class="kolom-aksi">
                                     @can('update', $konsentrasiKeahlian)
                                         <a href="{{ route('admin.master-data.konsentrasi-keahlian.edit', $konsentrasiKeahlian) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Ubah</a>

@@ -21,6 +21,10 @@ class ProgramKeahlianController extends Controller
             'daftarProgramKeahlian' => ProgramKeahlian::query()
                 ->with('bidangKeahlian')
                 ->withCount('konsentrasiKeahlian')
+                // Urut mengikuti hierarki: bidang keahlian, lalu program keahlian.
+                ->orderBy(BidangKeahlian::query()
+                    ->select('nama')
+                    ->whereColumn('tb_bidang_keahlian.id_bidang_keahlian', 'tb_program_keahlian.id_bidang_keahlian'))
                 ->orderBy('nama')
                 ->orderBy('id_program_keahlian')
                 ->paginate(15),

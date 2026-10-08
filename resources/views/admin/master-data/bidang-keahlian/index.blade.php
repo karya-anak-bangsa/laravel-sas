@@ -19,8 +19,8 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Nama</th>
-                            <th>Jumlah program</th>
+                            <th>Bidang Keahlian</th>
+                            <th>Jumlah</th>
                             <th class="kolom-aksi">Aksi</th>
                         </tr>
                     </thead>
@@ -28,7 +28,7 @@
                         @foreach ($daftarBidangKeahlian as $bidangKeahlian)
                             <tr>
                                 <td class="cell-strong">{{ $bidangKeahlian->nama }}</td>
-                                <td>{{ $bidangKeahlian->program_keahlian_count }}</td>
+                                <td>{{ $bidangKeahlian->program_keahlian_count }} program keahlian</td>
                                 <td class="kolom-aksi">
                                     @can('update', $bidangKeahlian)
                                         <a href="{{ route('admin.master-data.bidang-keahlian.edit', $bidangKeahlian) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Ubah</a>

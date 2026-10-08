@@ -35,12 +35,25 @@ class ProgramKeahlianControllerTest extends TestCase
     public function test_administrator_melihat_daftar_dengan_nama_bidang(): void
     {
         $program = ProgramKeahlian::factory()->create();
+        KonsentrasiKeahlian::factory()->for($program)->create();
 
         $this->actingAs($this->admin())
             ->get(route('admin.master-data.program-keahlian.index'))
             ->assertOk()
-            ->assertSee($program->nama)
-            ->assertSee($program->bidangKeahlian->nama);
+            ->assertSeeInOrder(['<th>Bidang Keahlian</th>', '<th>Program Keahlian</th>', '<th>Jumlah</th>', 'Aksi</th>'], false)
+            ->assertSeeInOrder([$program->bidangKeahlian->nama, $program->nama, '1 konsentrasi keahlian']);
+    }
+
+    public function test_daftar_diurutkan_menurut_bidang_lalu_program(): void
+    {
+        $bidangA = BidangKeahlian::factory()->create(['nama' => 'A Bidang']);
+        $bidangB = BidangKeahlian::factory()->create(['nama' => 'B Bidang']);
+        ProgramKeahlian::factory()->for($bidangB)->create(['nama' => 'A Program']);
+        ProgramKeahlian::factory()->for($bidangA)->create(['nama' => 'Z Program']);
+
+        $this->actingAs($this->admin())
+            ->get(route('admin.master-data.program-keahlian.index'))
+            ->assertSeeInOrder(['A Bidang', 'Z Program', 'B Bidang', 'A Program']);
     }
 
     public function test_form_tambah_menampilkan_pilihan_bidang_keahlian(): void
