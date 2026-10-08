@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            <label class="form-label" for="password">Kata sandi</label>
+            <label class="form-label" for="password">Password</label>
             <input type="password" id="password" name="password"
                 @class(['form-control', 'is-invalid' => $errors->has('password')])
                 autocomplete="current-password" required>
@@ -47,6 +47,6 @@
     </form>
 
     <div class="auth-footer">
-        Lupa kata sandi? Hubungi Administrator sekolah.
+        Lupa password? Hubungi Administrator sekolah.
     </div>
 @endsection

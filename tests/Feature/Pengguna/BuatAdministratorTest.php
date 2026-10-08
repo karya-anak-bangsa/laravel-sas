@@ -14,8 +14,8 @@ class BuatAdministratorTest extends TestCase
     {
         $this->artisan('pengguna:buat-administrator')
             ->expectsQuestion('Email', 'admin@sekolah.test')
-            ->expectsQuestion('Kata sandi', 'rahasia123')
-            ->expectsQuestion('Ulangi kata sandi', 'rahasia123')
+            ->expectsQuestion('Password', 'rahasia123')
+            ->expectsQuestion('Ulangi password', 'rahasia123')
             ->assertSuccessful();
 
         $pengguna = Pengguna::query()->where('email', 'admin@sekolah.test')->firstOrFail();
@@ -23,12 +23,12 @@ class BuatAdministratorTest extends TestCase
         $this->assertTrue($pengguna->adalahAdministrator());
     }
 
-    public function test_perintah_gagal_jika_konfirmasi_kata_sandi_tidak_cocok(): void
+    public function test_perintah_gagal_jika_konfirmasi_password_tidak_cocok(): void
     {
         $this->artisan('pengguna:buat-administrator')
             ->expectsQuestion('Email', 'admin@sekolah.test')
-            ->expectsQuestion('Kata sandi', 'rahasia123')
-            ->expectsQuestion('Ulangi kata sandi', 'berbeda123')
+            ->expectsQuestion('Password', 'rahasia123')
+            ->expectsQuestion('Ulangi password', 'berbeda123')
             ->assertFailed();
 
         $this->assertDatabaseMissing('tb_pengguna', ['email' => 'admin@sekolah.test']);
@@ -40,8 +40,8 @@ class BuatAdministratorTest extends TestCase
 
         $this->artisan('pengguna:buat-administrator')
             ->expectsQuestion('Email', 'admin@sekolah.test')
-            ->expectsQuestion('Kata sandi', 'rahasia123')
-            ->expectsQuestion('Ulangi kata sandi', 'rahasia123')
+            ->expectsQuestion('Password', 'rahasia123')
+            ->expectsQuestion('Ulangi password', 'rahasia123')
             ->assertFailed();
 
         $this->assertSame(1, Pengguna::query()->where('email', 'admin@sekolah.test')->count());

@@ -4,14 +4,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Baris Bahasa Atur Ulang Kata Sandi
+    | Baris Bahasa Atur Ulang Password
     |--------------------------------------------------------------------------
     */
 
-    'reset' => 'Kata sandi Anda telah diatur ulang.',
-    'sent' => 'Tautan atur ulang kata sandi telah dikirim ke email Anda.',
+    'reset' => 'Password Anda telah diatur ulang.',
+    'sent' => 'Tautan atur ulang password telah dikirim ke email Anda.',
     'throttled' => 'Harap tunggu sebelum mencoba lagi.',
-    'token' => 'Token atur ulang kata sandi tidak valid.',
+    'token' => 'Token atur ulang password tidak valid.',
     'user' => 'Tidak ada pengguna dengan alamat email tersebut.',
 
 ];

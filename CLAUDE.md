@@ -25,6 +25,7 @@ Aplikasi Laravel 13 untuk **SMP Puspita Bangsa** dan **SMK Puspita Bangsa**. Mod
 | Orang Tua/Wali | wali siswa |
 | Konsentrasi Keahlian | jurusan (kecuali nama peran "Ketua Jurusan") |
 | Rombel (rombongan belajar) | kelas (untuk entitas data) |
+| Password | kata sandi |
 
 Berlaku untuk UI, nama tabel/kolom, nama model, dan dokumentasi.
 
@@ -208,11 +209,11 @@ Setiap fitur memperhatikan karakteristik berikut:
 
 ## Autentikasi
 
-- Halaman masuk `/admin/masuk` (**email** + kata sandi; tidak ada nama pengguna/username), keluar lewat POST `/admin/keluar`. Tidak ada pendaftaran mandiri; akun dibuat oleh Administrator.
+- Halaman masuk `/admin/masuk` (**email** + password; tidak ada nama pengguna/username), keluar lewat POST `/admin/keluar`. Tidak ada pendaftaran mandiri; akun dibuat oleh Administrator.
 - Hanya akun `aktif` yang dapat masuk; percobaan gagal dibatasi 5 kali per email + IP (`App\Actions\Autentikasi\AutentikasiPengguna`).
 - Seluruh route admin selain masuk/keluar memakai middleware `auth` + `can:akses-admin` (lihat `routes/web.php`).
-- Lupa kata sandi: sementara diatur ulang oleh Administrator (belum ada reset via email).
-- Akun dikelola di menu **Pengguna** (`/admin/pengguna`, khusus Administrator): email (wajib), kata sandi, aktif, peran tetap, dan tautan ke data tenaga pendidik/kependidikan yang belum punya akun. Email unik terhadap semua akun termasuk yang sudah dihapus. Di UI (topbar, sidebar, dasbor, daftar) akun ditampilkan dengan email-nya.
+- Lupa password: sementara diatur ulang oleh Administrator (belum ada reset via email).
+- Akun dikelola di menu **Pengguna** (`/admin/pengguna`, khusus Administrator): email (wajib), password, aktif, peran tetap, dan tautan ke data tenaga pendidik/kependidikan yang belum punya akun. Email unik terhadap semua akun termasuk yang sudah dihapus. Di UI (topbar, sidebar, dasbor, daftar) akun ditampilkan dengan email-nya.
 - Administrator tidak dapat menghapus, menonaktifkan, atau mencabut peran Administrator dari akunnya sendiri.
 
 ## Tahapan pengembangan (usulan urutan)

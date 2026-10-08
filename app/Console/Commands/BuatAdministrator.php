@@ -25,8 +25,8 @@ class BuatAdministrator extends Command
     {
         $data = [
             'email' => text('Email', required: true),
-            'password' => password('Kata sandi', required: true),
-            'password_confirmation' => password('Ulangi kata sandi', required: true),
+            'password' => password('Password', required: true),
+            'password_confirmation' => password('Ulangi password', required: true),
         ];
 
         $validator = Validator::make($data, [

@@ -21,10 +21,10 @@
                     autocomplete="off" autocapitalize="none" bantuan="Dipakai untuk masuk." />
             </div>
             <div class="form-row">
-                <x-admin.input type="password" name="password" :label="$sedangMengubah ? 'Kata sandi baru' : 'Kata sandi'"
+                <x-admin.input type="password" name="password" :label="$sedangMengubah ? 'Password baru' : 'Password'"
                     :required="! $sedangMengubah" autocomplete="new-password"
-                    :bantuan="$sedangMengubah ? 'Kosongkan jika tidak ingin mengganti kata sandi.' : 'Minimal 8 karakter.'" />
-                <x-admin.input type="password" name="password_confirmation" label="Ulangi kata sandi" autocomplete="new-password" />
+                    :bantuan="$sedangMengubah ? 'Kosongkan jika tidak ingin mengganti password.' : 'Minimal 8 karakter.'" />
+                <x-admin.input type="password" name="password_confirmation" label="Ulangi password" autocomplete="new-password" />
             </div>
 
             <div class="form-group">

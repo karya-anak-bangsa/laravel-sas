@@ -103,17 +103,17 @@ class PenggunaControllerTest extends TestCase
             ->assertSessionHasErrors(['peran.0' => 'Peran yang dipilih tidak valid.']);
     }
 
-    public function test_kata_sandi_wajib_saat_membuat_akun_dan_harus_dikonfirmasi(): void
+    public function test_password_wajib_saat_membuat_akun_dan_harus_dikonfirmasi(): void
     {
         $admin = $this->admin();
 
         $this->actingAs($admin)
             ->post(route('admin.pengguna.store'), $this->isianValid(['password' => '', 'password_confirmation' => '']))
-            ->assertSessionHasErrors(['password' => 'Kata sandi wajib diisi.']);
+            ->assertSessionHasErrors(['password' => 'Password wajib diisi.']);
 
         $this->actingAs($admin)
             ->post(route('admin.pengguna.store'), $this->isianValid(['password_confirmation' => 'berbeda123']))
-            ->assertSessionHasErrors(['password' => 'Konfirmasi kata sandi tidak cocok.']);
+            ->assertSessionHasErrors(['password' => 'Konfirmasi password tidak cocok.']);
     }
 
     public function test_email_wajib_diisi(): void
@@ -142,7 +142,7 @@ class PenggunaControllerTest extends TestCase
             ->assertSessionHasErrors(['id_tenaga_pendidik' => 'Data tenaga pendidik tidak ditemukan atau sudah tertaut ke akun lain.']);
     }
 
-    public function test_mengubah_akun_tanpa_kata_sandi_mempertahankan_kata_sandi_lama(): void
+    public function test_mengubah_akun_tanpa_password_mempertahankan_password_lama(): void
     {
         $pengguna = Pengguna::factory()->create(['password' => 'lama12345']);
 
@@ -157,7 +157,7 @@ class PenggunaControllerTest extends TestCase
         $this->assertTrue(Hash::check('lama12345', $pengguna->refresh()->password));
     }
 
-    public function test_administrator_mengatur_ulang_kata_sandi_dan_menonaktifkan_akun(): void
+    public function test_administrator_mengatur_ulang_password_dan_menonaktifkan_akun(): void
     {
         $pengguna = Pengguna::factory()->create();
 

@@ -12,7 +12,7 @@ class PenggunaTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_pengguna_disimpan_di_tb_pengguna_dengan_kata_sandi_ter_hash(): void
+    public function test_pengguna_disimpan_di_tb_pengguna_dengan_password_ter_hash(): void
     {
         $pengguna = Pengguna::factory()->create(['password' => 'rahasia123']);
 

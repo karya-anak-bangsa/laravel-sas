@@ -32,13 +32,13 @@ class AutentikasiTest extends TestCase
         $this->assertAuthenticatedAs($pengguna);
     }
 
-    public function test_kata_sandi_salah_ditolak(): void
+    public function test_password_salah_ditolak(): void
     {
         $pengguna = Pengguna::factory()->create();
 
         $this->from(route('admin.masuk'))->post(route('admin.masuk'), [
             'email' => $pengguna->email,
-            'password' => 'salah-sandi',
+            'password' => 'password-salah',
         ])->assertRedirect(route('admin.masuk'))
             ->assertSessionHasErrors(['email' => __('auth.failed')]);
 
@@ -62,7 +62,7 @@ class AutentikasiTest extends TestCase
         $this->post(route('admin.masuk'), [])
             ->assertSessionHasErrors([
                 'email' => 'Email wajib diisi.',
-                'password' => 'Kata sandi wajib diisi.',
+                'password' => 'Password wajib diisi.',
             ]);
     }
 
@@ -73,7 +73,7 @@ class AutentikasiTest extends TestCase
         for ($i = 0; $i < AutentikasiPengguna::MAKS_PERCOBAAN; $i++) {
             $this->post(route('admin.masuk'), [
                 'email' => $pengguna->email,
-                'password' => 'salah-sandi',
+                'password' => 'password-salah',
             ]);
         }
 

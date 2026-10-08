@@ -28,14 +28,4 @@ class MasukRequest extends FormRequest
             'ingat' => ['nullable', 'boolean'],
         ];
     }
-
-    /**
-     * @return array<string, string>
-     */
-    public function attributes(): array
-    {
-        return [
-            'password' => 'kata sandi',
-        ];
-    }
 }

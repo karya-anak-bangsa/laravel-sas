@@ -38,7 +38,7 @@ return [
     'can' => ':Attribute berisi nilai yang tidak diizinkan.',
     'confirmed' => 'Konfirmasi :attribute tidak cocok.',
     'contains' => ':Attribute tidak memuat nilai yang diwajibkan.',
-    'current_password' => 'Kata sandi salah.',
+    'current_password' => 'Password salah.',
     'date' => ':Attribute harus berupa tanggal yang valid.',
     'date_equals' => ':Attribute harus berupa tanggal yang sama dengan :date.',
     'date_format' => ':Attribute harus sesuai format :format.',
@@ -193,8 +193,8 @@ return [
 
     'attributes' => [
         'email' => 'email',
-        'password' => 'kata sandi',
-        'password_confirmation' => 'konfirmasi kata sandi',
+        'password' => 'password',
+        'password_confirmation' => 'konfirmasi password',
     ],
 
 ];

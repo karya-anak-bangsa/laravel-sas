@@ -26,7 +26,7 @@ class SimpanPengguna
                 'aktif' => $data['aktif'],
             ]);
 
-            // Kata sandi hanya diganti jika diisi.
+            // Password hanya diganti jika diisi.
             if (filled($data['password'] ?? null)) {
                 $pengguna->password = $data['password'];
             }
