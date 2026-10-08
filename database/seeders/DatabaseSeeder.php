@@ -32,5 +32,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'aryajayaalamsyah@gmail.com',
             'password' => '12341234',
         ]);
+
+        // Master data contoh tanpa akun pengguna lain.
+        $this->call(DataContohSeeder::class);
     }
 }

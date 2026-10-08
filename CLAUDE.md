@@ -165,7 +165,7 @@ Pola CRUD area admin (ikuti modul Satuan Pendidikan sebagai contoh):
 - Menu baru ditambahkan ke array di `layouts/partials/admin-sidebar.blade.php` (otomatis disaring dengan Policy `viewAny`).
 - Validasi unik pada tabel ber-soft-delete memakai `Rule::unique(...)->withoutTrashed()` dan **tanpa** unique index di database (index biasa), agar data yang sudah dihapus tidak menghalangi isian baru.
 - Data yang masih dirujuk data lain tidak boleh dihapus: Action `Hapus<Entitas>` melempar `App\Exceptions\DataMasihDipakai`, yang otomatis dirender sebagai redirect kembali dengan `session('galat')` (lihat `bootstrap/app.php`).
-- Data awal yang dibutuhkan di semua lingkungan masuk `DataAwalSeeder` (idempoten, aman di production); data contoh hanya di `DatabaseSeeder` (non-production).
+- Data awal yang dibutuhkan di semua lingkungan masuk `DataAwalSeeder` (idempoten, aman di production); data contoh hanya lewat `DatabaseSeeder` (non-production): akun Administrator lokal + `DataContohSeeder` (master data contoh; **tidak membuat akun pengguna lain**). Perbarui `DataContohSeeder` bila kolom/aturan master data berubah.
 
 Data pribadi (NIK, No. KK, NUPTK, data orang tua):
 - Simpan sebagai string dengan panjang tetap dan validasi digit (NIK/No. KK 16 digit, NISN 10 digit, NUPTK 16 digit).
@@ -208,7 +208,7 @@ Setiap fitur memperhatikan karakteristik berikut:
   - `vendor/bin/pint --dirty`: format kode
   - `npm run build`: build aset
   - `php artisan pengguna:buat-administrator`: buat akun Administrator (instalasi awal/production)
-  - `php artisan migrate:fresh --seed`: database lokal dengan akun Administrator `aryajayaalamsyah@gmail.com` / `12341234` (seeder tidak berjalan di production)
+  - `php artisan migrate:fresh --seed`: database lokal dengan akun Administrator `aryajayaalamsyah@gmail.com` / `12341234` beserta master data contoh: 2 tahun ajaran (2026/2027 ganjil aktif), 42 rombel, 105 murid + orang tua/wali, 34 tenaga pendidik + penugasan, 6 tenaga kependidikan (seeder contoh tidak berjalan di production)
 - Cara deploy ke production: **TBD**.
 
 ## Autentikasi
