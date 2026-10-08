@@ -37,6 +37,7 @@
                             <th>Tingkat</th>
                             <th>Satuan pendidikan</th>
                             <th>Konsentrasi keahlian</th>
+                            <th>Anggota</th>
                             <th>Tahun ajaran</th>
                             <th class="kolom-aksi">Aksi</th>
                         </tr>
@@ -48,9 +49,11 @@
                                 <td>{{ $rombel->tingkat->label() }}</td>
                                 <td>{{ $rombel->satuanPendidikan?->nama ?? '—' }}</td>
                                 <td>{{ $rombel->konsentrasiKeahlian?->nama ?? '—' }}</td>
+                                <td>{{ $rombel->murid_count }} murid</td>
                                 <td>{{ $rombel->tahunAjaran?->nama ?? '—' }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $rombel)
+                                        <a href="{{ route('admin.master-data.rombel.anggota.index', $rombel) }}" class="btn btn-outline btn-sm">Anggota</a>
                                         <a href="{{ route('admin.master-data.rombel.edit', $rombel) }}" class="btn btn-outline btn-sm">Ubah</a>
                                     @endcan
                                     @can('delete', $rombel)

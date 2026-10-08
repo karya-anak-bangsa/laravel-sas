@@ -32,6 +32,7 @@ class RombelController extends Controller
         return view('admin.master-data.rombel.index', [
             'daftarRombel' => Rombel::query()
                 ->with(['tahunAjaran', 'satuanPendidikan', 'konsentrasiKeahlian'])
+                ->withCount('murid')
                 ->when($idTahunAjaran, fn ($query) => $query->where('id_tahun_ajaran', $idTahunAjaran))
                 ->when($idSatuanPendidikan, fn ($query) => $query->where('id_satuan_pendidikan', $idSatuanPendidikan))
                 ->orderByDesc('id_tahun_ajaran')

@@ -30,6 +30,7 @@ class MuridController extends Controller
 
         return view('admin.master-data.murid.index', [
             'daftarMurid' => Murid::query()
+                ->with('rombelAktif')
                 ->when($cari !== '', fn (Builder $query) => $query->where(fn (Builder $query) => $query
                     ->where('nama_lengkap', 'like', "%{$cari}%")
                     ->orWhere('nisn', 'like', "{$cari}%")

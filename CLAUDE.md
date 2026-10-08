@@ -88,6 +88,7 @@ Peran:
 - `tb_rombel`: tahun ajaran, satuan pendidikan, tingkat (sesuai `BentukPendidikan::tingkat()`), konsentrasi keahlian (**wajib untuk SMK, dilarang untuk SMP/MTs**), dan **nama bebas** diisi Administrator (mis. "X PH 1", "VII"), unik per satuan pendidikan + tahun ajaran.
 - Daftar rombel secara bawaan disaring ke tahun ajaran aktif.
 - Satuan pendidikan, tahun ajaran, dan konsentrasi keahlian yang masih memiliki rombel tidak dapat dihapus.
+- **Anggota rombel** (`tb_rombel_murid`): satu murid hanya satu rombel per tahun ajaran (divalidasi di `AnggotaRombelRequest`). Rombel aktif murid: `Murid::rombelAktif()`. Rombel yang masih memiliki anggota tidak dapat dihapus. Dikelola di halaman Anggota tiap rombel.
 
 ### Tenaga Pendidik
 - Kolom: nama lengkap, NUPTK, tempat lahir, tanggal lahir, pendidikan terakhir, status, TMT GTT, TMT GTY, masa kerja, satuan pendidikan.
@@ -216,8 +217,8 @@ Setiap fitur memperhatikan karakteristik berikut:
 
 ## Tahapan pengembangan (usulan urutan)
 
-0. **Fondasi**: konfigurasi `.env`/locale/timezone, `tb_pengguna`, autentikasi, peran dan penugasan, layout admin (Gentelella) dan publik (Tailwind).
-1. **Master data**: satuan pendidikan, spektrum keahlian, tahun ajaran, rombel, tenaga pendidik, tenaga kependidikan, murid, orang tua/wali.
+0. **Fondasi** ✅: konfigurasi `.env`/locale/timezone, `tb_pengguna`, autentikasi, peran, layout admin (Gentelella) dan publik (Tailwind).
+1. **Master data** ✅: satuan pendidikan, spektrum keahlian, tahun ajaran + semester, rombel + anggota rombel, tenaga pendidik, penugasan, tenaga kependidikan (kolom sementara), murid, orang tua/wali, menu Pengguna.
 2. **Company profile** (publik).
 3. **PPDB online**: formulir dua lembar, data pendaftar menjadi data murid.
 4. **Administrasi tenaga pendidik**: prota, prosem, RPP, silabus, dll.

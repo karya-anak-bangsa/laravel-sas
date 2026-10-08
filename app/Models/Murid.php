@@ -71,6 +71,28 @@ class Murid extends Model
     }
 
     /**
+     * Semua rombel yang pernah diikuti (satu per tahun ajaran).
+     *
+     * @return BelongsToMany<Rombel, $this>
+     */
+    public function rombel(): BelongsToMany
+    {
+        return $this->belongsToMany(Rombel::class, 'tb_rombel_murid', 'id_murid', 'id_rombel', 'id_murid', 'id_rombel')
+            ->withTimestamps();
+    }
+
+    /**
+     * Rombel pada tahun ajaran aktif (paling banyak satu).
+     *
+     * @return BelongsToMany<Rombel, $this>
+     */
+    public function rombelAktif(): BelongsToMany
+    {
+        return $this->rombel()
+            ->whereIn('tb_rombel.id_tahun_ajaran', Semester::query()->aktif()->select('id_tahun_ajaran'));
+    }
+
+    /**
      * Daftar kebutuhan khusus dalam teks, atau "Tidak ada".
      */
     public function keteranganBerkebutuhanKhusus(): string

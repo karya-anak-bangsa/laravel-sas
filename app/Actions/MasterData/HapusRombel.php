@@ -12,6 +12,10 @@ class HapusRombel
      */
     public function handle(Rombel $rombel): void
     {
+        if ($rombel->murid()->exists()) {
+            throw new DataMasihDipakai("Rombel {$rombel->nama} masih memiliki anggota. Keluarkan muridnya terlebih dahulu.");
+        }
+
         if ($rombel->penugasan()->exists()) {
             throw new DataMasihDipakai("Rombel {$rombel->nama} masih memiliki wali kelas. Hapus penugasannya terlebih dahulu.");
         }

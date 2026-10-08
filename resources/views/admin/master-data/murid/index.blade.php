@@ -32,6 +32,7 @@
                             <th>NISN</th>
                             <th>Jenis kelamin</th>
                             <th>Tanggal lahir</th>
+                            <th>Rombel (tahun ajaran aktif)</th>
                             <th class="kolom-aksi">Aksi</th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                                 <td>{{ $murid->nisn ?? '—' }}</td>
                                 <td>{{ $murid->jenis_kelamin->label() }}</td>
                                 <td>{{ $murid->tanggal_lahir->translatedFormat('j F Y') }}</td>
+                                <td>{{ $murid->rombelAktif->first()?->nama ?? '—' }}</td>
                                 <td class="kolom-aksi">
                                     @can('update', $murid)
                                         <a href="{{ route('admin.master-data.murid.edit', $murid) }}" class="btn btn-outline btn-sm">Ubah</a>

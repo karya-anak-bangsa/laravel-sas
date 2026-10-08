@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -57,6 +58,17 @@ class Rombel extends Model
     public function konsentrasiKeahlian(): BelongsTo
     {
         return $this->belongsTo(KonsentrasiKeahlian::class, 'id_konsentrasi_keahlian', 'id_konsentrasi_keahlian');
+    }
+
+    /**
+     * Anggota rombel.
+     *
+     * @return BelongsToMany<Murid, $this>
+     */
+    public function murid(): BelongsToMany
+    {
+        return $this->belongsToMany(Murid::class, 'tb_rombel_murid', 'id_rombel', 'id_murid', 'id_rombel', 'id_murid')
+            ->withTimestamps();
     }
 
     /**

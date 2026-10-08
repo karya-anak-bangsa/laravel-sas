@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MasterData\AnggotaRombelController;
 use App\Http\Controllers\Admin\MasterData\BidangKeahlianController;
 use App\Http\Controllers\Admin\MasterData\KonsentrasiKeahlianController;
 use App\Http\Controllers\Admin\MasterData\MuridController;
@@ -40,6 +41,10 @@ Route::prefix('master-data')->name('master-data.')->group(function () {
         ->name('semester-aktif.update');
 
     Route::resource('rombel', RombelController::class)->except('show');
+
+    Route::get('rombel/{rombel}/anggota', [AnggotaRombelController::class, 'index'])->name('rombel.anggota.index');
+    Route::post('rombel/{rombel}/anggota', [AnggotaRombelController::class, 'store'])->name('rombel.anggota.store');
+    Route::delete('rombel/{rombel}/anggota/{murid}', [AnggotaRombelController::class, 'destroy'])->name('rombel.anggota.destroy');
 
     Route::resource('tenaga-pendidik', TenagaPendidikController::class)
         ->except('show')
