@@ -208,7 +208,7 @@ Setiap fitur memperhatikan karakteristik berikut:
   - `vendor/bin/pint --dirty`: format kode
   - `npm run build`: build aset
   - `php artisan pengguna:buat-administrator`: buat akun Administrator (instalasi awal/production)
-  - `php artisan migrate:fresh --seed`: database lokal dengan akun Administrator `aryajayaalamsyah@gmail.com` / `12341234` beserta master data contoh: 2 tahun ajaran (2026/2027 ganjil aktif), 42 rombel, 105 murid + orang tua/wali, 34 tenaga pendidik + penugasan, 6 tenaga kependidikan (seeder contoh tidak berjalan di production)
+  - `php artisan migrate:fresh --seed`: database lokal dengan akun Administrator `aryajayaalamsyah@gmail.com` / `12341234` beserta master data contoh: 2 tahun ajaran (2026/2027 ganjil aktif), 42 rombel, 30–35 murid per rombel aktif (± 690) + orang tua/wali, 34 tenaga pendidik + penugasan, 6 tenaga kependidikan (seeder contoh tidak berjalan di production)
 - Cara deploy ke production: **TBD**.
 
 ## Autentikasi

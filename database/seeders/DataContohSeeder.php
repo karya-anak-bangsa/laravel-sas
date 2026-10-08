@@ -28,6 +28,7 @@ use App\Models\TenagaKependidikan;
 use App\Models\TenagaPendidik;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Data contoh master data untuk pengembangan lokal (tidak untuk production).
@@ -37,8 +38,6 @@ use Illuminate\Support\Collection;
  */
 class DataContohSeeder extends Seeder
 {
-    private const MURID_PER_ROMBEL = 5;
-
     /**
      * Jumlah rombel per tingkat untuk tiap konsentrasi keahlian SMK.
      *
@@ -53,7 +52,21 @@ class DataContohSeeder extends Seeder
     /** @var Collection<string, KonsentrasiKeahlian> */
     private Collection $konsentrasi;
 
+    /**
+     * Jumlah murid setiap rombel aktif diacak di antara minimal dan maksimal.
+     */
+    public function __construct(
+        private int $muridMinimal = 30,
+        private int $muridMaksimal = 35,
+    ) {}
+
     public function run(): void
+    {
+        // Satu transaksi agar ribuan insert tetap cepat.
+        DB::transaction(fn () => $this->isi());
+    }
+
+    private function isi(): void
     {
         $this->smp = SatuanPendidikan::query()->where('bentuk_pendidikan', BentukPendidikan::Smp)->firstOrFail();
         $this->smk = SatuanPendidikan::query()->where('bentuk_pendidikan', BentukPendidikan::Smk)->firstOrFail();
@@ -127,7 +140,9 @@ class DataContohSeeder extends Seeder
         foreach ($rombelAktif as $rombel) {
             $namaRombelLalu = $this->namaRombelTingkatSebelumnya($rombel);
 
-            for ($i = 0; $i < self::MURID_PER_ROMBEL; $i++, $urutan++) {
+            $jumlahMurid = fake()->numberBetween($this->muridMinimal, $this->muridMaksimal);
+
+            for ($i = 0; $i < $jumlahMurid; $i++, $urutan++) {
                 // Setiap murid ke-12 adalah saudara kandung murid sebelumnya: No. KK dan orang tua sama.
                 $kakak = $urutan % 12 === 11 ? $muridSebelumnya : null;
                 $murid = $this->buatMurid($rombel->tingkat, $urutan, $kakak);
