@@ -27,10 +27,11 @@ class DatabaseSeeder extends Seeder
             return;
         }
 
-        // Akun lokal: admin / password
+        // Akun lokal: aryajaya.alamsyah / 12341234
         Pengguna::factory()->denganPeran(KodePeran::Administrator)->create([
-            'nama_pengguna' => 'admin',
-            'email' => 'admin@example.com',
+            'nama_pengguna' => 'aryajaya.alamsyah',
+            'email' => 'aryajaya.alamsyah@gmail.com',
+            'password' => '12341234',
         ]);
     }
 }
