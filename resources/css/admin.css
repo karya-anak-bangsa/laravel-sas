@@ -149,9 +149,9 @@ table.table .kolom-aksi .btn {
 
 /*
  * Warna tombol aksi: kode warna asli Bootstrap 5.3 (Bootstrap tidak dipasang).
- * Tambah & Simpan = success, Ubah = warning, Hapus = danger, Batal = secondary;
- * keempatnya dibuat 5% lebih pudar (opacity 0,95) dan kembali penuh saat hover.
- * Cari & Terapkan = primary (#0d6efd dengan kecerahan diturunkan 20%).
+ * Tambah & Simpan = success, Ubah = warning, Hapus = danger, Batal = secondary,
+ * Cari & Terapkan = primary; semuanya dibuat 5% lebih pudar (opacity 0,95) dan
+ * kembali penuh saat hover.
  */
 .btn-success {
     background: #198754;
@@ -201,30 +201,32 @@ table.table .kolom-aksi .btn {
     color: #fff;
 }
 
+.btn-primary {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #0b5ed7;
+    border-color: #0a58ca;
+    color: #fff;
+}
+
 .btn-success,
 .btn-warning,
 .btn-danger,
-.btn-secondary {
+.btn-secondary,
+.btn-primary {
     opacity: 0.95;
 }
 
 .btn-success:hover,
 .btn-warning:hover,
 .btn-danger:hover,
-.btn-secondary:hover {
-    opacity: 1;
-}
-
-.btn-primary {
-    background: #0a58ca;
-    border-color: #0a58ca;
-    color: #fff;
-}
-
+.btn-secondary:hover,
 .btn-primary:hover {
-    background: #094db1;
-    border-color: #094db1;
-    color: #fff;
+    opacity: 1;
 }
 
 a.btn {
